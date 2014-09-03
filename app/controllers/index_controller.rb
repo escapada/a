@@ -146,5 +146,5 @@ class IndexController < ApplicationController
 		render :text => @tmp1
 
 	end
-
+	
 end

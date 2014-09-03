@@ -1,4 +1,14 @@
 A::Application.routes.draw do
+  scope '/admin' do
+    resources :articles
+  end
+  match 'articles/:url' => 'articles#public', :as => :article
+  #match '/home' => 'static#home', :as => :home
+  match '/about' => 'static#about', :as => :about
+  match '/contact' => 'static#contact', :as => :contact
+
+  #resources :articles
+
   resources :index
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -49,7 +59,7 @@ A::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "index#index"
+  root :to => "index#index"   #"static#home"
   #map.connect '',:controller=>"index",:action=>"index"
   match 'index/result'
 

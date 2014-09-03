@@ -11,12 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140814101442) do
+ActiveRecord::Schema.define(:version => 20140903073232) do
+
+  create_table "articles", :force => true do |t|
+    t.string   "title"
+    t.string   "meta"
+    t.string   "url"
+    t.text     "html"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "papers", :force => true do |t|
     t.string   "name"
     t.string   "runame"
-    t.integer  "price"
+    t.float    "price"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

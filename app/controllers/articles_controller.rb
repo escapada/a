@@ -82,8 +82,6 @@ class ArticlesController < ApplicationController
   end
   ###################### My code
   def public
-    #@article = Article.where(:url => "second")
-    #@article = Article.find(:all)
     @article = Article.find(:first ,:conditions => ["url = ?", params[:url]])#where("url = ?", params[:url])#where(url: 'second')#.take#params[:url])
 
     respond_to do |format|

@@ -1,0 +1,24 @@
+html {overflow:  hidden  !important;}
+body{ padding: 0px !important;}
+
+#fp_wrap{ padding: 0px;}
+.wrapper{ background: #ccc; float:left;}
+.wrapper_margin{ width:10px; float:left;}
+.line_margin{ height:10px; width:100%; clear: left;}
+.tmp_img{ box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; width:100%; height:100%; border:2px solid #FCF9CE;background: url(/images/main_prw_tmp.jpg) no-repeat center; width: 100%; height: 100%; background-size: cover;} /*background: url(/images/main_prw_tmp.jpg) no-repeat center; width: 100%; height: 100%; background-size: cover;*/
+
+#fp_box_1{}
+#fp_box_2{}
+#fp_box_3{}
+#fp_box_4{}
+#fp_box_5{}
+#fp_box_6{}
+#fp_box_7{}
+#fp_box_8{}
+#fp_box_9{}
+
+#logo_fp{width: 100%; text-align: center; height: 100%; color: #FCF9CE;}
+.text_fp{}
+
+/*//////////////////*/
+#text{ text-align: center; background: red; color:yellow;}

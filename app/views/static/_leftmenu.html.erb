@@ -1,0 +1,22 @@
+<div id="logo">
+	<%=link_to "#{ image_tag("/images/logo.png", {:title=>"АВС-Принт. Дизайн. Полиграфия. Шелкография. Рекламное производство."}) }".html_safe, root_path %>
+</div>
+<nav id="navblock">
+	<ul id="leftmenu">
+		<li><%= link_to "Визитные карточки", vizitki_path%></li>
+		<li><%= link_to "Визитные карточки", vizitki_path%></li>
+		<li><%= link_to "Визитные карточки", vizitki_path%></li>
+		<li>&nbsp;</li>
+		<li><%= link_to "Требования к макетам", trebovaniya_path%></li>
+		<li>&nbsp;</li>
+		<li><%= link_to "О нас", about_path%></li>
+		<li><%= link_to "Контаакты", contact_path%></li>
+	</ul>
+</nav>
+<div id="leftcontact">
+	(812) 702 7840<br />
+	(812) 702 7841<br />
+	(812) 702 7802<br />
+	(921) 420 7809<br />
+	<%= mail_to "zakaz@abc-design.ru", "zakaz@abc-design.ru" %>
+</div>

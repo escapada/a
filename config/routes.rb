@@ -6,6 +6,8 @@ A::Application.routes.draw do
   #match '/home' => 'static#home', :as => :home
   match '/about' => 'static#about', :as => :about
   match '/contact' => 'static#contact', :as => :contact
+  match '/trebovaniya' => 'static#trebovaniya', :as => :trebovaniya
+  match '/vizitki' => 'static#vizitki', :as => :vizitki
 
   #resources :articles
 

@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>No name.</title>
-  <meta name="keywords" content="" />
+  <title><%= @title %></title>
+  <meta name="keywords" content="<%= @meta %>" />
 
   <%= javascript_include_tag "jquery-1.11.1.min.js" %>
   <%= javascript_include_tag "functions.js" %>
   <%= stylesheet_link_tag 'main' %>
-  <!--<%= stylesheet_link_tag 'home' %> -->
-  
+  <% if @vizitki %>
+  <%= javascript_include_tag "vizitki.js.erb" %>
+  <% end %>
   <% if @home %>
   <%= stylesheet_link_tag 'home' %>
   	<script type="text/javascript">

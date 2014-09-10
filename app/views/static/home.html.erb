@@ -2,37 +2,58 @@
 <div class="line_margin"></div>
 	<div class="wrapper_margin"></div>
 	<div class="wrapper">
-	 <div id="fp_box" class="tmp_img">
-	 	<div id="logo_fp_1">
+	 <div id="fp_box_1" class="tmp_img"><table width="100%" height="100%" cellpadding="0" cellspacing="0"><tr><td valign="middle">
+	 	<div id="logo_fp">
 	 		<%= image_tag "logo_fp.png", alt: "АВС-Принт. Эксклюзивная полиграфия в Санкт-Петербурге" %>
 	 		<div class="text_fp">
 	 			эксклюзивная полиграфия в Санкт-Петербурге
 	 		</div>
-	 	</div>
+	 	</div></td></tr></table>
 	 </div>
 	</div>
 	<div class="wrapper_margin"></div>
-	<div class="wrapper"><div id="fp_box_2" class="tmp_img"><%@prw.each do |e|%><%=e%><%end%></div></div>
+	<div class="wrapper"><div id="fp_box_2" class="tmp_img" style="background:url(/images/fp_random_prw/<%= @prw[0]%>) no-repeat center; background-size:cover;"></div></div>
 	<div class="wrapper_margin"></div>
-	<div class="wrapper"><div id="fp_box_3" class="tmp_img"></div></div>
-	<div class="wrapper_margin"></div>
-
-<div class="line_margin"></div>
-	<div class="wrapper_margin"></div>
-	<div class="wrapper"><div id="fp_box_4" class="tmp_img"></div></div>
-	<div class="wrapper_margin"></div>
-	<div class="wrapper"><div id="fp_box_5" class="tmp_img"></div></div>
-	<div class="wrapper_margin"></div>
-	<div class="wrapper"><div id="fp_box_6" class="tmp_img"></div></div>
+	<div class="wrapper"><div id="fp_box_3" class="tmp_img" style="background:url(/images/fp_random_prw/<%= @prw[1]%>) no-repeat center; background-size:cover;"><div id="text"></div></div></div>
 	<div class="wrapper_margin"></div>
 
 <div class="line_margin"></div>
 	<div class="wrapper_margin"></div>
-	<div class="wrapper"><div id="fp_box_7" class="tmp_img"></div></div>
+	<div class="wrapper"><div id="fp_box_4" class="tmp_img" style="background:url(/images/fp_random_prw/<%= @prw[2]%>) no-repeat center; background-size:cover;"></div></div>
 	<div class="wrapper_margin"></div>
-	<div class="wrapper"><div id="fp_box_8" class="tmp_img"></div></div>
+	<div class="wrapper"><div id="fp_box_5" class="tmp_img" style="background:url(/images/fp_2_bg.png) no-repeat center #EF3C24;"></div></div>
 	<div class="wrapper_margin"></div>
-	<div class="wrapper"><div id="fp_box_9" class="tmp_img"></div></div>
+	<div class="wrapper"><div id="fp_box_6" class="tmp_img" style="background:url(/images/fp_random_prw/<%= @prw[3]%>) no-repeat center; background-size:cover;"></div></div>
+	<div class="wrapper_margin"></div>
+
+<div class="line_margin"></div>
+	<div class="wrapper_margin"></div>
+	<div class="wrapper"><div id="fp_box_7" class="tmp_img" style="background:url(/images/fp_random_prw/<%= @prw[4]%>) no-repeat center; background-size:cover;"></div></div>
+	<div class="wrapper_margin"></div>
+	<div class="wrapper"><div id="fp_box_8" class="tmp_img" style="background:url(/images/fp_random_prw/<%= @prw[5]%>) no-repeat center; background-size:cover;"></div></div>
+	<div class="wrapper_margin"></div>
+	<div class="wrapper">
+		<div id="fp_box_9" class="tmp_img"><table width="100%" height="100%" cellpadding="0" cellspacing="0"><tr><td valign="middle">
+			<div id="nav_block_wrap">
+				<nav id="fp_nav">
+					<ul>
+						<li><%= link_to "О нас", about_path, {:class=>"link"} %></li>
+						<li><%= link_to "Визитки", vizitki_path, {:class=>"link"} %></li>
+						<li><%= link_to "Контакты", contact_path, {:class=>"link"} %></li>
+						<li><%= link_to "Технические требования", trebovaniya_path, {:class=>"link"} %></li>
+						<!--			<li><%= link_to "Шелкография", {:action => "about"}, {:class=>"link"} %></li>
+						<li><%= link_to "Высокая печать (Letterpress)", {:action => "contact"}, {:class=>"link"} %></li>
+						<li><%= link_to "Тиснение", {:action => "contact"}, {:class=>"link"} %></li>
+						<li><%= link_to "Вырубка", {:action => "contact"}, {:class=>"link"} %></li>
+						<li><%= link_to "УФ-Лакировка", {:action => "contact"}, {:class=>"link"} %></li>
+						<li><%= link_to "Термоподъём", {:action => "contact"}, {:class=>"link"} %></li>
+						<li><%= link_to "Цифровая печать", {:action => "contact"}, {:class=>"link"} %></li>			-->
+					</ul>
+				</nav>
+				<div class="text_fp">(812) 702 7840 / 702 7841 / 702 7802 / <%= mail_to "zakaz@abc-design.ru", "zakaz@abc-design.ru" %></div>
+			</div></td></tr></table>
+		</div>
+	</div>
 	<div class="wrapper_margin"></div>
 
 <div class="line_margin"></div>

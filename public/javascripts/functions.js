@@ -1,4 +1,16 @@
 function resize_monitor() {
+//	if(document.body.clientWidth <= 1220){
+//		var windowHSize = 1220;
+//		var windowVSize = 788;
+//	}
+//	else if(document.body.clientWidth >= 2048){
+//		var windowHSize = 2048;
+//	}
+//	else{
+//		var windowHSize = document.body.clientWidth;
+//		var windowVSize = document.body.clientHeight;
+//	}
+	
 	var windowHSize = document.body.clientWidth;
 	var windowVSize = document.body.clientHeight;
 
@@ -8,19 +20,25 @@ function resize_monitor() {
 	var wrapperHSize = (fp_wrapHSize-40)/3;
 	var wrapperVSize = (fp_wrapVSize-40)/3;
 
-	$("#text").text(windowHSize+" : "+windowVSize+" : "+wrapperHSize);
+	$("#text").text(windowHSize+" : "+windowVSize+" : "+wrapperHSize+" : "+wrapperVSize);
 	$("#fp_wrap").css({"padding-top": 20, "padding-left": 20});
 	$(".wrapper").css({"width": wrapperHSize, "height": wrapperVSize});
 	$(".wrapper_margin").css({"height": wrapperVSize});
 
+	//adaptive resizing for calc (vizitki...)
 	if (windowHSize > 1546) {
 		$("#right-top-hidden").css({"display": "block"});
+		$("#right-bottom-hidden").css({"display": "block"});
 		$("#contentcolumn").css({"width": 1260});
+		$("#hideblockbtn .line").css({"width": 570});
 	}
 	else{
 		$("#right-top-hidden").css({"display": "none"});
+		$("#right-bottom-hidden").css({"display": "none"});
 		$("#contentcolumn").css({"width": 940});
+		$("#hideblockbtn .line").css({"width": 410});
 	}
+
 }
 function clear_cash() {
 	$("[name='material']").val('');

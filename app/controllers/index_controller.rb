@@ -1,17 +1,6 @@
 class IndexController < ApplicationController
 	def index
-		#@tmp = 'someShit'
 		@papers = Paper.find(:all)
-
-		#render json: @tmp
- 		
-		#render :action => 'index'
-		#respond_to do |format|
-		#	format.html
-##
-		##end
-
-		
 	end
 
 	def result

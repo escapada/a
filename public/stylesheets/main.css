@@ -1,4 +1,5 @@
-* {margin: 0; padding: 0; border: 0; font-family: Arial, sans-serif; font-size: 12px; list-style-type: none;}
+* {margin: 0; padding: 0; border: 0; font-family: Arial, sans-serif; font-size: 12px; list-style-type: none; text-decoration: none;}
+a{color:#FCF9CE;}
 html { width: 100%; height:100%;}
 body { background: #EF3C24; padding-top: 40px; width: 100%; height:100%;}
 h1{font-size:32px; color:#EF3C24;}
@@ -10,9 +11,17 @@ p{text-align: justify; margin-bottom: 8px;}
 .redtext{color:#EF3C24;}
 .yellowtext{color:#FCF9CE;}
 
-
 #content_wrap{overflow: hidden;}
-#leftcolumn{width: 246px; float: left;				height: 300px; }
+
+#leftcolumn{width: 246px; float: left;}
+#logo{ width: 100%; text-align: center;}
+#leftcolumn #navblock, #leftcontact{ margin: 15px 0 0 50px;}
+#leftmenu{ width:162px; border-bottom: 1px solid #FCF9CE; padding-bottom: 20px;}
+#leftmenu li{line-height: 16px;}
+#leftmenu li a{color: #fff; font-size: 14px;}
+#leftmenu li a:hover{color: #aaa;}
+#leftcontact{line-height: 16px; color:#FCF9CE;}
+
 #contentcolumn{width: 940px; padding: 20px; background: #fff; overflow: hidden;}
 
 #wrapbox_top{float: left;}
@@ -22,20 +31,15 @@ p{text-align: justify; margin-bottom: 8px;}
 #contentbody-r{float: left; margin: 0 0 0 20px;}
 #contentbody-b{clear: both;}
 
-#wrapbox_bottom{float: left;}
-/*#right-bottom-hidden{float: left; margin: 0 0 0 20px;								display: none; }*/
-
+#wrapbox_bottom{float: left; width: 940px;}
 
 
 .tmpbox{width:298px; height:298px;border:1px solid #666766;}
 .lastinrowbox{width:298px; height:298px;border:1px solid #666766; float: left; margin: 0;}
 
 #contentbody-r .tmpbox{margin: 0 0 20px 0;}
-#right-top-hidden .tmpbox{margin: 0 0 20px 0;}
+#right-top-hidden .tmpbox, #right-bottom-hidden .tmpbox{margin: 0 0 20px 0;}
 #contentbody-b .tmpbox, #wrapbox_bottom .tmpbox{float: left; margin: 0 20px 20px 0;}
-
-#hideblockbtn{clear: both; cursor: pointer;}
-#hideblock{									display: none;}
 
 #vizitki_selectbox_line{margin-top: 7px;}
 #material{float:left; height: 28px; margin: 0 19px 0 0;}
@@ -49,6 +53,12 @@ p{text-align: justify; margin-bottom: 8px;}
 .line{width: 209px; height:16px; float: left; background: url(/images/redline1px.png) repeat-x center;}
 .line_text{width: 200px;float: left; text-align: center;}
 .line_text span{font-size: 14px;}
+
+#hideblockbtn{clear: both; cursor: pointer; width: 100%; height: 16px; margin-bottom: 20px;}
+#hideblockbtn .line{width: 570px;}
+#hideblockbtn .line_text{width: 120px;}
+#hideblock{	margin-bottom: 10px;								display: none;}
+
 #vizitki_radiolist{clear: both;}
 #radiotbl{color: #666766; text-align: right; }
 #radiotbl span{margin: 0 15px 0 0;}
@@ -75,19 +85,18 @@ p{text-align: justify; margin-bottom: 8px;}
 .notice_txt{float: left; width:150px;text-align:right;}
 .notice_check{float: right;}
 #alert{display:none; border:solid red 1px; height: 26px; width:450px; float: left; text-align: center; color: red; line-height: 26px; margin-bottom: 10px;}
-/*html {overflow:  hidden;}*/
 
+/*///////////////////////////contact, about*/
+#cont_left{float: left; width:618px;}
+#cont_left p{line-height:19px; margin-bottom:15px;}
+#cont_left a{color:#EF3C24;}
+#cont_right{float: right;}
+#cont_right .tmpbox{margin-bottom: 20px;}
+#cont_bottom{clear: both;}
+#cont_bottom .map{margin-bottom: 20px;}
+.nobottommargin{margin-bottom: 0 !important;}
 
-/*#fp_wrap{padding: 0px;}
-.wrapper{ background: #fff; float:left;}
-.wrapper_margin{width:5px; float:left;}
-.line_margin{height:5px; width:100%; clear: left;}
-#text{text-align: center; background: red; color:yellow;}
-.tmp_img{background: url(/images/main_prw_tmp.jpg) no-repeat center; width: 100%; height: 100%; background-size: cover;}*/
-
-
-
-
+.last_p{margin-bottom:0px;}
 
 
 #color-op-1, #color-op-2, #color-op-3, #color-op-4{ width: 48px; float: left;}

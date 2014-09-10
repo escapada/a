@@ -127,6 +127,17 @@ $("#calculate").click(function(){
 	}	
 }); //end of calculate click
 
+$("#hideblockbtn").click(function(){
+	if ($( "#hideblock" ).is( ":visible" )){
+		$("#hideblockbtn .redtext").text("Больше фото");
+		$("#hideblock").toggle();
+	}
+	else {
+		$("#hideblockbtn .redtext").text("Меньше фото");
+		$("#hideblock").toggle();
+	}
+});//end of hideblockbtn click
+
 });//end of document ready function
 
 

@@ -17,9 +17,10 @@ p{text-align: justify; margin-bottom: 8px;}
 #logo{ width: 100%; text-align: center;}
 #leftcolumn #navblock, #leftcontact{ margin: 15px 0 0 50px;}
 #leftmenu{ width:162px; border-bottom: 1px solid #FCF9CE; padding-bottom: 20px;}
-#leftmenu li{line-height: 16px;}
+#leftmenu li{line-height: 16px; color: #ad0303; font-size: 14px;}
 #leftmenu li a{color: #fff; font-size: 14px;}
-#leftmenu li a:hover{color: #aaa;}
+#leftmenu li a:hover{color: #d21a1a;}
+#leftmenu li a .current{}
 #leftcontact{line-height: 16px; color:#FCF9CE;}
 
 #contentcolumn{width: 940px; padding: 20px; background: #fff; overflow: hidden;}
@@ -97,7 +98,10 @@ p{text-align: justify; margin-bottom: 8px;}
 .nobottommargin{margin-bottom: 0 !important;}
 
 .last_p{margin-bottom:0px;}
-
+.red_marked{padding-left: 12px;}
+.red_marked li{list-style-type: disc; color:#EF3C24; line-height: 20px;}
+.red_marked li span{color:#000; }
+.h2margins{margin: 20px 0 7px 0;}
 
 #color-op-1, #color-op-2, #color-op-3, #color-op-4{ width: 48px; float: left;}
 #color-op-1 li, #color-op-2 li, #color-op-3 li, #color-op-4 li{ padding-left:7px; cursor: pointer;}

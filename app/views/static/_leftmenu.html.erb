@@ -3,14 +3,14 @@
 </div>
 <nav id="navblock">
 	<ul id="leftmenu">
-		<li><%= link_to "Визитные карточки", vizitki_path%></li>
-		<li><%= link_to "Визитные карточки", vizitki_path%></li>
-		<li><%= link_to "Визитные карточки", vizitki_path%></li>
+		<li><%= link_to_unless_current("Визитные карточки", { action: "vizitki" })%></li>
+		<!-- <li><%= link_to_unless_current("Визитные карточки", { action: "vizitki" })%></li>
+		<li><%= link_to_unless_current("Визитные карточки", { action: "vizitki" })%></li> -->
 		<li>&nbsp;</li>
-		<li><%= link_to "Требования к макетам", trebovaniya_path%></li>
+		<li><%= link_to_unless_current("Требования к макетам", { action: "trebovaniya" })%></li>
 		<li>&nbsp;</li>
-		<li><%= link_to "О нас", about_path%></li>
-		<li><%= link_to "Контаакты", contact_path%></li>
+		<li><%= link_to_unless_current("О нас", { action: "about" })%></li>
+		<li><%= link_to_unless_current("Контакты", { action: "contact" })%></li>
 	</ul>
 </nav>
 <div id="leftcontact">

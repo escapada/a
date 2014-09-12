@@ -4,7 +4,7 @@
 	<div class="wrapper">
 	 <div id="fp_box_1" class="tmp_img"><table width="100%" height="100%" cellpadding="0" cellspacing="0"><tr><td valign="middle">
 	 	<div id="logo_fp">
-	 		<%= image_tag "logo_fp.png", alt: "АВС-Принт. Эксклюзивная полиграфия в Санкт-Петербурге" %>
+	 		<%=link_to "#{ image_tag("/images/logo_fp.png", {:title=>"АВС-Принт. Дизайн. Полиграфия. Шелкография. Рекламное производство.", :alt=>"АВС-Принт. Эксклюзивная полиграфия в Санкт-Петербурге"}) }".html_safe, root_path %>
 	 		<div class="text_fp">
 	 			эксклюзивная полиграфия в Санкт-Петербурге
 	 		</div>
@@ -14,7 +14,7 @@
 	<div class="wrapper_margin"></div>
 	<div class="wrapper"><div id="fp_box_2" class="tmp_img" style="background:url(/images/fp_random_prw/<%= @prw[0]%>) no-repeat center; background-size:cover;"></div></div>
 	<div class="wrapper_margin"></div>
-	<div class="wrapper"><div id="fp_box_3" class="tmp_img" style="background:url(/images/fp_random_prw/<%= @prw[1]%>) no-repeat center; background-size:cover;"><div id="text"></div></div></div>
+	<div class="wrapper"><div id="fp_box_3" class="tmp_img" style="background:url(/images/fp_random_prw/<%= @prw[1]%>) no-repeat center; background-size:cover;"></div></div>
 	<div class="wrapper_margin"></div>
 
 <div class="line_margin"></div>

@@ -20,6 +20,10 @@ class StaticController < ApplicationController
 	def trebovaniya
 		@title="Технические требования к макетам."
 		@meta="полиграфия, шелкография, требования к макетам, печать на пакетах, печать визиток, брошюр, листовок, календарей, буклетов, рекламной продукции"
+
+		@prw=Array.new()
+		Dir.glob("public/images/allstuff/*.jpg"){|x| @prw << File.basename(x)}
+		@prw.shuffle!
 	end
 	def vizitki
 		@title="Онлайн калькулятор. Шелкотрафаретная, цифровая, полноцветная печать визиток. Постобработка. Вырубка, тиснение, лакировка. Online calculate."

@@ -4,17 +4,24 @@ $( document ).ready(function() {
 resize_monitor();
 clear_cash();
 
+$("#printmethod").click(function(){
+	var xy = $(this).position();
+	$("#printmethod-options").css({"left": xy.left, "top": xy.top+29});
+	$("#printmethod-options").toggle();
+	$("#help_invisieble_box").css({"display": "block"});
+});
+
 $("#material").click(function(){
 	var xy = $(this).position();
-	$("#material-options").css({"left": xy.left, "top": xy.top+29});
-	$("#material-options").toggle();
+	$("#material-options-wrap").css({"left": xy.left, "top": xy.top+29});
+	$("#material-options-wrap").toggle();
 	$("#help_invisieble_box").css({"display": "block"});
 });
 
 $("#select-color").click(function(){
 	var xy = $(this).position();
-	$("#select-color-options").css({"left": xy.left, "top": xy.top+29});
-	$("#select-color-options").toggle();
+	$("#select-color-options-wrap").css({"left": xy.left, "top": xy.top+29});
+	$("#select-color-options-wrap").toggle();
 	$("#help_invisieble_box").css({"display": "block"});
 });
 $( "#select-tirazh" ).click(function() {
@@ -38,6 +45,42 @@ $( "#select-tirazh" ).focusout(function() {
 	}
 });
 
+$(".selectoption_printmethod").click(function(){
+	$("[name='material']").val('');
+	$("[name='color']").val('');
+
+	var printmethod = $('> input', this).val();
+	var text = $(this).text()
+	
+	if (printmethod == "true") {
+		$("#material-options").hide(0);
+		$("#material-options-printer").show(0);
+		$("#select-color-options").hide(0);
+		$("#select-color-options2").show(0);
+	}
+	else{
+		$("#material-options-printer").hide(0);
+		$("#material-options").show(0);
+		$("#select-color-options2").hide(0);
+		$("#select-color-options").show(0);
+	}
+
+	$("#printmethod span").html(text);
+	$("#printmethod").children("input").val(printmethod);
+	
+	$("#printmethod-options").toggle();
+	
+	$("#material span").text("Материал");
+	$("[name='material']").val('');
+	$("#select-color span").text("Печать");
+	$("[name='color']").val('');
+	
+	$("#help_invisieble_box").css({"display": "none"});
+	//alert($(this).text());
+	//alert($("#material").children("input").value);
+
+});
+
 $(".selectoption_material").click(function(){
 	var material = $('> input', this).val();
 	var text = $(this).text()
@@ -45,7 +88,7 @@ $(".selectoption_material").click(function(){
 	$("#material span").html(text);
 	$("#material").children("input").val(material);
 	
-	$("#material-options").toggle();
+	$("#material-options-wrap").toggle();
 	$("#help_invisieble_box").css({"display": "none"});
 	//alert($(this).text());
 	//alert($("#material").children("input").value);
@@ -59,7 +102,7 @@ $(".selectoption_color").click(function(){
 	$("#select-color span").html(text);
 	$("#select-color").children("input").val(color);
 	
-	$("#select-color-options").toggle();
+	$("#select-color-options-wrap").toggle();
 	$("#help_invisieble_box").css({"display": "none"});
 });
 
@@ -87,6 +130,7 @@ $(".radiobtn").click(function(){
 
 
 $("#calculate").click(function(){
+	printer = $("[name='printmethod']").val();
 	//here will be validation and collecting all values
 	paper = $("[name='material']").val();
 	tirazh = $("#select-tirazh").val();
@@ -118,7 +162,7 @@ $("#calculate").click(function(){
 		$.ajax({
 			url: '/index/result',
 			type: 'POST',
-			data: 'paper='+paper+'&color='+encodeURIComponent(color)+'&tirazh='+tirazh+'&dp='+dp+'&klishe_blint='+klishe_blint+'&klishe_folga='+klishe_folga+'&klishe_kongrev='+klishe_kongrev+'&vyrubka='+vyrubka,
+			data: 'printer='+printer+'&paper='+paper+'&color='+encodeURIComponent(color)+'&tirazh='+tirazh+'&dp='+dp+'&klishe_blint='+klishe_blint+'&klishe_folga='+klishe_folga+'&klishe_kongrev='+klishe_kongrev+'&vyrubka='+vyrubka,
 			//dataType: "json",
 			success: function(tmp){
 				$('#result').text(tmp);

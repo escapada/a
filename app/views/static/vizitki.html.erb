@@ -9,38 +9,58 @@
 					<h1>Рассчет заказа онлайн</h1>
 					<h2>Визитные карточки</h2>
 					<div id="vizitki_selectbox_line">
+						<div id="printmethod" class="selectbox"><span class="noselect">Шелкография</span><input name="printmethod" type="hidden" value="false" /></div>
+						<ul id="printmethod-options" class="options-list">
+							<li class="selectoption_printmethod">Шелкография<input type="hidden" value="false" /></li>
+							<li class="selectoption_printmethod">Цифровая печать<input type="hidden" value="true" /></li>
+						</ul>
 						<div id="material" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /></div>
-						<ul id="material-options" class="options-list">
-							<% @papers.each do |paper| %>
-								<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
-							<% end %>
-						</ul>
+							<div id="material-options-wrap" class="options-list">
+								<ul id="material-options">
+										<li class="selectoption_material"><input class="" type="text" value="Своя бумага"  /></li>
+									<% @noprinter.each do |paper| %>
+										<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
+									<% end %>
+								</ul>
+								<ul id="material-options-printer">
+										<li class="selectoption_material"><input class="" type="text" value="Своя бумага"  /></li>
+									<% @printer.each do |paper| %>
+										<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
+									<% end %>
+								</ul>
+							</div>
 						<div id="select-color" class="selectbox"><span class="noselect">Печать</span><input name="color" type="hidden" value="" /></div>
-						<ul id="select-color-options" class="options-list">
-							<div id="color-op-1">
-								<li class="selectoption_color">1+0<input class="" type="hidden" value="1+0"  /></li>
-								<li class="selectoption_color">1+1<input class="" type="hidden" value="1+1"  /></li>
-								<li class="selectoption_color">2+1<input class="" type="hidden" value="2+1"  /></li>
-								<li class="selectoption_color">4+2<input class="" type="hidden" value="4+2"  /></li>
-							</div>
-							<div id="color-op-2">
-								<li class="selectoption_color">2+0<input class="" type="hidden" value="2+0"  /></li>
-								<li class="selectoption_color">2+2<input class="" type="hidden" value="2+2"  /></li>
-								<li class="selectoption_color">3+1<input class="" type="hidden" value="3+1"  /></li>
-								<li class="selectoption_color">4+3<input class="" type="hidden" value="4+3"  /></li>
-							</div>
-							<div id="color-op-3">
-								<li class="selectoption_color">3+0<input class="" type="hidden" value="3+0"  /></li>
-								<li class="selectoption_color">3+3<input class="" type="hidden" value="3+3"  /></li>
-								<li class="selectoption_color">4+1<input class="" type="hidden" value="4+1"  /></li>
-							</div>
-							<div id="color-op-4">
-								<li class="selectoption_color">4+0<input class="" type="hidden" value="4+0"  /></li>
-								<li class="selectoption_color">4+4<input class="" type="hidden" value="4+4"  /></li>
-								<li class="selectoption_color">3+2<input class="" type="hidden" value="3+2"  /></li>
-							</div>
-						</ul>
-						
+						<div id="select-color-options-wrap" class="options-list">
+							<ul id="select-color-options">
+								<div id="color-op-1">
+									<li class="selectoption_color"><span>1+0</span><input class="" type="hidden" value="1+0"  /></li>
+									<li class="selectoption_color"><span>2+0</span><input class="" type="hidden" value="2+0"  /></li>
+									<li class="selectoption_color"><span>3+0</span><input class="" type="hidden" value="3+0"  /></li>
+									<li class="selectoption_color"><span>4+0</span><input class="" type="hidden" value="4+0"  /></li>
+								</div>
+								<div id="color-op-2">
+									<li class="selectoption_color"><span>1+1</span><input class="" type="hidden" value="1+1"  /></li>
+									<li class="selectoption_color"><span>2+2</span><input class="" type="hidden" value="2+2"  /></li>
+									<li class="selectoption_color"><span>3+3</span><input class="" type="hidden" value="3+3"  /></li>
+									<li class="selectoption_color"><span>4+4</span><input class="" type="hidden" value="4+4"  /></li>
+									<li class="selectoption_color"><span>4+2</span><input class="" type="hidden" value="4+2"  /></li>
+								</div>
+								<div id="color-op-3">
+									<li class="selectoption_color"><span>2+1</span><input class="" type="hidden" value="2+1"  /></li>
+									<li class="selectoption_color"><span>3+1</span><input class="" type="hidden" value="3+1"  /></li>
+									<li class="selectoption_color"><span>4+1</span><input class="" type="hidden" value="4+1"  /></li>
+									<li class="selectoption_color"><span>3+2</span><input class="" type="hidden" value="3+2"  /></li>
+									<li class="selectoption_color"><span>4+3</span><input class="" type="hidden" value="4+3"  /></li>
+								</div>
+							</ul>
+	
+							<ul id="select-color-options2">
+								<div id="color-op">
+									<li class="selectoption_color"><span>Односторонние</span><input class="" type="hidden" value="1"  /></li>
+									<li class="selectoption_color"><span>Двусторонние</span><input class="" type="hidden" value="2"  /></li>
+								</div>
+							</ul>
+						</div>
 						<input id="select-tirazh" class="selectbox" type="text" value="Тираж"  />
 					</div>
 					<div id="vizitki_dop_line">

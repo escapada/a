@@ -42,6 +42,8 @@ function resize_monitor() {
 }
 function clear_cash() {
 	$("[name='material']").val('');
+	$("#material-options").show(0);
+	$("#select-color-options").show(0);
 	$("[name='color']").val('');
 	$("#select-tirazh").val('Тираж');
 	$("[name='dp1']").val(0);

@@ -43,10 +43,11 @@ p{text-align: justify; margin-bottom: 8px;}
 #contentbody-b .tmpbox, #wrapbox_bottom .tmpbox{float: left; margin: 0 20px 20px 0;}
 
 #vizitki_selectbox_line{margin-top: 7px;}
-#material{float:left; height: 28px; margin: 0 19px 0 0;}
-#select-color{float:left; margin: 0 19px 0 0;}
-#select-tirazh{float:left; width: 192px; height: 28px; background: none; border: 1px solid #666766; color: #666766; text-align: center; font-size: 14px;}
-#material span{font-size: 14px; margin: 5px 0 0 5px; display: block;}
+#printmethod{float:left; margin: 0 10px 0 0; width: 132px;}
+#material{float:left; margin: 0 10px 0 0; width: 222px;}
+#select-color{float:left; margin: 0 10px 0 0; width: 138px;}
+#select-tirazh{float:left; width: 90px; background: none; border: 1px solid #666766; color: #666766; text-align: center; font-size: 14px;}
+#material span, #printmethod span{font-size: 14px; margin: 5px 0 0 5px; display: block;}
 #select-color span{font-size: 14px; margin: 5px 0 0 5px; display: block;}
 
 #vizitki_dop_line{clear: both; width: 100%; height: 16px; padding: 15px 0;}
@@ -70,13 +71,18 @@ p{text-align: justify; margin-bottom: 8px;}
 
 #help_invisieble_box{display: none; position: absolute; z-index: 1; top: 0; left: 0; width: 100%; height: 100%; background: none;}
 
-#material-options{display: none; color: #666766; width:192px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
-#select-color-options{display: none; color: #666766; width:192px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
-#material-options li{font-size: 14px; line-height: 28px; margin-left: 5px;}
-#select-color-options li{font-size: 14px; line-height: 28px; margin-left: 5px;}
-.selectbox{width: 192px; height: 28px; background: none; border: 1px solid #666766; color: #666766; cursor: pointer;}
+#printmethod-options{display: none; color: #666766; width:132px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
+#material-options-wrap{display: none; color: #666766; width:222px; position: absolute; z-index: 2;}
+#material-options{display: none; color: #666766; width:222px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
+#material-options-printer{display: none; color: #666766; width:222px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
+#select-color-options-wrap{display: none; color: #666766; width:138px; position: absolute; z-index: 2;}
+#select-color-options{display: none; color: #666766; width:138px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
+#select-color-options2{display: none; color: #666766; width:138px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
+#material-options li, #material-options-printer li, #printmethod-options li, #select-color-options2 li span{font-size: 14px; line-height: 28px; margin-left: 5px;}
+#select-color-options li, #select-color-options2 li{font-size: 14px; line-height: 28px;}
+.selectbox{height: 28px; background: none; border: 1px solid #666766; color: #666766; cursor: pointer;}
 .selectoption_material{cursor: pointer;}
-.selectoption_color{}
+.selectoption_printmethod{cursor: pointer;}
 .sendbtn{cursor: pointer; width: 147px; height: 28px; font-size: 14px; background: none; border: 1px solid #666766; color: #666766; display: block;}
 
 #result{width: 145px; height: 22px; font-size:16px; color:#EF3C24; text-align: center; margin: 10px 0;}
@@ -103,8 +109,10 @@ p{text-align: justify; margin-bottom: 8px;}
 .red_marked li span{color:#000; }
 .h2margins{margin: 20px 0 7px 0;}
 
-#color-op-1, #color-op-2, #color-op-3, #color-op-4{ width: 48px; float: left;}
-#color-op-1 li, #color-op-2 li, #color-op-3 li, #color-op-4 li{ padding-left:7px; cursor: pointer;}
+#color-op{ width: 45px;}
+#color-op span{ cursor: pointer;}
+#color-op-1, #color-op-2, #color-op-3{ width: 45px; float: left; text-align: center;}
+#color-op-1 li span, #color-op-2 li span, #color-op-3 li span{ cursor: pointer;}
 /*//////////////////////////////////////noselect class*/	
 .noselect {
   -webkit-touch-callout: none;

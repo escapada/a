@@ -30,7 +30,8 @@ class StaticController < ApplicationController
 		@meta="визитки, дизайн, малотиражное производство, шелкография, печать визиток"
 
 		@vizitki=true
-		@papers = Paper.find(:all)
+		@printer = Paper.printer
+		@noprinter = Paper.find(:all)
 
 		@prw=Array.new()
 		Dir.glob("public/images/vizitki/*.jpg"){|x| @prw << File.basename(x)}

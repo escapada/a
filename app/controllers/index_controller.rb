@@ -4,10 +4,15 @@ class IndexController < ApplicationController
 	end
 
 	def result
-		paperPrice = Paper.find(params[:paper]).price
+		if params[:paper]
+			paperPrice = Paper.find(params[:paper]).price			
+		end
+		if params[:nopaper]
+			paperPrice = params[:nopaper].to_i		
+		end
+		
 
-
-		percent = 15
+		percent = 30
 		setFirstColor = 300
 		setNextColor = 150
 		prokatPrint = 4
@@ -28,7 +33,7 @@ class IndexController < ApplicationController
 		vyrubka = 3
 		shtamp = 1500
 		
-		dopSum = Array.new()#Array.new(9, 0)
+		dopSum = Array.new()
 		dp = params[:dp].split(/,/)
 
 		color = params[:color]
@@ -38,36 +43,73 @@ class IndexController < ApplicationController
 		prokatCount = tirazh/4
 		colorCount = 1
 
-		
-		case color
-		when '1+0' then nextColorCount = 0
-		when '2+0' 
-		nextColorCount = 1
-		colorCount = 2
-		when '3+0'
-		nextColorCount = 2
-		colorCount = 3
-		when '4+0'
-		nextColorCount = 3
-		colorCount = 4
-		#####
-		when '1+1'
-		nextColorCount = 0
-		colorCount = 1
-		prokatCount *= 2
-		when '2+2', '2+1'
-		nextColorCount = 1
-		colorCount = 2
-		prokatCount *= 2
-		when '3+3', '3+2', '3+1'
-		nextColorCount = 2
-		colorCount = 3
-		prokatCount *= 2
-		when '4+4', '4+3', '4+2', '4+1'
-		nextColorCount = 3
-		colorCount = 4
-		prokatCount *= 2 
+		if params[:printer] == "true"
+			case tirazh
+			when 0..999
+				if color == '1'
+					print = Cyfravizitka.find(:first, :conditions => "tirazh = '#{tirazh}'").price
+				end
+				if color == '2'
+					print = Cyfravizitka.find(:first, :conditions => "tirazh = '#{tirazh}'").price2			
+				end
+			when 1000..1499
+				tmpCount = tirazh
+				if color == '1'
+					print = (Cyfravizitka.find(:first, :conditions => "tirazh = '1000'").price)
+				end
+				if color == '2'
+					print = Cyfravizitka.find(:first, :conditions => "tirazh = '1000'").price2			
+				end
+			when 1500..1999
+				if color == '1'
+					print = Cyfravizitka.find(:first, :conditions => "tirazh = '1500'").price
+				end
+				if color == '2'
+					print = Cyfravizitka.find(:first, :conditions => "tirazh = '1500'").price2			
+				end
+			when 2000..2999
+			when 3000..3999
+			when 4000..4999
+			when 5000..9999
+
+			end
+			
+
+			#print = setFirstColor + setNextColor*nextColorCount + prokatCount*prokatPrint*colorCount
+		else
+			case color
+			when '1+0' then nextColorCount = 0
+			when '2+0' 
+			nextColorCount = 1
+			colorCount = 2
+			when '3+0'
+			nextColorCount = 2
+			colorCount = 3
+			when '4+0'
+			nextColorCount = 3
+			colorCount = 4
+			#####
+			when '1+1'
+			nextColorCount = 0
+			colorCount = 1
+			prokatCount *= 2
+			when '2+2', '2+1'
+			nextColorCount = 1
+			colorCount = 2
+			prokatCount *= 2
+			when '3+3', '3+2', '3+1'
+			nextColorCount = 2
+			colorCount = 3
+			prokatCount *= 2
+			when '4+4', '4+3', '4+2', '4+1'
+			nextColorCount = 3
+			colorCount = 4
+			prokatCount *= 2 
+			end
+
+			print = setFirstColor + setNextColor*nextColorCount + prokatCount*prokatPrint*colorCount
 		end
+
 
 		if(dp[0]=="1")
 			if(params[:klishe_blint]=="0")
@@ -114,20 +156,14 @@ class IndexController < ApplicationController
 		end
 
 
-
-
-		bumaga = paperPrice + paperPrice*percent/100
-		print = setFirstColor + setNextColor*nextColorCount + prokatCount*prokatPrint*colorCount
+		bumaga = (paperPrice + paperPrice*percent/100)*tirazh/100
+		#print = setFirstColor + setNextColor*nextColorCount + prokatCount*prokatPrint*colorCount
 		obrabotka = dopSum.sum 
 		result = bumaga + print + obrabotka
 
 
 
-
-
-
-
-		@tmp1 = "#{result} руб."#obrabotka#dopSum#bumaga#tirazh
+		@tmp1 = "#{print} руб."#obrabotka#dopSum#bumaga#tirazh
 
 		#render json: @tmp1
 		#render text: @tmp1

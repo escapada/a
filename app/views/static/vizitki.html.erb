@@ -17,13 +17,13 @@
 						<div id="material" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /></div>
 							<div id="material-options-wrap" class="options-list">
 								<ul id="material-options">
-										<li class="selectoption_material"><input class="" type="text" value="Своя бумага"  /></li>
+										<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag("/images/selectarrow.png")%></span></li>
 									<% @noprinter.each do |paper| %>
 										<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
 									<% end %>
 								</ul>
 								<ul id="material-options-printer">
-										<li class="selectoption_material"><input class="" type="text" value="Своя бумага"  /></li>
+										<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag("/images/selectarrow.png")%></span></li>
 									<% @printer.each do |paper| %>
 										<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
 									<% end %>
@@ -61,7 +61,7 @@
 								</div>
 							</ul>
 						</div>
-						<input id="select-tirazh" class="selectbox" type="text" value="Тираж"  />
+						<div id="select-tirazh-wrap"><input id="select-tirazh" class="selectbox" type="text" value="Тираж"  /></div>
 					</div>
 					<div id="vizitki_dop_line">
 						<div class="line"></div>
@@ -106,7 +106,7 @@
 						<input id="calculate" class="sendbtn" type="submit" value="Стоимость заказа" />
 						<div id="result">
 						</div>
-						<input class="sendbtn" type="submit" value="Оформить заказ" />
+						<%=link_to "<input class='sendbtn' type='submit' value='Оформить заказ' />".html_safe, contact_path %>
 					</div>
 					<div id="alert">
 					</div>

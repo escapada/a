@@ -1,8 +1,10 @@
 var show_option_box = false;
+var nopaper = false;
 
 $( document ).ready(function() {
 resize_monitor();
 clear_cash();
+/*alert($("#material-options").height()+' / '+$("#material-options").innerHeight()+' / ');*/
 
 $("#printmethod").click(function(){
 	var xy = $(this).position();
@@ -15,6 +17,13 @@ $("#material").click(function(){
 	var xy = $(this).position();
 	$("#material-options-wrap").css({"left": xy.left, "top": xy.top+29});
 	$("#material-options-wrap").toggle();
+
+	/*////////////////material list scrolling*/
+	if ($("#material-options-wrap").children("ul").innerHeight()>350) {
+		$("#material-options-wrap").children("ul").css({"height": 350, "overflow": "scroll"});
+	}
+	/**/
+	
 	$("#help_invisieble_box").css({"display": "block"});
 });
 
@@ -28,7 +37,7 @@ $( "#select-tirazh" ).click(function() {
 	$( this ).val('');
 });
 $( "#select-tirazh" ).focusout(function() {
-	if($( this ).val().match(/\D/) || $( this ).val() == ''){
+	if($( this ).val().match(/\D/) || $( this ).val() == '' || $( this ).val()>5000){
 		$( this ).val('Тираж');
 	}
 	else if($( this ).val()%100){
@@ -84,6 +93,8 @@ $(".selectoption_printmethod").click(function(){
 $(".selectoption_material").click(function(){
 	var material = $('> input', this).val();
 	var text = $(this).text()
+
+	nopaper = false;
 	
 	$("#material span").html(text);
 	$("#material").children("input").val(material);
@@ -93,6 +104,28 @@ $(".selectoption_material").click(function(){
 	//alert($(this).text());
 	//alert($("#material").children("input").value);
 
+});
+
+$(".selectoption_material_input").click(function(){
+	$(this).val('');
+});
+
+$(".selectbtn").click(function() {
+	if($(this).prev().val().match(/[^0-9\\.]/) || $(this).prev().val() == ''){
+		alert("Неверно указана цена листа бумаги!");
+		$("#material span").html("Материал");
+		$("#material").children("input").val('');
+		nopaper = false;
+	}
+	else{
+		var text = $(this).prev().val();
+		$("#material span").html(text);
+		$("#material").children("input").val(text);
+
+		$("#material-options-wrap").toggle();
+		$("#help_invisieble_box").css({"display": "none"});
+		nopaper = true;
+	}
 });
 
 $(".selectoption_color").click(function(){
@@ -130,6 +163,9 @@ $(".radiobtn").click(function(){
 
 
 $("#calculate").click(function(){
+	var varpaper = "paper";
+	if (nopaper) {varpaper = "nopaper";}
+
 	printer = $("[name='printmethod']").val();
 	//here will be validation and collecting all values
 	paper = $("[name='material']").val();
@@ -139,6 +175,8 @@ $("#calculate").click(function(){
 	klishe_folga = $("[name='klishe_folga']").val();
 	klishe_kongrev = $("[name='klishe_kongrev']").val();
 	vyrubka = $("[name='vyrubka']").val();
+
+	
 
 
 	dp = new Array();
@@ -162,7 +200,7 @@ $("#calculate").click(function(){
 		$.ajax({
 			url: '/index/result',
 			type: 'POST',
-			data: 'printer='+printer+'&paper='+paper+'&color='+encodeURIComponent(color)+'&tirazh='+tirazh+'&dp='+dp+'&klishe_blint='+klishe_blint+'&klishe_folga='+klishe_folga+'&klishe_kongrev='+klishe_kongrev+'&vyrubka='+vyrubka,
+			data: 'printer='+printer+'&'+varpaper+'='+paper+'&color='+encodeURIComponent(color)+'&tirazh='+tirazh+'&dp='+dp+'&klishe_blint='+klishe_blint+'&klishe_folga='+klishe_folga+'&klishe_kongrev='+klishe_kongrev+'&vyrubka='+vyrubka,
 			//dataType: "json",
 			success: function(tmp){
 				$('#result').text(tmp);

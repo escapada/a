@@ -4,14 +4,9 @@ class IndexController < ApplicationController
 	end
 
 	def result
-		if params[:paper]
-			paperPrice = Paper.find(params[:paper]).price			
-		end
-		if params[:nopaper]
-			paperPrice = params[:nopaper].to_i		
-		end
-		
-
+		dollar = 38
+		euro = 50
+		koeficient = 1 # множитель для цифровой печати на визитках
 		percent = 30
 		setFirstColor = 300
 		setNextColor = 150
@@ -42,40 +37,28 @@ class IndexController < ApplicationController
 		nextColorCount = 0
 		prokatCount = tirazh/4
 		colorCount = 1
+		
+		if params[:paper]
+			paperInstance = Paper.find(params[:paper])
+			case paperInstance.currency
+			when 'd' then paperPrice = dollar*paperInstance.price
+			when 'e' then paperPrice = euro*paperInstance.price
+			when 'r' then paperPrice = paperInstance.price
+			end						
+		end
+
+		if params[:nopaper]
+			paperPrice = params[:nopaper].to_f
+			percent = 0		
+		end
 
 		if params[:printer] == "true"
-			case tirazh
-			when 0..999
-				if color == '1'
-					print = Cyfravizitka.find(:first, :conditions => "tirazh = '#{tirazh}'").price
-				end
-				if color == '2'
-					print = Cyfravizitka.find(:first, :conditions => "tirazh = '#{tirazh}'").price2			
-				end
-			when 1000..1499
-				tmpCount = tirazh
-				if color == '1'
-					print = (Cyfravizitka.find(:first, :conditions => "tirazh = '1000'").price)
-				end
-				if color == '2'
-					print = Cyfravizitka.find(:first, :conditions => "tirazh = '1000'").price2			
-				end
-			when 1500..1999
-				if color == '1'
-					print = Cyfravizitka.find(:first, :conditions => "tirazh = '1500'").price
-				end
-				if color == '2'
-					print = Cyfravizitka.find(:first, :conditions => "tirazh = '1500'").price2			
-				end
-			when 2000..2999
-			when 3000..3999
-			when 4000..4999
-			when 5000..9999
-
+			case color
+			when '1'
+				print = koeficient*Cyfravizitka.find(:first, :conditions => "tirazh = '#{tirazh}'").price
+			when '2'
+				print = koeficient*Cyfravizitka.find(:first, :conditions => "tirazh = '#{tirazh}'").price2
 			end
-			
-
-			#print = setFirstColor + setNextColor*nextColorCount + prokatCount*prokatPrint*colorCount
 		else
 			case color
 			when '1+0' then nextColorCount = 0
@@ -155,15 +138,13 @@ class IndexController < ApplicationController
 			end
 		end
 
-
-		bumaga = (paperPrice + paperPrice*percent/100)*tirazh/100
-		#print = setFirstColor + setNextColor*nextColorCount + prokatCount*prokatPrint*colorCount
+		bumaga = (paperPrice + paperPrice*percent/100)*tirazh/25
 		obrabotka = dopSum.sum 
+		
 		result = bumaga + print + obrabotka
+		
 
-
-
-		@tmp1 = "#{print} руб."#obrabotka#dopSum#bumaga#tirazh
+		@tmp1 = "#{result} руб."#obrabotka#dopSum#bumaga#tirazh
 
 		#render json: @tmp1
 		#render text: @tmp1

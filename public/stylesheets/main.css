@@ -10,10 +10,11 @@ p{text-align: justify; margin-bottom: 8px;}
 
 .redtext{color:#EF3C24;}
 .yellowtext{color:#FCF9CE;}
+.p-header{font-size: 14px;}
 
-#content_wrap{overflow: hidden;}
+#content_wrap{overflow: hidden; margin-left:246px;}
 
-#leftcolumn{width: 246px; float: left;}
+#leftcolumn{width: 246px; float: left; position:fixed; z-index:10;}
 #logo{ width: 100%; text-align: center;}
 #leftcolumn #navblock, #leftcontact{ margin: 15px 0 0 50px;}
 #leftmenu{ width:162px; border-bottom: 1px solid #FCF9CE; padding-bottom: 20px;}
@@ -125,3 +126,10 @@ p{text-align: justify; margin-bottom: 8px;}
          -o-user-select: none;
             user-select: none;
 }
+
+/*///////////////////////////footer*/
+#fp-footer{width: 100%;}
+#footer{margin:20px 0 20px 246px;}
+#foo-info{ float: left; color: #FCF9CE;}
+#foo-js{float: left; color: #FCF9CE;}
+#foo-copyright{float: right; color: #FCF9CE;}

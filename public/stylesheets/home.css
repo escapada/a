@@ -2,7 +2,7 @@ html {overflow:  hidden  !important;}
 body{ padding: 0px !important;}
 
 #fp_wrap{ padding: 0px;}
-.wrapper{ background: #ccc; float:left;}
+.wrapper{ background: none; float:left;}
 .wrapper_margin{ width:10px; float:left;}
 .line_margin{ height:10px; width:100%; clear: left;}
 .tmp_img{ overflow: hidden; box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; width:100%; height:100%; border:2px solid #FCF9CE; background: #EF3C24; width: 100%; height: 100%;}
@@ -21,7 +21,7 @@ body{ padding: 0px !important;}
 .text_fp{}
 
 #fp_nav{ margin-bottom: 15px;}
-#nav_block_wrap{ margin:auto; width: 358px; text-align: left; }
+#nav_block_wrap{ margin:auto; width: 358px; text-align: left;}
 
 /*//////////////////*/
 #text{ text-align: center; background: red; color:yellow; font-size: 12px;}

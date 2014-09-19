@@ -1,4 +1,14 @@
 class StaticController < ApplicationController
+	def index
+		@title="ООО АВС-Принт"
+		@meta="полиграфия, шелкография, печать на пакетах, печать визиток, брошюр, листовок, календарей, буклетов, рекламной продукции, тиснение, вырубка, УФ-лак, дизайн"
+
+		@prw=Array.new()
+		Dir.glob("public/images/tmpallstuff/*.jpg"){|x| @prw << File.basename(x)}
+		@prw.shuffle!
+
+		render :layout => 'blank'
+	end
 	def home
 		@home=true
 		@prw=Array.new()
@@ -10,7 +20,7 @@ class StaticController < ApplicationController
 		@meta="полиграфия, шелкография, печать на пакетах, печать визиток, брошюр, листовок, календарей, буклетов, рекламной продукции, тиснение, вырубка, УФ-лак, дизайн"
 
 		@prw=Array.new()
-		Dir.glob("public/images/about/*.jpg"){|x| @prw << File.basename(x)}
+		Dir.glob("public/images/tmpallstuff/*.jpg"){|x| @prw << File.basename(x)}
 		@prw.shuffle!
 	end
 	def contact
@@ -22,7 +32,7 @@ class StaticController < ApplicationController
 		@meta="полиграфия, шелкография, требования к макетам, печать на пакетах, печать визиток, брошюр, листовок, календарей, буклетов, рекламной продукции"
 
 		@prw=Array.new()
-		Dir.glob("public/images/allstuff/*.jpg"){|x| @prw << File.basename(x)}
+		Dir.glob("public/images/tmpallstuff/*.jpg"){|x| @prw << File.basename(x)}
 		@prw.shuffle!
 	end
 	def vizitki
@@ -34,7 +44,7 @@ class StaticController < ApplicationController
 		@noprinter = Paper.find(:all)
 
 		@prw=Array.new()
-		Dir.glob("public/images/vizitki/*.jpg"){|x| @prw << File.basename(x)}
+		Dir.glob("public/images/tmpallstuff/*.jpg"){|x| @prw << File.basename(x)}
 		@prw.shuffle!
 	end
 end

@@ -4,30 +4,36 @@ class IndexController < ApplicationController
 	end
 
 	def result
-		dollar = 38
-		euro = 50
-		koeficient = 1 # множитель для цифровой печати на визитках
-		percent = 30
-		setFirstColor = 300
-		setNextColor = 150
-		prokatPrint = 4
-		setUF = 1200
-		prokatUF = 5
-		setUFUp = 1700
-		prokatUFUp = 7
-		tisnenieBlint = 3
-		setTisnenie = 750
-		tisnenieBlint = 3
-		tisnenieFolga = 5
-		tisnenieKongrev = 5
-		klishe = 500
-		termopod = 500
-		obrez = 300
-		kruglenie = 1
-		setVyrubka = 750
-		vyrubka = 3
-		shtamp = 1500
+		constants = Constant.find(:first)
+
+		dollar = constants.dollar
+		euro = constants.euro
+		koeficient = constants.koeficient # множитель для цифровой печати на визитках
+		percent = constants.percent
+		setFirstColor = constants.setFirstColor
+		setNextColor = constants.setNextColor
+		prokatPrint = constants.prokatPrint
+		setUF = constants.setUF
+		prokatUF = constants.prokatUF
+		setUFUp = constants.setUFUp
+		prokatUFUp = constants.prokatUFUp
+		setTisnenie = constants.setTisnenie
+		tisnenieBlint = constants.tisnenieBlint
+		tisnenieFolga = constants.tisnenieFolga
+		tisnenieKongrev = constants.tisnenieKongrev
+		klishe = constants.klishe
+		termopod = constants.termopod
+		obrez = constants.obrez
+		kruglenie = constants.kruglenie
+		setVyrubka = constants.setVyrubka
+		vyrubka = constants.vyrubka
+		shtamp = constants.shtamp
 		
+		#dollar = 38		euro = 50		koeficient = 1 	percent = 30		setFirstColor = 300		setNextColor = 150
+		#prokatPrint = 4		setUF = 1200		prokatUF = 5		setUFUp = 1700		prokatUFUp = 7		setTisnenie = 750
+		#tisnenieBlint = 3		tisnenieFolga = 5		tisnenieKongrev = 5		klishe = 500		termopod = 500
+		#obrez = 300		kruglenie = 1		setVyrubka = 750		vyrubka = 3		shtamp = 1500
+
 		dopSum = Array.new()
 		dp = params[:dp].split(/,/)
 
@@ -138,13 +144,13 @@ class IndexController < ApplicationController
 			end
 		end
 
-		bumaga = (paperPrice + paperPrice*percent/100)*tirazh/25
+		bumaga = (paperPrice + paperPrice*percent/100)*tirazh/100
 		obrabotka = dopSum.sum 
 		
 		result = bumaga + print + obrabotka
 		
 
-		@tmp1 = "#{result} руб."#obrabotka#dopSum#bumaga#tirazh
+		@tmp1 = "#{(result).round(2)} руб."#obrabotka#dopSum#bumaga#tirazh
 
 		#render json: @tmp1
 		#render text: @tmp1

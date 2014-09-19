@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @title %></title>
+  <meta name="keywords" content="<%= @meta %>" />
+
+  <%= javascript_include_tag "jquery-1.11.1.min.js" %>
+  <%= javascript_include_tag "functions.js" %>
+  <%= javascript_include_tag "blank.js.erb" %>
+  <%= stylesheet_link_tag 'main' %>
+  
+</head>
+
+<body>
+
+<%= yield %>
+
+</body>
+</html>

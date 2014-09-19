@@ -12,7 +12,7 @@
   <% end %>
   <% if @home %>
   <%= stylesheet_link_tag 'home' %>
-  	<script type="text/javascript">
+  <script type="text/javascript">
 
   	$( document ).ready(function() {
   		resize_monitor();
@@ -20,7 +20,18 @@
   	$( window ).resize(function() {
   		resize_monitor();
   	});
-  	</script>
+  </script>
+  <%else if !@vizitki %>
+    <script type="text/javascript">
+
+    $( document ).ready(function() {
+      $("#footer").css({"width": $("#contentcolumn").outerWidth()});
+    });
+    $( window ).resize(function() {
+      $("#footer").css({"width": $("#contentcolumn").outerWidth()});
+    });
+    </script>
+  <% end %>
   <% end %>
 
 </head>

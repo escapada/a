@@ -4,7 +4,7 @@
 	<div class="wrapper">
 	 <div id="fp_box_1" class="tmp_img"><table width="100%" height="100%" cellpadding="0" cellspacing="0"><tr><td valign="middle">
 	 	<div id="logo_fp">
-	 		<%=link_to "#{ image_tag("/images/logo_fp.png", {:title=>"АВС-Принт. Дизайн. Полиграфия. Шелкография. Рекламное производство.", :alt=>"АВС-Принт. Эксклюзивная полиграфия в Санкт-Петербурге"}) }".html_safe, root_path %>
+	 		<%=link_to "#{ image_tag("/images/logo_fp.png", {:id=>"logo_img", :title=>"АВС-Принт. Дизайн. Полиграфия. Шелкография. Рекламное производство.", :alt=>"АВС-Принт. Эксклюзивная полиграфия в Санкт-Петербурге"}) }".html_safe, root_path %>
 	 		<div class="text_fp">
 	 			эксклюзивная полиграфия в Санкт-Петербурге
 	 		</div>
@@ -21,7 +21,7 @@
 	<div class="wrapper_margin"></div>
 	<div class="wrapper"><div id="fp_box_4" class="tmp_img" style="background:url(/images/fp_random_prw/<%= @prw[2]%>) no-repeat center; background-size:cover;"></div></div>
 	<div class="wrapper_margin"></div>
-	<div class="wrapper"><div id="fp_box_5" class="tmp_img" style="background:url(/images/fp_2_bg.png) no-repeat center #EF3C24;"></div></div>
+	<div class="wrapper"><%= link_to "<div id='fp_box_5' class='tmp_img' style='background:url(/images/fp_2_bg.png) no-repeat center #EF3C24;'></div>".html_safe, vizitki_path, {:class=>"link"} %></div>
 	<div class="wrapper_margin"></div>
 	<div class="wrapper"><div id="fp_box_6" class="tmp_img" style="background:url(/images/fp_random_prw/<%= @prw[3]%>) no-repeat center; background-size:cover;"></div></div>
 	<div class="wrapper_margin"></div>
@@ -37,17 +37,17 @@
 			<div id="nav_block_wrap">
 				<nav id="fp_nav">
 					<ul>
-						<li><%= link_to "О нас", about_path, {:class=>"link"} %></li>
+						<!--			<li><%= link_to "О нас", about_path, {:class=>"link"} %></li>
 						<li><%= link_to "Визитки", vizitki_path, {:class=>"link"} %></li>
 						<li><%= link_to "Контакты", contact_path, {:class=>"link"} %></li>
-						<li><%= link_to "Технические требования", trebovaniya_path, {:class=>"link"} %></li>
-						<!--			<li><%= link_to "Шелкография", {:action => "about"}, {:class=>"link"} %></li>
-						<li><%= link_to "Высокая печать (Letterpress)", {:action => "contact"}, {:class=>"link"} %></li>
-						<li><%= link_to "Тиснение", {:action => "contact"}, {:class=>"link"} %></li>
-						<li><%= link_to "Вырубка", {:action => "contact"}, {:class=>"link"} %></li>
-						<li><%= link_to "УФ-Лакировка", {:action => "contact"}, {:class=>"link"} %></li>
-						<li><%= link_to "Термоподъём", {:action => "contact"}, {:class=>"link"} %></li>
-						<li><%= link_to "Цифровая печать", {:action => "contact"}, {:class=>"link"} %></li>			-->
+						<li><%= link_to "Технические требования", trebovaniya_path, {:class=>"link"} %></li>			-->
+						<li><%= link_to "Шелкография", vizitki_path, {:class=>"link"} %></li>
+						<li><%= link_to "Высокая печать (Letterpress)", vizitki_path, {:class=>"link"} %></li>
+						<li><%= link_to "Тиснение", vizitki_path, {:class=>"link"} %></li>
+						<li><%= link_to "Вырубка", vizitki_path, {:class=>"link"} %></li>
+						<li><%= link_to "УФ-Лакировка", vizitki_path, {:class=>"link"} %></li>
+						<li><%= link_to "Термоподъём", vizitki_path, {:class=>"link"} %></li>
+						<li><%= link_to "Цифровая печать", vizitki_path, {:class=>"link"} %></li>
 					</ul>
 				</nav>
 				<div class="text_fp">(812) 702 7840 / 702 7841 / 702 7802 / <%= mail_to "zakaz@abc-design.ru", "zakaz@abc-design.ru" %></div>
@@ -57,4 +57,7 @@
 	<div class="wrapper_margin"></div>
 
 <div class="line_margin"></div>
+</div>
+<div id="fp-footer">
+	<%= render "footer" %>
 </div>

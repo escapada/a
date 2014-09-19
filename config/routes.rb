@@ -9,6 +9,19 @@ A::Application.routes.draw do
   match '/trebovaniya' => 'static#trebovaniya', :as => :trebovaniya
   match '/vizitki' => 'static#vizitki', :as => :vizitki
 
+  #temp blank stuff
+  match '/silk' => 'static#index', :as => :silk
+  match '/upprint' => 'static#index', :as => :upprint
+  match '/tisnenie' => 'static#index', :as => :tisnenie
+  match '/vyrubka' => 'static#index', :as => :vyrubka
+  match '/uflak' => 'static#index', :as => :uflak
+  match '/printer' => 'static#index', :as => :printer
+  match '/cards' => 'static#index', :as => :cards
+  match '/folders' => 'static#index', :as => :folders
+  match '/plasticfolders' => 'static#index', :as => :plasticfolders
+  match '/stickers' => 'static#index', :as => :stickers
+  #end of temp blank stuff
+
   #resources :articles
 
   resources :index

@@ -4,14 +4,6 @@ var nopaper = false;
 $( document ).ready(function() {
 resize_monitor();
 clear_cash();
-/*alert($("#material-options").height()+' / '+$("#material-options").innerHeight()+' / ');*/
-
-$("#printmethod").click(function(){
-	var xy = $(this).position();
-	$("#printmethod-options").css({"left": xy.left, "top": xy.top+29});
-	$("#printmethod-options").toggle();
-	$("#help_invisieble_box").css({"display": "block"});
-});
 
 $("#material").click(function(){
 	var xy = $(this).position();
@@ -24,6 +16,13 @@ $("#material").click(function(){
 	}
 	/**/
 	
+	$("#help_invisieble_box").css({"display": "block"});
+});
+
+$("#format").click(function(){
+	var xy = $(this).position();
+	$("#format-options").css({"left": xy.left, "top": xy.top+29});
+	$("#format-options").toggle();
 	$("#help_invisieble_box").css({"display": "block"});
 });
 
@@ -40,54 +39,27 @@ $( "#select-tirazh" ).focusout(function() {
 	if($( this ).val().match(/\D/) || $( this ).val() == '' || $( this ).val()>5000){
 		$( this ).val('Тираж');
 	}
-	else if($( this ).val()%100){
-		if ($( this ).val() < 100) {
-			$( this ).val(100);
+	else if($( this ).val()%50){
+		if ($( this ).val() < 50) {
+			$( this ).val(50);
 		}
-		else{
-			tmpVal = Math.round($( this ).val()/100)*100;
-			$( this ).val(tmpVal);
-		}	
 	}
 	else if($( this ).val() == 0){
-		$( this ).val(100);
+		$( this ).val(50);
 	}
 });
 
-$(".selectoption_printmethod").click(function(){
-	$("[name='material']").val('');
-	$("[name='color']").val('');
+$(".selectoption_format").click(function(){
 
-	var printmethod = $('> input', this).val();
+	var format = $('> input', this).val();
 	var text = $(this).text()
-	
-	if (printmethod == "true") {
-		$("#material-options").hide(0);
-		$("#material-options-printer").show(0);
-		$("#select-color-options").hide(0);
-		$("#select-color-options2").show(0);
-	}
-	else{
-		$("#material-options-printer").hide(0);
-		$("#material-options").show(0);
-		$("#select-color-options2").hide(0);
-		$("#select-color-options").show(0);
-	}
 
-	$("#printmethod span").html(text);
-	$("#printmethod").children("input").val(printmethod);
+	$("#format span").html(text);
+	$("#format").children("input").val(format);
 	
-	$("#printmethod-options").toggle();
-	
-	$("#material span").text("Материал");
-	$("[name='material']").val('');
-	$("#select-color span").text("Печать");
-	$("[name='color']").val('');
+	$("#format-options").toggle();
 	
 	$("#help_invisieble_box").css({"display": "none"});
-	//alert($(this).text());
-	//alert($("#material").children("input").value);
-
 });
 
 $(".selectoption_material").click(function(){
@@ -101,9 +73,6 @@ $(".selectoption_material").click(function(){
 	
 	$("#material-options-wrap").toggle();
 	$("#help_invisieble_box").css({"display": "none"});
-	//alert($(this).text());
-	//alert($("#material").children("input").value);
-
 });
 
 $(".selectoption_material_input").click(function(){
@@ -139,58 +108,22 @@ $(".selectoption_color").click(function(){
 	$("#help_invisieble_box").css({"display": "none"});
 });
 
-
 $("#help_invisieble_box").click(function(){
 	$(this).css({"display": "none"});
 	$(".options-list").css({"display": "none"});
 });
 
-
-$(".radiobtn").click(function(){
-	if ($(this).hasClass('selected')) {
-		$(this).removeClass('selected');
-		$(this).children("input").val(0);
-		tisnenieOrVyrubkaChecked($(this).children("input").attr('name'), 0);
-		//alert($(this).children("input").attr('name')+' unchecked');
-	}
-	else{
-		$(this).addClass( "selected" );
-		$(this).children("input").val(1);
-		tisnenieOrVyrubkaChecked($(this).children("input").attr('name'), 1);
-		//alert($(this).children("input").attr('name')+' checked');
-	};
-});
-
-
 $("#calculate").click(function(){
 	var varpaper = "paper";
 	if (nopaper) {varpaper = "nopaper";}
 
-	printer = $("[name='printmethod']").val();
+	format = $("[name='format']").val();
 	//here will be validation and collecting all values
 	paper = $("[name='material']").val();
 	tirazh = $("#select-tirazh").val();
 	color = $("[name='color']").val();
-	klishe_blint = $("[name='klishe_blint']").val();
-	klishe_folga = $("[name='klishe_folga']").val();
-	klishe_kongrev = $("[name='klishe_kongrev']").val();
-	vyrubka = $("[name='vyrubka']").val();
 
-	
-
-
-	dp = new Array();
-	dp[0] = $("[name='dp1']").val();
-	dp[1] = $("[name='dp2']").val();
-	dp[2] = $("[name='dp3']").val();
-	dp[3] = $("[name='dp4']").val();
-	dp[4] = $("[name='dp5']").val();
-	dp[5] = $("[name='dp6']").val();
-	dp[6] = $("[name='dp7']").val();
-	dp[7] = $("[name='dp8']").val();
-	dp[8] = $("[name='dp9']").val();
-	
-	if(paper == '' || color == '' || tirazh == '' || tirazh == 'Тираж'){
+	if(paper == '' || format == '' || color == '' || tirazh == '' || tirazh == 'Тираж'){
 		$("#alert").show(0);
 		$("#alert").text('Не хватает параметров!');
 	}
@@ -198,9 +131,9 @@ $("#calculate").click(function(){
 		$("#alert").hide(0);
 
 		$.ajax({
-			url: '/index/vizitki_calculate',
+			url: '/index/silk_calculate',
 			type: 'POST',
-			data: 'printer='+printer+'&'+varpaper+'='+paper+'&color='+encodeURIComponent(color)+'&tirazh='+tirazh+'&dp='+dp+'&klishe_blint='+klishe_blint+'&klishe_folga='+klishe_folga+'&klishe_kongrev='+klishe_kongrev+'&vyrubka='+vyrubka,
+			data: varpaper+'='+paper+'&format='+format+'&color='+encodeURIComponent(color)+'&tirazh='+tirazh,
 			//dataType: "json",
 			success: function(tmp){
 				$('#result').text(tmp);
@@ -217,37 +150,18 @@ $("#hideblockbtn").click(function(){
 	else {
 		$("#hideblockbtn .redtext").text("Меньше фото");
 		$("#hideblock").toggle();
-												///$("#footer").html("<%= render @plant %>");//.html("<%= render @plant %>")
 	}
 });//end of hideblockbtn click
 
 });//end of document ready function
 
 
-
-
 $( window ).resize(function() {
 resize_monitor();
 });
 
-
-
-
-
 ///////////////////////////////////////////////////////////////StandAlone Functions//////////////////////////////////////
 function resize_monitor() {
-//	if(document.body.clientWidth <= 1220){
-//		var windowHSize = 1220;
-//		var windowVSize = 788;
-//	}
-//	else if(document.body.clientWidth >= 2048){
-//		var windowHSize = 2048;
-//	}
-//	else{
-//		var windowHSize = document.body.clientWidth;
-//		var windowVSize = document.body.clientHeight;
-//	}
-	
 	var windowHSize = document.body.clientWidth;
 	var windowVSize = document.body.clientHeight;
 
@@ -301,72 +215,8 @@ function resize_monitor() {
 }
 function clear_cash() {
 	$("[name='material']").val('');
+	$("[name='format']").val('');
 	$("#material-options").show(0);
-	$("#select-color-options").show(0);
 	$(".selectoption_material_input").val('');
-	$("[name='color']").val('');
 	$("#select-tirazh").val('Тираж');
-	$("[name='dp1']").val(0);
-	$("[name='dp2']").val(0);
-	$("[name='dp3']").val(0);
-	$("[name='dp4']").val(0);
-	$("[name='dp5']").val(0);
-	$("[name='dp6']").val(0);
-	$("[name='dp7']").val(0);
-	$("[name='dp8']").val(0);
-	$("[name='dp9']").val(0);
-	$("[name='klishe_blint']").val(0);
-	$("[name='klishe_folga']").val(0);
-	$("[name='klishe_kongrev']").val(0);
-	$("[name='vyrubka']").val(0);
-}
-function tisnenieOrVyrubkaChecked(dp, checked) {						//$(this).children("input").attr('name')
-	if (dp == 'dp1') {
-		if(checked){
-			$("#notice1").show(0);
-		}
-		else{
-			$("#notice1").hide(0);
-			if ($("input[name='klishe_blint']").parent().hasClass('selected')) {
-				$("input[name='klishe_blint']").parent().removeClass('selected');
-				$("input[name='klishe_blint']").val(0);
-			}
-		}
-	}
-		if (dp == 'dp2') {
-		if(checked){
-			$("#notice2").show(0);
-		}
-		else{
-			$("#notice2").hide(0);
-			if ($("input[name='klishe_folga']").parent().hasClass('selected')) {
-				$("input[name='klishe_folga']").parent().removeClass('selected');
-				$("input[name='klishe_folga']").val(0);
-			}
-		}
-	}
-	if (dp == 'dp3') {
-		if(checked){
-			$("#notice3").show(0);
-		}
-		else{
-			$("#notice3").hide(0);
-			if ($("input[name='klishe_kongrev']").parent().hasClass('selected')) {
-				$("input[name='klishe_kongrev']").parent().removeClass('selected');
-				$("input[name='klishe_kongrev']").val(0);
-			}
-		}
-	}
-	if (dp == 'dp9') {
-		if(checked){
-			$("#notice4").show(0);
-		}
-		else{
-			$("#notice4").hide(0);
-			if ($("input[name='vyrubka']").parent().hasClass('selected')) {
-				$("input[name='vyrubka']").parent().removeClass('selected');
-				$("input[name='vyrubka']").val(0);
-			}
-		}
-	}
 }

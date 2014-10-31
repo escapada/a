@@ -9,14 +9,15 @@ A::Application.routes.draw do
   match '/trebovaniya' => 'static#trebovaniya', :as => :trebovaniya
   match '/vizitki' => 'static#vizitki', :as => :vizitki
 
+  match '/silk' => 'static#silk', :as => :silk
+  match '/cards' => 'static#cards', :as => :cards
+  match '/printer' => 'static#printer', :as => :printer
+  match '/tisnenie' => 'static#tisnenie', :as => :tisnenie
+
   #temp blank stuff
-  match '/silk' => 'static#index', :as => :silk
   match '/upprint' => 'static#index', :as => :upprint
-  match '/tisnenie' => 'static#index', :as => :tisnenie
   match '/vyrubka' => 'static#index', :as => :vyrubka
   match '/uflak' => 'static#index', :as => :uflak
-  match '/printer' => 'static#index', :as => :printer
-  match '/cards' => 'static#index', :as => :cards
   match '/folders' => 'static#index', :as => :folders
   match '/plasticfolders' => 'static#index', :as => :plasticfolders
   match '/stickers' => 'static#index', :as => :stickers
@@ -77,7 +78,10 @@ A::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => "static#home" #"index#index"
   #map.connect '',:controller=>"index",:action=>"index"
-  match 'index/result'
+  match 'index/vizitki_calculate'
+  match 'index/silk_calculate'
+  match 'index/printer_calculate'
+  match 'index/tisnenie_calculate'
 
   # See how all your routes lay out with "rake routes"
 

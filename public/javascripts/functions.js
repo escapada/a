@@ -1,6 +1,3 @@
-var logowidth=0;
-var logoheight=0;
-
 function resize_monitor() {
 //	if(document.body.clientWidth <= 1220){
 //		var windowHSize = 1220;
@@ -48,13 +45,21 @@ function resize_monitor() {
 		//$("#footer").css({"width": 940});
 		$("#hideblockbtn .line").css({"width": 410});
 	}
-
-	if (fp_wrapHSize<245) {
-		$("#logo_img").width(fp_wrapHSize);
+	//logo+boxes scalling
+	wrapheight = $(".wrapper").height();
+	wrapwidth = $(".wrapper").width();
+	if (wrapheight<194) {
+	 $("#logo_img").height(wrapheight-30);
 	}
-	if (fp_wrapVSize<195) {
-		$("#logo_img").width(fp_wrapVSize);
+	if (wrapheight<211) {
+	 $("#fp_2_img").height(wrapheight-20);
 	}
+	wrapheight = $(".wrapper").height();
+	if (wrapheight<205 || wrapwidth<344) {
+	 $(".link").css({"font-size": "14px", "line-height": "18px"});
+	}
+	else{$(".link").css({"font-size": "21px", "line-height": "25px"});}
+	//end of logo+boxes scalling
 
 }
 function clear_cash() {

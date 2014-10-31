@@ -21,7 +21,10 @@
 	<div class="wrapper_margin"></div>
 	<div class="wrapper"><div id="fp_box_4" class="tmp_img" style="background:url(/images/fp_random_prw/<%= @prw[2]%>) no-repeat center; background-size:cover;"></div></div>
 	<div class="wrapper_margin"></div>
-	<div class="wrapper"><%= link_to "<div id='fp_box_5' class='tmp_img' style='background:url(/images/fp_2_bg.png) no-repeat center #EF3C24;'></div>".html_safe, vizitki_path, {:class=>"link"} %></div>
+
+	<div class="wrapper"><%=link_to "<div id='fp_box_5' class='tmp_img'><table width='100%' height='100%' cellpadding='0' cellspacing='0'><tr><td valign='middle'>#{ image_tag("/images/fp_2_bg.png", {:id=>"fp_2_img", :title=>"Онлайн калькулятор. Расчёт заказа онлайн.", :alt=>"калькулятор, онлайн, расчёт online"}) }</td></tr></table></div>".html_safe, vizitki_path, {:class=>"link"} %>
+	</div>
+
 	<div class="wrapper_margin"></div>
 	<div class="wrapper"><div id="fp_box_6" class="tmp_img" style="background:url(/images/fp_random_prw/<%= @prw[3]%>) no-repeat center; background-size:cover;"></div></div>
 	<div class="wrapper_margin"></div>

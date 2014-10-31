@@ -4,11 +4,15 @@
   <title><%= @title %></title>
   <meta name="keywords" content="<%= @meta %>" />
 
+  <%= favicon_link_tag 'favicon.ico' %>
+
   <%= javascript_include_tag "jquery-1.11.1.min.js" %>
-  <%= javascript_include_tag "functions.js" %>
   <%= stylesheet_link_tag 'main' %>
-  <% if @vizitki %>
-  <%= javascript_include_tag "vizitki.js.erb" %>
+  <% if @remotejs %>
+  <%= javascript_include_tag "#{@remotejs}.js.erb" %>
+  <% end %>
+  <% if @cards %>
+  <%= javascript_include_tag "cards.js.erb" %>
   <% end %>
   <% if @home %>
   <%= stylesheet_link_tag 'home' %>

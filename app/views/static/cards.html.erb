@@ -7,23 +7,28 @@
 			<div id="contentbox">
 				<div id="contentbody">
 					<h1>Рассчет заказа онлайн</h1>
-					<h2>Шелкография (листовая печать)</h2>
+					<h2>Визитные карточки</h2>
 					<div id="vizitki_selectbox_line">
-						<div id="material" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /></div>
-						<div id="material-options-wrap" class="options-list">
-							<ul id="material-options">
-									<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag("/images/selectarrow.png")%></span></li>
-								<% @noprinter.each do |paper| %>
-									<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
-								<% end %>
-							</ul>
-						</div>
-						<div id="format" class="selectbox"><span class="noselect">Формат</span><input name="format" type="hidden" value="false" /></div>
-						<ul id="format-options" class="options-list">
-							<li class="selectoption_format">A4<input type="hidden" value="A4" /></li>
-							<li class="selectoption_format">A3<input type="hidden" value="A3" /></li>
-							<li class="selectoption_format">A2<input type="hidden" value="A2" /></li>
+						<div id="printmethod" class="selectbox"><span class="noselect">Шелкография</span><input name="printmethod" type="hidden" value="false" /></div>
+						<ul id="printmethod-options" class="options-list">
+							<li class="selectoption_printmethod">Шелкография<input type="hidden" value="false" /></li>
+							<li class="selectoption_printmethod">Цифровая печать<input type="hidden" value="true" /></li>
 						</ul>
+						<div id="material" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /></div>
+							<div id="material-options-wrap" class="options-list">
+								<ul id="material-options">
+										<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag("/images/selectarrow.png")%></span></li>
+									<% @noprinter.each do |paper| %>
+										<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
+									<% end %>
+								</ul>
+								<ul id="material-options-printer">
+										<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag("/images/selectarrow.png")%></span></li>
+									<% @printer.each do |paper| %>
+										<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
+									<% end %>
+								</ul>
+							</div>
 						<div id="select-color" class="selectbox"><span class="noselect">Печать</span><input name="color" type="hidden" value="" /></div>
 						<div id="select-color-options-wrap" class="options-list">
 							<ul id="select-color-options">
@@ -48,12 +53,55 @@
 									<li class="selectoption_color"><span>4+3</span><input class="" type="hidden" value="4+3"  /></li>
 								</div>
 							</ul>
-
+	
+							<ul id="select-color-options2">
+								<div id="color-op">
+									<li class="selectoption_color"><span>Односторонние</span><input class="" type="hidden" value="1"  /></li>
+									<li class="selectoption_color"><span>Двусторонние</span><input class="" type="hidden" value="2"  /></li>
+								</div>
+							</ul>
 						</div>
 						<div id="select-tirazh-wrap"><input id="select-tirazh" class="selectbox" type="text" value="Тираж"  /></div>
 					</div>
-					<div class="separate_line"></div>
+					<div id="vizitki_dop_line">
+						<div class="line"></div>
+						<div class="line_text"><span class="redtext">Дополнительная обработка</span></div>
+						<div class="line"></div>
+					</div>
+					
+					<div id="vizitki_radiolist">
+						<table id="radiotbl" width="618px">
+							<tr height="40px">
+								<td width="176px"><span>Тиснение блинтовое</span></td>
+								<td width="30px"><div class="radiobtn"><input name="dp1" type="hidden" value="0" /></div></td>
+								<td width="176px"><span>Тиснение фольгой</span></td>
+								<td width="30px"><div class="radiobtn"><input name="dp2" type="hidden" value="0" /></div></td>
+								<td width="176px"><span>Тиснение конгрев</span></td>
+								<td width="30px"><div class="radiobtn"><input name="dp3" type="hidden" value="0" /></div></td>
+							</tr>
+							
+							<tr height="40px">
+								<td width="176px"><span>УФ-лак</span></td>
+								<td width="30px"><div class="radiobtn"><input name="dp4" type="hidden" value="0" /></div></td>
+								<td width="176px"><span>Уф-лак объемный</span></td>
+								<td width="30px"><div class="radiobtn"><input name="dp5" type="hidden" value="0" /></div></td>
+								<td width="176px"><span>Термоподъем </span></td>
+								<td width="30px"><div class="radiobtn"><input name="dp6" type="hidden" value="0" /></div></td>
+							</tr>
 
+							<tr height="40px">
+								<td width="176px"><span>Тонированный обрез</span></td>
+								<td width="30px"><div class="radiobtn"><input name="dp7" type="hidden" value="0" /></div></td>
+								<td width="176px"><span>Скругление углов</span></td>
+								<td width="30px"><div class="radiobtn"><input name="dp8" type="hidden" value="0" /></div></td>
+								<td width="176px"><span>Вырубка</span></td>
+								<td width="30px"><div class="radiobtn"><input name="dp9" type="hidden" value="0" /></div></td>
+							</tr>					
+							
+						</table>
+					</div>
+
+					<div id="vizitki_dop_line_bottom"></div>
 					<div id="btns">
 						<input id="calculate" class="sendbtn" type="submit" value="Стоимость заказа" />
 						<div id="result">
@@ -62,12 +110,38 @@
 					</div>
 					<div id="alert">
 					</div>
+					<div class="notice_line">
+						<div id="notice1">
+							<div class="notice_txt">Есть клише (блинт)</div><div class="notice_check"><div class="radiobtn"><input name="klishe_blint" type="hidden" value="0" /></div></div>
+						</div>
+						<div id="notice2">
+							<div class="notice_txt">Есть клише (фольга)</div><div class="notice_check"><div class="radiobtn"><input name="klishe_folga" type="hidden" value="0" /></div></div>
+						</div>
+					</div>
+					<div class="notice_line">
+						<div id="notice3">
+							<div class="notice_txt">Есть клише (конгрев)</div><div class="notice_check"><div class="radiobtn"><input name="klishe_kongrev" type="hidden" value="0" /></div></div>
+						</div>
+						<div id="notice4">
+							<div class="notice_txt">Есть штамп (вырубка)</div><div class="notice_check"><div class="radiobtn"><input name="vyrubka" type="hidden" value="0" /></div></div>
+						</div>
+					</div>
+					
 
-					<p style="clear:both; margin-top:420px;">
+					<p style="clear:both;">
 						<span class="redtext p-header">Обратите внимание:</span>
 					</p>
 					<p>
+						Если Вам нужны визитки с лакировкой, тиснением, термоподъемом и другими эффектами - выбирайте <span class="redtext">Дополнительную обработку.</span>
+					</p>
+					<p>
 						Если в списке материалов нет желаемого, Вы можете ввести цену листа картона выбрав пункт «Указать цену». Стоимость можно узнать на сайтах  наших поставщиков: Берег, Дубль В.
+					</p>
+					<p>
+						Термоподъем может быть только с одной стороны, но похожего эффекта можно добиться с двух сторон, используя объемный УФ-лак.
+					</p>
+					<p>
+						Блинтовое тиснение рекомендуем делать на толстом и мягком картоне или на «сэндвич»-визитках (склееных из нескольких слоев картона).
 					</p>
 
 				</div>

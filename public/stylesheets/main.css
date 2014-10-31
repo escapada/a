@@ -44,15 +44,20 @@ p{text-align: justify; margin-bottom: 8px;}
 #contentbody-b .tmpbox, #wrapbox_bottom .tmpbox{float: left; margin: 0 20px 20px 0;}
 
 #vizitki_selectbox_line{margin-top: 7px;}
-#printmethod{float:left; margin: 0 10px 0 0; width: 132px;}
+#printmethod, #format, #laminat{float:left; margin: 0 10px 0 0; width: 132px;}
+#format-p{float:left; margin: 0 10px 0 0; width: 282px;}
+#format-t{float:left; margin: 0 10px 0 0; width: 195px;}
+#laminat{margin: 0; float: none; text-align: left;}
 #material{float:left; margin: 0 10px 0 0; width: 222px;}
+#material-t{float:left; margin: 0 10px 0 0; width: 206px;}
 #select-color{float:left; margin: 0 10px 0 0; width: 138px;}
 #select-tirazh{float:left; width: 90px; background: none; border: 1px solid #666766; color: #666766; text-align: center; font-size: 14px;}
-#material span, #printmethod span{font-size: 14px; margin: 5px 0 0 5px; display: block;}
-#select-color span{font-size: 14px; margin: 5px 0 0 5px; display: block;}
+#select-tirazh-t{float:left; width: 192px; background: none; border: 1px solid #666766; color: #666766; text-align: center; font-size: 14px;}
+#material span, #material-t span, #printmethod span, #select-color span, #format span, #format-p span, #format-t span, #laminat span{font-size: 14px; padding-left: 5px; display: block; line-height: 26px;}
 
 #vizitki_dop_line{clear: both; width: 100%; height: 16px; padding: 15px 0;}
 #vizitki_dop_line_bottom{ width: 100%; height: 16px; background: url(/images/redline1px.png) repeat-x center; padding: 10px 0;}
+.separate_line{clear: both; width: 100%; height: 16px; padding: 15px 0;background: url(/images/redline1px.png) repeat-x center;}
 .line{width: 209px; height:16px; float: left; background: url(/images/redline1px.png) repeat-x center;}
 .line_text{width: 200px;float: left; text-align: center;}
 .line_text span{font-size: 14px;}
@@ -72,28 +77,32 @@ p{text-align: justify; margin-bottom: 8px;}
 
 #help_invisieble_box{display: none; position: absolute; z-index: 1; top: 0; left: 0; width: 100%; height: 100%; background: none;}
 
-#printmethod-options{display: none; color: #666766; width:132px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
+#printmethod-options, #format-options, #laminat-options{display: none; color: #666766; width:132px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
+#format-p-options{display: none; color: #666766; width:282px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
+#format-t-options{display: none; color: #666766; width:195px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
+#laminat-options{text-align: left;}
 #material-options-wrap{display: none; color: #666766; width:474px; position: absolute; z-index: 2;}
 #material-options{display: none; color: #666766; width:474px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
 #material-options-printer{display: none; color: #666766; width:474px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
 #select-color-options-wrap{display: none; color: #666766; width:138px; position: absolute; z-index: 2;}
 #select-color-options{display: none; color: #666766; width:138px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
 #select-color-options2{display: none; color: #666766; width:138px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
-#material-options li, #material-options-printer li, #printmethod-options li, #select-color-options2 li span{font-size: 14px; line-height: 28px; margin-left: 5px;}
+#material-options li, #material-options-printer li, #printmethod-options li, #format-options li, #format-p-options li, #format-t-options li, #laminat-options li, #select-color-options2 li span{font-size: 14px; line-height: 28px; margin-left: 5px;}
 #select-color-options li, #select-color-options2 li{font-size: 14px; line-height: 28px;}
 .selectbox{height: 28px; background: none; border: 1px solid #666766; color: #666766; cursor: pointer; overflow:hidden; line-height:20px;}
 .selectoption_material{cursor: pointer;}
 .selectoption_material_input{cursor: pointer; color: #666766; font-size: 14px; min-width: 222px;}
 .selectbtn{text-align: center; cursor: pointer; padding: 0 5px; position: absolute; right: 0; margin-right: 9px;}
-.selectoption_printmethod{cursor: pointer;}
-.sendbtn{cursor: pointer; width: 147px; height: 28px; font-size: 14px; background: none; border: 1px solid #666766; color: #666766; display: block;}
+.selectoption_printmethod, .selectoption_format, .selectoption_laminat{cursor: pointer;}
+.sendbtn{cursor: pointer; width: 147px; height: 28px; font-size: 14px; background: url(/images/graybtn.png) repeat-x; border: 1px solid #666766; color: #666766; display: block;}
 
-#result{width: 145px; height: 22px; font-size:16px; color:#EF3C24; text-align: center; margin: 10px 0;}
+#result{width: 145px; height: 22px; font-size:16px; color:#EF3C24; text-align: center; margin: 10px 0; border: 1px solid #666766;}
 
-#notice1, #notice2, #notice3, #notice4{display:none; border:none; height: 26px; width:204px; float: left; color: #666766; line-height: 26px;}
-.notice_line{clear:left; margin: 0 0 42px 0; line-height:45px;}
+#notice1, #notice2, #notice3, #notice4{display:none; border:none; height: 26px; width:204px; float: left; color: #666766; line-height: 26px; margin-bottom:10px;}
+.notice_line{clear:left; line-height:45px;}
 .notice_txt{float: left; width:150px;text-align:right;}
 .notice_check{float: right;}
+#alert_wrap{height: 135px;}
 #alert{display:none; border:solid red 1px; height: 26px; width:450px; float: left; text-align: center; color: red; line-height: 26px; margin-bottom: 10px;}
 
 /*///////////////////////////contact, about*/
@@ -133,3 +142,4 @@ p{text-align: justify; margin-bottom: 8px;}
 #foo-info{ float: left; color: #FCF9CE;}
 #foo-js{float: left; color: #FCF9CE;}
 #foo-copyright{float: right; color: #FCF9CE;}
+#counter{float: right; margin-right: 25px;}

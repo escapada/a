@@ -15,20 +15,20 @@
 							<li class="selectoption_printmethod">Цифровая печать<input type="hidden" value="true" /></li>
 						</ul>
 						<div id="material" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /></div>
-							<div id="material-options-wrap" class="options-list">
-								<ul id="material-options">
-										<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag("/images/selectarrow.png")%></span></li>
-									<% @noprinter.each do |paper| %>
-										<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
-									<% end %>
-								</ul>
-								<ul id="material-options-printer">
-										<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag("/images/selectarrow.png")%></span></li>
-									<% @printer.each do |paper| %>
-										<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
-									<% end %>
-								</ul>
-							</div>
+						<div id="material-options-wrap" class="options-list">
+							<ul id="material-options">
+									<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag("/images/selectarrow.png")%></span></li>
+								<% @noprinter.each do |paper| %>
+									<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
+								<% end %>
+							</ul>
+							<ul id="material-options-printer">
+									<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag("/images/selectarrow.png")%></span></li>
+								<% @printer.each do |paper| %>
+									<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
+								<% end %>
+							</ul>
+						</div>
 						<div id="select-color" class="selectbox"><span class="noselect">Печать</span><input name="color" type="hidden" value="" /></div>
 						<div id="select-color-options-wrap" class="options-list">
 							<ul id="select-color-options">

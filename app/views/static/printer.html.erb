@@ -24,6 +24,17 @@
 									<li class="selectoption_format"><%= format.format %><input class="" type="hidden" value="<%= format.id %>"  /></li>
 							<% end %>
 						</ul>
+
+						<div id="select-color" class="selectbox"><span class="noselect">Печать</span><input name="color" type="hidden" value="" /></div>
+						<div id="select-color-options-wrap" class="options-list">
+							<ul id="select-color-options2">
+								<div id="color-op">
+									<li class="selectoption_color"><span>С одной стороны</span><input class="" type="hidden" value="1"  /></li>
+									<li class="selectoption_color"><span>С двух сторон</span><input class="" type="hidden" value="2"  /></li>
+								</div>
+							</ul>
+						</div>
+
 						<div id="select-tirazh-wrap"><input id="select-tirazh" class="selectbox" type="text" value="Тираж"  /></div>
 					</div>
 					<div class="separate_line"></div>

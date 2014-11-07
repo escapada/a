@@ -262,8 +262,11 @@ class IndexController < ApplicationController
 		dollar = constants.dollar
 		euro = constants.euro
 		percent = constants.percent
+		koeficient = constants.koeficient # множитель для цифровой печати (такой же на визитках)
+		priceBigovka = constants.meloch
 		
 		tirazh = params[:tirazh].to_i
+		color = params[:color]
 		#format = params[:format]
 		
 		if params[:paper]
@@ -287,15 +290,20 @@ class IndexController < ApplicationController
 			listCount = tirazh/printerConstants.formatLists
 		end 
 		
-		bumaga = (paperPrice + paperPrice*percent/100)*listCount
-		###считаем сколько стоит один прокат. в процентах вычисляем, куда попал тираж от 1 до 5000 (1% до 100%) и соответственно ценник: чем ближе к 100%, тем дешевле за единицу печати. как-то так.
-		prokatPrint = printerConstants.firstPrintPrice-(printerConstants.firstPrintPrice-printerConstants.lastPrintPrice)*tirazh/5000
+		bumaga = (paperPrice + paperPrice*percent/100)*listCount+printerConstants.bigovka*priceBigovka*tirazh
+		###считаем (с одной/ или с двусторонней печатью) сколько стоит один прокат. в процентах вычисляем, куда попал тираж от 1 до 5000 (1% до 100%) и соответственно ценник: чем ближе к 100%, тем дешевле за единицу печати. как-то так.
+		case color
+			when '1'
+			prokatPrint = printerConstants.firstPrintPrice*((tirazh-1)/(5000-1))#printerConstants.lastPrintPrice+(printerConstants.firstPrintPrice-printerConstants.lastPrintPrice)*((tirazh-1)/(5000-1))
+			when '2'
+			prokatPrint = printerConstants.lastPrintPrice2+(printerConstants.firstPrintPrice2-printerConstants.lastPrintPrice2)*((tirazh-1)/(5000-1))
+		end
 		###
-		print = tirazh*prokatPrint
+		print = koeficient*tirazh*prokatPrint
 		
 		result = bumaga + print
 	
-		@tmp1 = "#{(result).round(2)} руб."#obrabotka#dopSum#bumaga#tirazh
+		@tmp1 = "#{(result).round(2)} #{prokatPrint}"# руб."#obrabotka#dopSum#bumaga#tirazh
 		
 		render :text => @tmp1
 

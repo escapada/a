@@ -5,7 +5,7 @@ $( document ).ready(function() {
 resize_monitor();
 clear_cash();
 
-$("#material").click(function(){
+$("#material-p").click(function(){
 	var xy = $(this).position();
 	$("#material-options-wrap").css({"left": xy.left, "top": xy.top+29});
 	$("#material-options-wrap").toggle();
@@ -26,6 +26,13 @@ $("#format-p").click(function(){
 	$("#help_invisieble_box").css({"display": "block"});
 });
 
+$("#select-color-p").click(function(){
+	var xy = $(this).position();
+	$("#select-color-options-wrap").css({"left": xy.left, "top": xy.top+29});
+	$("#select-color-options-wrap").toggle();
+	$("#help_invisieble_box").css({"display": "block"});
+});
+
 $( "#select-tirazh" ).click(function() {
 	$( this ).val('');
 });
@@ -33,13 +40,8 @@ $( "#select-tirazh" ).focusout(function() {
 	if($( this ).val().match(/\D/) || $( this ).val() == '' || $( this ).val()>5000){
 		$( this ).val('Тираж');
 	}
-	else if($( this ).val()%50){
-		if ($( this ).val() < 50) {
-			$( this ).val(50);
-		}
-	}
 	else if($( this ).val() == 0){
-		$( this ).val(50);
+		$( this ).val(1);
 	}
 });
 
@@ -62,8 +64,8 @@ $(".selectoption_material").click(function(){
 
 	nopaper = false;
 	
-	$("#material span").html(text);
-	$("#material").children("input").val(material);
+	$("#material-p span").html(text);
+	$("#material-p").children("input").val(material);
 	
 	$("#material-options-wrap").toggle();
 	$("#help_invisieble_box").css({"display": "none"});
@@ -76,19 +78,30 @@ $(".selectoption_material_input").click(function(){
 $(".selectbtn").click(function() {
 	if($(this).prev().val().match(/[^0-9\\.]/) || $(this).prev().val() == ''){
 		alert("Неверно указана цена листа бумаги!");
-		$("#material span").html("Материал");
-		$("#material").children("input").val('');
+		$("#material-p span").html("Материал");
+		$("#material-p").children("input").val('');
 		nopaper = false;
 	}
 	else{
 		var text = $(this).prev().val();
-		$("#material span").html(text);
-		$("#material").children("input").val(text);
+		$("#material-p span").html(text);
+		$("#material-p").children("input").val(text);
 
 		$("#material-options-wrap").toggle();
 		$("#help_invisieble_box").css({"display": "none"});
 		nopaper = true;
 	}
+});
+
+$(".selectoption_color").click(function(){
+	var color = $('> input', this).val();
+	var text = $(this).text()
+	
+	$("#select-color-p span").html(text);
+	$("#select-color-p").children("input").val(color);
+	
+	$("#select-color-options-wrap").toggle();
+	$("#help_invisieble_box").css({"display": "none"});
 });
 
 $("#help_invisieble_box").click(function(){
@@ -101,11 +114,12 @@ $("#calculate").click(function(){
 	if (nopaper) {varpaper = "nopaper";}
 
 	format = $("[name='format']").val();
-	//here will be validation and collecting all values
 	paper = $("[name='material']").val();
 	tirazh = $("#select-tirazh").val();
+	color = $("[name='color']").val();
+	//here will be validation and collecting all values
 
-	if(paper == '' || format == '' || tirazh == '' || tirazh == 'Тираж'){
+	if(paper == '' || format == '' || color == '' || tirazh == '' || tirazh == 'Тираж'){
 		$("#alert").show(0);
 		$("#alert").text('Не хватает параметров!');
 	}
@@ -115,7 +129,7 @@ $("#calculate").click(function(){
 		$.ajax({
 			url: '/index/printer_calculate',
 			type: 'POST',
-			data: varpaper+'='+paper+'&format='+format+'&tirazh='+tirazh,
+			data: varpaper+'='+paper+'&format='+format+'&color='+color+'&tirazh='+tirazh,
 			//dataType: "json",
 			success: function(tmp){
 				$('#result').text(tmp);
@@ -198,9 +212,9 @@ function resize_monitor() {
 function clear_cash() {
 	$("[name='material']").val('');
 	$("[name='format']").val('');
-	$("#material-options").show(0);
-	$("#select-color-options").show(0);
-	$(".selectoption_material_input").val('');
 	$("[name='color']").val('');
+	$(".selectoption_material_input").val('');
 	$("#select-tirazh").val('Тираж');
+	$("#material-p-options").show(0);
+	$("#select-color-p-options2").show(0);
 }

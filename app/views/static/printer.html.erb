@@ -9,9 +9,9 @@
 					<h1>Рассчет заказа онлайн</h1>
 					<h2>Цифровая печать</h2>
 					<div id="vizitki_selectbox_line">
-						<div id="material" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /></div>
+						<div id="material-p" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /></div>
 						<div id="material-options-wrap" class="options-list">
-							<ul id="material-options">
+							<ul id="material-p-options">
 									<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag("/images/selectarrow.png")%></span></li>
 								<% @printer.each do |paper| %>
 									<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
@@ -25,9 +25,9 @@
 							<% end %>
 						</ul>
 
-						<div id="select-color" class="selectbox"><span class="noselect">Печать</span><input name="color" type="hidden" value="" /></div>
+						<div id="select-color-p" class="selectbox"><span class="noselect">Печать</span><input name="color" type="hidden" value="" /></div>
 						<div id="select-color-options-wrap" class="options-list">
-							<ul id="select-color-options2">
+							<ul id="select-color-p-options2">
 								<div id="color-op">
 									<li class="selectoption_color"><span>С одной стороны</span><input class="" type="hidden" value="1"  /></li>
 									<li class="selectoption_color"><span>С двух сторон</span><input class="" type="hidden" value="2"  /></li>

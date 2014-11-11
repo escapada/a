@@ -269,41 +269,99 @@ class IndexController < ApplicationController
 		color = params[:color]
 		#format = params[:format]
 		
+		#далее цену стандартного большого листа делем на 4 (получаем цену A3 формата)
+		#так как везде далее в рассчётах привязка к A3
 		if params[:paper]
 			paperInstance = Paper.find(params[:paper])
 			case paperInstance.currency
-			when 'd' then paperPrice = dollar*paperInstance.price
-			when 'e' then paperPrice = euro*paperInstance.price
-			when 'r' then paperPrice = paperInstance.price
+			when 'd' then paperPrice = dollar*paperInstance.price/4
+			when 'e' then paperPrice = euro*paperInstance.price/4
+			when 'r' then paperPrice = paperInstance.price/4
 			end						
 		end
 
 		if params[:nopaper]
-			paperPrice = params[:nopaper].to_f	
+			paperPrice = (params[:nopaper].to_f)/4
 		end
 
-		remainder = tirazh%printerConstants.formatLists
+		tech = 3 	#баксы за работу/тех.обслуживание видимо. добавляется ко всему тиражу
+		
+		#печать во всех форматах рассчитывается из цены печати на А3 формате,
+		#соответственно нужен этот коэффициент:
+		k = printerConstants.a3
+		
+		remainder = tirazh%k 	#проверяем кратность A3, и дальше если не кратно добавляем 1 лист A3.
+													#и считаем сколько всего A3-их придётся напечатать. далее тираж как таковой 
+													#в рассчёте стоимости печати не учавствует (понадобиться биговки посчитать только потом)
 
 		if remainder>0
-			listCount = tirazh/printerConstants.formatLists+1
+			listCount = tirazh/k+1
 		else
-			listCount = tirazh/printerConstants.formatLists
-		end 
+			listCount = tirazh/k
+		end
+
+		#при перевале в 75*k(38*k при двусторонней печати А3-х листов вычитается. 
+		#пока не понятно, но наверное, так как только количество прокатов на машине 
+		#влияет на то когда делать этот вычет, то скорее всего после этого рубежа 
+		#меняется печатная машина на более высокий класс с более высокими тиражами, 
+		#где и цена за прокат падает и необходима корректировка в последовательности 
+		#ценообразования, для чего и делается этот вычет. 
+		#вычеты разные для одно/двусторонней печати (vychet/vychet2), как и все дэльты. 
+		#как-то так: 
+		case color
+		when '1'	#односторонняя печать
+			vychet = 3.75 				
+			delta_1 = 0.75
+			delta_2 = 0.7
+			delta_3 = 0.18
+			delta_4 = 0.15
+			case listCount
+			when 1...75
+				print = delta_1*listCount+tech
+			when 75
+				print = (delta_1*listCount-vychet)+tech	#здесь вот тута и делается вычет, корректировка. дальше всё ровно как бэ
+			when 75+1..100
+				delta = delta_1*75-vychet
+				print = (delta+delta_2*(listCount-75))+tech
+			when 100+1..1000
+				delta = (delta_1*75-vychet)+(delta_2*25)	#до 75 одна дельта на 25 другая ну а после 100 третья, такая петрушка 
+				print = (delta+delta_3*(listCount-(75+25)))+tech
+			else	#если тираж (на A3-их) больше 1000
+				delta = (delta_1*75-vychet)+(delta_2*25)+(delta_3*900)
+				print = (delta+delta_4*(listCount-(75+25+900)))+tech
+			
+			end
+		when '2'	#двусторонняя печать
+			vychet2 = 3.8
+			delta_1 = 1.5
+			delta_2 = 1.4
+			delta_3 = 0.36
+			delta_4 = 0.3
+			case listCount
+			when 1...38 #без верхней границы
+				print = delta_1*listCount+tech
+			when 38
+				print = (delta_1*listCount-vychet2)+tech	#здесь вот тута и делается вычет, корректировка. дальше всё ровно как бэ
+			when 38+1..50
+				delta = delta_1*38-vychet2
+				print = (delta+delta_2*(listCount-38))+tech
+			when 50+1..500
+				delta = (delta_1*38-vychet2)+(delta_2*12)	#до 38 одна дельта на 12 другая ну а после 50 третья, такая петрушка 
+				print = (delta+delta_3*(listCount-(38+12)))+tech
+			else	#если тираж (на A3-их) больше 500
+				delta = (delta_1*38-vychet2)+(delta_2*12)+(delta_3*450)
+				print = (delta+delta_4*(listCount-(38+12+450)))+tech
+			
+			end
+			
+		end						
 		
 		bumaga = (paperPrice + paperPrice*percent/100)*listCount+printerConstants.bigovka*priceBigovka*tirazh
-		###считаем (с одной/ или с двусторонней печатью) сколько стоит один прокат. в процентах вычисляем, куда попал тираж от 1 до 5000 (1% до 100%) и соответственно ценник: чем ближе к 100%, тем дешевле за единицу печати. как-то так.
-		case color
-			when '1'
-			prokatPrint = printerConstants.firstPrintPrice*((tirazh-1)/(5000-1))#printerConstants.lastPrintPrice+(printerConstants.firstPrintPrice-printerConstants.lastPrintPrice)*((tirazh-1)/(5000-1))
-			when '2'
-			prokatPrint = printerConstants.lastPrintPrice2+(printerConstants.firstPrintPrice2-printerConstants.lastPrintPrice2)*((tirazh-1)/(5000-1))
-		end
-		###
-		print = koeficient*tirazh*prokatPrint
-		
-		result = bumaga + print
 	
-		@tmp1 = "#{(result).round(2)} #{prokatPrint}"# руб."#obrabotka#dopSum#bumaga#tirazh
+		result = bumaga + koeficient*print*dollar
+	
+		@tmp1 = "#{result.round(2)} руб."#obrabotka#dopSum#bumaga#tirazh
+		#@tmp1 = "#{print}  #{listCount}"
 		
 		render :text => @tmp1
 

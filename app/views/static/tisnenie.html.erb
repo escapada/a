@@ -48,28 +48,29 @@
 						<%=link_to "<input class='sendbtn' type='submit' value='Оформить заказ' />".html_safe, contact_path %>
 					</div>
 					<div id="alert_wrap">
-					<div id="alert"></div>
-					<div class="notice_line">
-						<div id="notice1">
-							<div class="notice_txt">Есть клише (блинт)</div><div class="notice_check"><div class="radiobtn"><input name="klishe_blint" type="hidden" value="0" /></div></div>
-						</div>
-						<div id="notice2">
-							<div class="notice_txt">Есть клише (фольга)</div><div class="notice_check"><div class="radiobtn"><input name="klishe_folga" type="hidden" value="0" /></div></div>
-						</div>
-						<div id="notice3">
-							<div class="notice_txt">Есть клише (конгрев)</div><div class="notice_check"><div class="radiobtn"><input name="klishe_kongrev" type="hidden" value="0" /></div></div>
-						</div>
-					</div>
+						<div id="alert"></div>
 					</div>
 
 					<p style="clear:both; margin-top:100px;">
 						<span style="display:none;" class="redtext p-header">Обратите внимание:</span>
 					</p>
-					<p style="display:none;">
+					<p>
 						Стоимость тиснения в калькуляторе не включает в себя стоимость изготовления клише. Чтобы узнать цену клише впишите Ширину и Высоту оттиска в соответствующие ячейки и нажмите на кнопку цена клише:
 					</p>
+					<div>
+						<div id="klishe1"><input id="width-klishe" class="selectbox" type="text" value="" placeholder="Ширина оттиска, см" /></div>
+						<div id="x"><%= image_tag("/images/x.png")%></div>
+						<div id="klishe2"><input id="height-klishe" class="selectbox" type="text" value="" placeholder="Высота оттиска, см" /></div>
+						<input id="klishebtn" class="sendbtn" type="submit" value="Цена клише" />
+						<div id="resklishe"></div>
+					</div>
+					<p style="clear:both;">
+						Если в заказе используются различные виды тиснения, на каждый вид рассчитывается отдельное клише.
+					</p>
 
-				</div>
+
+
+				</div><!--end of contentbody-->
 				<div id="contentbody-r">
 					<div class="tmpbox"><%= image_tag("/images/tmpallstuff/#{@prw[0]}", {:title=>"Фото. #{@prw[0]}"})%></div>
 					<div class="tmpbox"><%= image_tag("/images/tmpallstuff/#{@prw[1]}", {:title=>"Фото. #{@prw[1]}"})%></div>

@@ -100,7 +100,9 @@ class StaticController < ApplicationController
 
 		@remotejs="tisnenie"
 		@paper = Paper.find(:all)
-		@format = Format.all
+		@format = Format.where("tisnenieVyrubkaLak = '1'")
+		#@format = Format.where("format = 'A4' OR format = 'A3' OR format = 'A2'")		##the same## @format = Format.find([4,5,6])
+		#@format = Format.all
 
 		@prw=Array.new()
 		Dir.glob("public/images/tmpallstuff/*.jpg"){|x| @prw << File.basename(x)}

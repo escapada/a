@@ -289,7 +289,7 @@ class IndexController < ApplicationController
 		#печать во всех форматах рассчитывается из цены печати на А3 формате,
 		#соответственно нужен этот коэффициент:
 		k = printerConstants.a3
-		
+
 		remainder = tirazh%k 	#проверяем кратность A3, и дальше если не кратно добавляем 1 лист A3.
 													#и считаем сколько всего A3-их придётся напечатать. далее тираж как таковой 
 													#в рассчёте стоимости печати не учавствует (понадобиться биговки посчитать только потом)
@@ -362,6 +362,7 @@ class IndexController < ApplicationController
 	
 		@tmp1 = "#{result.round(2)} руб."#obrabotka#dopSum#bumaga#tirazh
 		#@tmp1 = "#{print}  #{listCount}"
+		end 
 		
 		render :text => @tmp1
 

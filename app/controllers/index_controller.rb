@@ -363,6 +363,8 @@ class IndexController < ApplicationController
 		@tmp1 = "#{result.round(2)} руб."#obrabotka#dopSum#bumaga#tirazh
 		#@tmp1 = "#{print}  #{listCount}"
 		
+		end 
+		
 		render :text => @tmp1
 
 	end

@@ -43,6 +43,27 @@ $( "#select-tirazh-t" ).focusout(function() {
 	}
 });
 
+$( "#width-klishe" ).click(function() {
+	$( this ).val('');
+	$( this ).attr('placeholder', '');
+});
+$( "#height-klishe" ).click(function() {
+	$( this ).val('');
+	$( this ).attr('placeholder', '');
+});
+$( "#width-klishe" ).focusout(function() {
+	if($( this ).val().match(/[\D,\.]/) || $( this ).val() == ''){
+		$( this ).val('');
+		$( this ).attr('placeholder', 'Ширина оттиска, см');
+	}
+});
+$( "#height-klishe" ).focusout(function() {
+	if($( this ).val().match(/\D*?\./) || $( this ).val() == ''){
+		$( this ).val('');
+		$( this ).attr('placeholder', 'Высота оттиска, см');
+	}
+});
+
 $(".selectoption_format").click(function(){
 
 	var format = $('> input', this).val();

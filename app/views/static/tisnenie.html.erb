@@ -57,7 +57,7 @@
 					<p>
 						Стоимость тиснения в калькуляторе не включает в себя стоимость изготовления клише. Чтобы узнать цену клише впишите Ширину и Высоту оттиска в соответствующие ячейки и нажмите на кнопку цена клише:
 					</p>
-					<div>
+					<div id="klishe_line">
 						<div id="klishe1"><input id="width-klishe" class="selectbox" type="text" value="" placeholder="Ширина оттиска, см" /></div>
 						<div id="x"><%= image_tag("/images/x.png")%></div>
 						<div id="klishe2"><input id="height-klishe" class="selectbox" type="text" value="" placeholder="Высота оттиска, см" /></div>
@@ -65,6 +65,8 @@
 						<div id="resklishe"></div>
 					</div>
 					<p style="clear:both;">
+						<span class="redtext p-header">Обратите внимание:</span><br />
+						Стоимость конгревного клише на 50% дороже от рассчётной. 
 						Если в заказе используются различные виды тиснения, на каждый вид рассчитывается отдельное клише.
 					</p>
 

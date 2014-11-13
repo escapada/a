@@ -63,8 +63,8 @@ p{text-align: justify; margin-bottom: 8px;}
 #x{float:left;margin: 0 9px;}
 #width-klishe{float:left; width: 150px; background: none; border: 1px solid #666766; color: #666766; text-align: center; font-size: 14px; }
 #height-klishe{float:left; width: 150px; background: none; border: 1px solid #666766; color: #666766; text-align: center; font-size: 14px;}
-#klishebtn{float:left; height: 30px; width: 100px; margin: 0 19px;}
-#resklishe{float:left; width: 150px; height: 28px; font-size:16px; color:#EF3C24; text-align: center; margin: 0; border: 1px solid #666766;}
+#klishebtn{float:left; height: 30px; width: 100px; margin: 0 19px; cursor: pointer;}
+#resklishe{float:left; width: 150px;line-height: 28px;  height: 28px; font-size:16px; color:#EF3C24; text-align: center; margin: 0; border: 1px solid #666766;}
 
 #vizitki_dop_line{clear: both; width: 100%; height: 16px; padding: 15px 0;}
 #vizitki_dop_line_bottom{ width: 100%; height: 16px; background: url(/images/redline1px.png) repeat-x center; padding: 10px 0;}

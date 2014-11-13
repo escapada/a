@@ -51,16 +51,32 @@ $( "#height-klishe" ).click(function() {
 	$( this ).val('');
 	$( this ).attr('placeholder', '');
 });
+$( "#width-klishe" ).keyup(function() {
+  if(!$( this ).val().match(/^(\d+|\d+\.|\d+\.\d+)$/)){
+  	$( this ).css({"background": "pink"});
+  }
+  else{$( this ).css({"background": "white"});
+  }
+});
+$( "#height-klishe" ).keyup(function() {
+  if(!$( this ).val().match(/^(\d+|\d+\.|\d+\.\d+)$/)){
+  	$( this ).css({"background": "pink"});
+  }
+  else{$( this ).css({"background": "white"});
+  }
+});
 $( "#width-klishe" ).focusout(function() {
-	if($( this ).val().match(/[\D,\.]/) || $( this ).val() == ''){
+	if($( this ).val().match(/^(\d+\.|.*\D+)$/) || $( this ).val()==''){
 		$( this ).val('');
 		$( this ).attr('placeholder', 'Ширина оттиска, см');
+		$( this ).css({"background": "white"});
 	}
 });
 $( "#height-klishe" ).focusout(function() {
-	if($( this ).val().match(/\D*?\./) || $( this ).val() == ''){
+	if($( this ).val().match(/^(\d+\.|.*\D+)$/) || $( this ).val()==''){
 		$( this ).val('');
 		$( this ).attr('placeholder', 'Высота оттиска, см');
+		$( this ).css({"background": "white"});
 	}
 });
 
@@ -169,6 +185,30 @@ $("#calculate").click(function(){
 	}	
 }); //end of calculate click
 
+//begin of klishebtn click
+$("#klishebtn").click(function(){
+	//here will be validation and collecting all values
+	$("#resklishe").text('');
+	width = $("#width-klishe").val();
+	height = $("#height-klishe").val();
+	
+	if(width == '' || height == ''){
+		alert('Не хватает величины!');
+	}
+	else{
+		$.ajax({
+			url: '/index/klishe_calculate',
+			type: 'POST',
+			data: 'width'+'='+width+'&height='+height,
+			//dataType: "json",
+			success: function(tmp){
+				$('#resklishe').text(tmp);
+			}
+		});
+	}	
+});	//end of klishebtn click
+
+
 $("#hideblockbtn").click(function(){
 	if ($( "#hideblock" ).is( ":visible" )){
 		$("#hideblockbtn .redtext").text("Больше фото");
@@ -268,4 +308,6 @@ function clear_cash() {
 	$("[name='klishe_blint']").val(0);
 	$("[name='klishe_folga']").val(0);
 	$("[name='klishe_kongrev']").val(0);
+	$("#width-klishe").val('');
+	$("#height-klishe").val('');
 }

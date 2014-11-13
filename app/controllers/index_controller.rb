@@ -363,12 +363,8 @@ class IndexController < ApplicationController
 		@tmp1 = "#{result.round(2)} руб."#obrabotka#dopSum#bumaga#tirazh
 		#@tmp1 = "#{print}  #{listCount}"
 		
-		end 
-		
 		render :text => @tmp1
-
-	end
-
+	end 
 
 	def tisnenie_calculate
 		formats = Format.find(params[:format])
@@ -383,11 +379,8 @@ class IndexController < ApplicationController
 		tisnenieBlint = tisnenieConstants.tisnenieBlint
 		tisnenieFolga = tisnenieConstants.tisnenieFolga
 		tisnenieKongrev = tisnenieConstants.tisnenieKongrev
-		
-		klisheSm = tisnenieConstants.klisheSm
-		klisheKongrevSm = tisnenieConstants.klisheKongrevSm
-		klisheMin = tisnenieConstants.klisheKongrevMin
-		klisheKongrevMin = tisnenieConstants.klisheKongrevMin
+
+		k = formats.kratnostTLV
 
 		dopSum = Array.new()
 		dp = params[:dp].split(/,/)
@@ -432,9 +425,29 @@ class IndexController < ApplicationController
 		result = bumaga + obrabotka
 	
 		@tmp1 = "#{(result).round(2)} руб."#obrabotka#dopSum#bumaga#tirazh
+
+		render :text => @tmp1
+	end
+
+	def klishe_calculate
+		tisnenieConstants = Tisnenieconstant.find(:first)
+		klisheSm = tisnenieConstants.klisheSm
+		klisheMin = tisnenieConstants.klisheKongrevMin
+		
+		width = params[:width].to_f
+		height = params[:height].to_f
+
+		tmp = width*height*klisheSm
+
+		if tmp<klisheMin
+			result = klisheMin
+		else 
+			result = tmp
+		end
+	
+		@tmp1 = "#{(result).round(2)} руб."#obrabotka#dopSum#bumaga#tirazh
 		
 		render :text => @tmp1
-
 	end
-	
+
 end

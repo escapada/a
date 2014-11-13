@@ -82,6 +82,7 @@ A::Application.routes.draw do
   match 'index/silk_calculate'
   match 'index/printer_calculate'
   match 'index/tisnenie_calculate'
+  match 'index/klishe_calculate'
 
   # See how all your routes lay out with "rake routes"
 

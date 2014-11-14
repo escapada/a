@@ -109,4 +109,49 @@ class StaticController < ApplicationController
 		@prw.shuffle!
 	end
 
+	def vyrubka
+		@title="Онлайн калькулятор. Вырубка. Online calculate."
+		@meta="вырубка, малотиражное производство, печать, дизайн, постпечатная обработка"
+
+		@remotejs="vyrubka"
+		@paper = Paper.find(:all)
+		@format = Format.where("tisnenieVyrubkaLak = '1'")
+		#@format = Format.where("format = 'A4' OR format = 'A3' OR format = 'A2'")		##the same## @format = Format.find([4,5,6])
+		#@format = Format.all
+
+		@prw=Array.new()
+		Dir.glob("public/images/tmpallstuff/*.jpg"){|x| @prw << File.basename(x)}
+		@prw.shuffle!
+	end
+
+	def lak
+		@title="Онлайн калькулятор. УФ-лак. Online calculate."
+		@meta="УФ-лак, малотиражное производство, печать, дизайн, постпечатная обработка"
+
+		@remotejs="lak"
+		@paper = Paper.find(:all)
+		@format = Format.where("tisnenieVyrubkaLak = '1'")
+		#@format = Format.where("format = 'A4' OR format = 'A3' OR format = 'A2'")		##the same## @format = Format.find([4,5,6])
+		#@format = Format.all
+
+		@prw=Array.new()
+		Dir.glob("public/images/tmpallstuff/*.jpg"){|x| @prw << File.basename(x)}
+		@prw.shuffle!
+	end
+
+	def upprint
+		@title="Онлайн калькулятор. Верхняя печать / Леттерпресс. Online calculate."
+		@meta="Верхняя печать / Леттерпресс, малотиражное производство, печать, дизайн, постпечатная обработка"
+
+		@remotejs="upprint"
+		@paper = Paper.find(:all)
+		@format = Format.where("letterpress = '1'")
+		#@format = Format.where("format = 'A4' OR format = 'A3' OR format = 'A2'")		##the same## @format = Format.find([4,5,6])
+		#@format = Format.all
+
+		@prw=Array.new()
+		Dir.glob("public/images/tmpallstuff/*.jpg"){|x| @prw << File.basename(x)}
+		@prw.shuffle!
+	end
+
 end

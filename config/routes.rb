@@ -10,14 +10,14 @@ A::Application.routes.draw do
   match '/vizitki' => 'static#vizitki', :as => :vizitki
 
   match '/silk' => 'static#silk', :as => :silk
-  match '/cards' => 'static#cards', :as => :cards
   match '/printer' => 'static#printer', :as => :printer
   match '/tisnenie' => 'static#tisnenie', :as => :tisnenie
+  match '/vyrubka' => 'static#vyrubka', :as => :vyrubka
+  match '/lak' => 'static#lak', :as => :uflak
+  match '/upprint' => 'static#upprint', :as => :upprint
 
   #temp blank stuff
-  match '/upprint' => 'static#index', :as => :upprint
-  match '/vyrubka' => 'static#index', :as => :vyrubka
-  match '/uflak' => 'static#index', :as => :uflak
+  match '/cards' => 'static#index', :as => :cards
   match '/folders' => 'static#index', :as => :folders
   match '/plasticfolders' => 'static#index', :as => :plasticfolders
   match '/stickers' => 'static#index', :as => :stickers
@@ -83,7 +83,10 @@ A::Application.routes.draw do
   match 'index/printer_calculate'
   match 'index/tisnenie_calculate'
   match 'index/klishe_calculate'
-
+  match 'index/vyrubka_calculate'
+  match 'index/lak_calculate'
+  match 'index/upprint_calculate'
+  
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

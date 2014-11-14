@@ -1,4 +1,5 @@
 var show_option_box = false;
+var mypaper = false;
 var nopaper = false;
 
 $( document ).ready(function() {
@@ -98,7 +99,10 @@ $(".selectoption_material").click(function(){
 	var material = $('> input', this).val();
 	var text = $(this).text()
 
+	mypaper = false;
 	nopaper = false;
+	
+	if (material=='0') {nopaper=true;}
 	
 	$("#material-t span").html(text);
 	$("#material-t").children("input").val(material);
@@ -116,7 +120,7 @@ $(".selectbtn").click(function() {
 		alert("Неверно указана цена листа бумаги!");
 		$("#material-t span").html("Материал");
 		$("#material-t").children("input").val('');
-		nopaper = false;
+		mypaper = false;
 	}
 	else{
 		var text = $(this).prev().val();
@@ -125,10 +129,10 @@ $(".selectbtn").click(function() {
 
 		$("#material-options-wrap").toggle();
 		$("#help_invisieble_box").css({"display": "none"});
-		nopaper = true;
+		mypaper = true;
+		nopaper = false;
 	}
 });
-
 
 $("#help_invisieble_box").click(function(){
 	$(this).css({"display": "none"});
@@ -151,6 +155,7 @@ $(".radiobtn").click(function(){
 $("#calculate").click(function(){
 	var varpaper = "paper";
 	var notype = false;
+	if (mypaper) {varpaper = "mypaper";}
 	if (nopaper) {varpaper = "nopaper";}
 	//here will be validation and collecting all values
 	format = $("[name='format']").val();
@@ -299,7 +304,7 @@ function resize_monitor() {
 }
 function clear_cash() {
 	$("[name='material']").val('');
-	$("#material-options").show(0);
+	$("#material-t-options").show(0);
 	$(".selectoption_material_input").val('');
 	$("#select-tirazh-t").val('Тираж');
 	$("[name='dp1']").val(0);

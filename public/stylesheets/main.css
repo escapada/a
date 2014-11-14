@@ -91,6 +91,7 @@ p{text-align: justify; margin-bottom: 8px;}
 #printmethod-options, #format-options, #laminat-options{display: none; color: #666766; width:132px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
 #format-p-options{display: none; color: #666766; width:auto; position: absolute; z-index: 2; background: white; border: 1px solid #666766;		padding-right: 5px;}
 #material-p-options{display: none; color: #666766; width:338px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
+#material-t-options{display: none; color: #666766; width:413px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
 #format-t-options{display: none; color: #666766; width:195px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
 #laminat-options{text-align: left;}
 #material-options-wrap{display: none; color: #666766; width:474px; position: absolute; z-index: 2;}
@@ -100,7 +101,7 @@ p{text-align: justify; margin-bottom: 8px;}
 #select-color-options{display: none; color: #666766; width:138px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
 #select-color-options2{display: none; color: #666766; width:138px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
 #select-color-p-options2{display: none; color: #666766; width:165px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
-#material-options li, #material-options-printer li, #printmethod-options li, #format-options li, #format-p-options li, #material-p-options li, #format-t-options li, #laminat-options li, #select-color-options2 li, #select-color-p-options2 li span{font-size: 14px; line-height: 28px; margin-left: 5px;}
+#material-options li, #material-options-printer li, #printmethod-options li, #format-options li, #format-p-options li, #material-p-options li, #material-t-options li, #format-t-options li, #laminat-options li, #select-color-options2 li, #select-color-p-options2 li span{font-size: 14px; line-height: 28px; margin-left: 5px;}
 #select-color-options li, #select-color-options2 li, #select-color-p-options2 li{font-size: 14px; line-height: 28px;}
 .selectbox{height: 28px; background: none; border: 1px solid #666766; color: #666766; cursor: pointer; overflow:hidden; line-height:20px;}
 .selectoption_material{cursor: pointer;}

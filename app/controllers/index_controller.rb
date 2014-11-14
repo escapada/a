@@ -380,7 +380,7 @@ class IndexController < ApplicationController
 		tisnenieFolga = tisnenieConstants.tisnenieFolga
 		tisnenieKongrev = tisnenieConstants.tisnenieKongrev
 
-		k = formats.kratnostTLV
+		k = formats.kratnostTVL
 
 		dopSum = Array.new()
 		dp = params[:dp].split(/,/)
@@ -390,15 +390,18 @@ class IndexController < ApplicationController
 		if params[:paper]
 			paperInstance = Paper.find(params[:paper])
 			case paperInstance.currency
-			when 'd' then paperPrice = dollar*paperInstance.price
-			when 'e' then paperPrice = euro*paperInstance.price
-			when 'r' then paperPrice = paperInstance.price
+			when 'd' then paperPrice = dollar*paperInstance.price/2
+			when 'e' then paperPrice = euro*paperInstance.price/2
+			when 'r' then paperPrice = paperInstance.price/2
 			end						
 		end
 
+		if params[:mypaper]
+			paperPrice = params[:mypaper].to_f/2	
+		end
+
 		if params[:nopaper]
-			paperPrice = params[:nopaper].to_f
-			#percent = 0		
+			paperPrice = 0	
 		end
 
 		if(dp[0]=="1")
@@ -411,12 +414,12 @@ class IndexController < ApplicationController
 				dopSum << priladka+tirazh*tisnenieKongrev
 		end
 
-		remainder = tirazh%formats.formatLists
+		remainder = tirazh%k
 
 		if remainder>0
-			listCount = tirazh/formats.formatLists+1
+			listCount = tirazh/k+1
 		else
-			listCount = tirazh/formats.formatLists
+			listCount = tirazh/k
 		end 
 
 		bumaga = (paperPrice + paperPrice*percent/100)*listCount
@@ -447,6 +450,165 @@ class IndexController < ApplicationController
 	
 		@tmp1 = "#{(result).round(2)} руб."#obrabotka#dopSum#bumaga#tirazh
 		
+		render :text => @tmp1
+	end
+
+	def vyrubka_calculate
+		formats = Format.find(params[:format])
+		vyrubkaConstants = Vyrubkaconstant.find(:first)
+		constants = Constant.find(:first)
+
+		dollar = constants.dollar
+		euro = constants.euro
+		percent = constants.percent
+
+		priladka = vyrubkaConstants.priladka
+		vyrubka = vyrubkaConstants.vyrubka
+
+		k = formats.kratnostTVL
+		
+		tirazh = params[:tirazh].to_i
+
+		obrabotka = priladka + vyrubka*tirazh
+
+		if params[:paper]
+			paperInstance = Paper.find(params[:paper])
+			case paperInstance.currency
+			when 'd' then paperPrice = dollar*paperInstance.price/2
+			when 'e' then paperPrice = euro*paperInstance.price/2
+			when 'r' then paperPrice = paperInstance.price/2
+			end						
+		end
+
+		if params[:mypaper]
+			paperPrice = params[:mypaper].to_f/2	
+		end
+
+		if params[:nopaper]
+			paperPrice = 0	
+		end
+
+		remainder = tirazh%k
+
+		if remainder>0
+			listCount = tirazh/k+1
+		else
+			listCount = tirazh/k
+		end 
+
+		bumaga = (paperPrice + paperPrice*percent/100)*listCount
+		
+		result = bumaga + obrabotka
+	
+		@tmp1 = "#{(result).round(2)} руб."#obrabotka#dopSum#bumaga#tirazh
+
+		render :text => @tmp1
+	end
+
+	def vyrubka_calculate
+		formats = Format.find(params[:format])
+		lakConstants = Lakconstant.find(:first)
+		constants = Constant.find(:first)
+
+		dollar = constants.dollar
+		euro = constants.euro
+		percent = constants.percent
+
+		priladka = lakConstants.priladka
+		lak = lakConstants.lak
+
+		k = formats.kratnostTVL
+		
+		tirazh = params[:tirazh].to_i
+
+		obrabotka = priladka + lak*tirazh
+
+		if params[:paper]
+			paperInstance = Paper.find(params[:paper])
+			case paperInstance.currency
+			when 'd' then paperPrice = dollar*paperInstance.price/2
+			when 'e' then paperPrice = euro*paperInstance.price/2
+			when 'r' then paperPrice = paperInstance.price/2
+			end						
+		end
+
+		if params[:mypaper]
+			paperPrice = params[:mypaper].to_f/2	
+		end
+
+		if params[:nopaper]
+			paperPrice = 0	
+		end
+
+		remainder = tirazh%k
+
+		if remainder>0
+			listCount = tirazh/k+1
+		else
+			listCount = tirazh/k
+		end 
+
+		bumaga = (paperPrice + paperPrice*percent/100)*listCount
+		
+		result = bumaga + obrabotka
+	
+		@tmp1 = "#{(result).round(2)} руб."#obrabotka#dopSum#bumaga#tirazh
+
+		render :text => @tmp1
+	end
+
+	def upprint_calculate
+		formats = Format.find(params[:format])
+		upprintConstants = Upprintconstant.find(:first)
+		constants = Constant.find(:first)
+
+		dollar = constants.dollar
+		euro = constants.euro
+		percent = constants.percent
+
+		priladka = upprintConstants.priladka
+		upprint = upprintConstants.upprint
+		sKlishe = formats.sKlisheLetter
+		priceKlishe = formats.priceKlisheLetter
+
+		k = formats.kratnostLetter
+		
+		tirazh = params[:tirazh].to_i
+
+		klishe = sKlishe*priceKlishe
+		obrabotka = priladka + upprint*tirazh + klishe
+
+		if params[:paper]
+			paperInstance = Paper.find(params[:paper])
+			case paperInstance.currency
+			when 'd' then paperPrice = dollar*paperInstance.price/4
+			when 'e' then paperPrice = euro*paperInstance.price/4
+			when 'r' then paperPrice = paperInstance.price/4
+			end						
+		end
+
+		if params[:mypaper]
+			paperPrice = params[:mypaper].to_f/4
+		end
+
+		if params[:nopaper]
+			paperPrice = 0	
+		end
+
+		remainder = tirazh%k
+
+		if remainder>0
+			listCount = tirazh/k+1
+		else
+			listCount = tirazh/k
+		end 
+
+		bumaga = (paperPrice + paperPrice*percent/100)*listCount
+		
+		result = bumaga + obrabotka
+	
+		@tmp1 = "#{(result).round(2)} руб."#obrabotka#dopSum#bumaga#tirazh
+
 		render :text => @tmp1
 	end
 

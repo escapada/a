@@ -13,7 +13,7 @@ A::Application.routes.draw do
   match '/printer' => 'static#printer', :as => :printer
   match '/tisnenie' => 'static#tisnenie', :as => :tisnenie
   match '/vyrubka' => 'static#vyrubka', :as => :vyrubka
-  match '/lak' => 'static#lak', :as => :uflak
+  match '/lak' => 'static#lak', :as => :lak
   match '/upprint' => 'static#upprint', :as => :upprint
 
   #temp blank stuff
@@ -86,7 +86,7 @@ A::Application.routes.draw do
   match 'index/vyrubka_calculate'
   match 'index/lak_calculate'
   match 'index/upprint_calculate'
-  
+
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

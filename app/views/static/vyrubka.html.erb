@@ -1,0 +1,99 @@
+<div id="leftcolumn">
+	<%= render "leftmenu" %>
+</div>
+<div id="content_wrap">
+	<div id="contentcolumn">
+		<div id="wrapbox_top">
+			<div id="contentbox">
+				<div id="contentbody">
+					<h1>Рассчет заказа онлайн</h1>
+					<h2>Вырубка</h2>
+					<div id="vizitki_selectbox_line">
+						<div id="material-t" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /></div>
+						<div id="material-options-wrap" class="options-list">
+							<ul id="material-t-options">
+									<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag("/images/selectarrow.png")%></span></li>
+									<li class="selectoption_material">Без бумаги<input class="" type="hidden" value="0"  /></li>
+								<% @paper.each do |paper| %>
+									<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
+								<% end %>
+							</ul>
+						</div>
+						<div id="format-t" class="selectbox"><span class="noselect">Формат</span><input name="format" type="hidden" value="" /></div>
+						<ul id="format-t-options" class="options-list">
+							<% @format.each do |format| %>
+									<li class="selectoption_format"><%= format.format %><input class="" type="hidden" value="<%= format.id %>"  /></li>
+							<% end %>
+						</ul>
+						<div id="select-tirazh-wrap"><input id="select-tirazh-t" class="selectbox" type="text" value="Тираж"  /></div>
+					</div>
+					<div class="separate_line"></div>
+
+					<div id="btns">
+						<input id="calculate" class="sendbtn" type="submit" value="Стоимость заказа" />
+						<div id="result">
+						</div>
+						<%=link_to "<input class='sendbtn' type='submit' value='Оформить заказ' />".html_safe, contact_path %>
+					</div>
+					<div id="alert_wrap">
+						<div id="alert"></div>
+					</div>
+
+					<p style="clear:both; margin-top:280px;">
+						<span class="redtext p-header">Обратите внимание:</span>
+					</p>
+					<p>
+						Стоимость вырубки в калькуляторе не включает в себя стоимость изготовления штампа. Если в списке материалов нет желаемого, Вы можете ввести цену листа картона выбрав пункт «Цена листа бумаги».<br />Стоимость можно узнать на сайтах  наших поставщиков: Берег, Дубль В.
+					</p>
+
+				</div><!--end of contentbody-->
+				<div id="contentbody-r">
+					<div class="tmpbox"><%= image_tag("/images/tmpallstuff/#{@prw[0]}", {:title=>"Фото. #{@prw[0]}"})%></div>
+					<div class="tmpbox"><%= image_tag("/images/tmpallstuff/#{@prw[1]}", {:title=>"Фото. #{@prw[1]}"})%></div>
+				</div>
+			</div>
+			<div id="contentbody-b">
+				<div class="tmpbox"><%= image_tag("/images/tmpallstuff/#{@prw[2]}", {:title=>"Фото. #{@prw[2]}"})%></div>
+				<div class="tmpbox"><%= image_tag("/images/tmpallstuff/#{@prw[3]}", {:title=>"Фото. #{@prw[3]}"})%></div>
+				<div class="lastinrowbox"><%= image_tag("/images/tmpallstuff/#{@prw[4]}", {:title=>"Фото. #{@prw[4]}"})%></div>
+			</div>
+		</div>
+		<div id="right-top-hidden">
+			<div class="tmpbox"><%= image_tag("/images/tmpallstuff/#{@prw[5]}", {:title=>"Фото. #{@prw[5]}"})%></div>
+			<div class="tmpbox"><%= image_tag("/images/tmpallstuff/#{@prw[6]}", {:title=>"Фото. #{@prw[6]}"})%></div>
+			<div class="tmpbox"><%= image_tag("/images/tmpallstuff/#{@prw[7]}", {:title=>"Фото. #{@prw[7]}"})%></div>
+		</div>
+
+		<div id="hideblockbtn">
+			<div class="line"></div>
+			<div class="line_text"><span class="redtext">Больше фото</span></div>
+			<div class="line"></div>
+		</div>
+		<div id="hideblock">
+			<div id="wrapbox_bottom">
+				<div class="tmpbox"><%= image_tag("/images/tmpallstuff/#{@prw[8]}", {:title=>"Фото. #{@prw[8]}"})%></div>
+				<div class="tmpbox"><%= image_tag("/images/tmpallstuff/#{@prw[9]}", {:title=>"Фото. #{@prw[9]}"})%></div>
+				<div class="lastinrowbox"><%= image_tag("/images/tmpallstuff/#{@prw[10]}", {:title=>"Фото. #{@prw[10]}"})%></div>
+				<div class="tmpbox"><%= image_tag("/images/tmpallstuff/#{@prw[11]}", {:title=>"Фото. #{@prw[11]}"})%></div>
+				<div class="tmpbox"><%= image_tag("/images/tmpallstuff/#{@prw[12]}", {:title=>"Фото. #{@prw[12]}"})%></div>
+				<div class="lastinrowbox"><%= image_tag("/images/tmpallstuff/#{@prw[13]}", {:title=>"Фото. #{@prw[13]}"})%></div>
+				<div class="tmpbox nobottommargin"><%= image_tag("/images/tmpallstuff/#{@prw[14]}", {:title=>"Фото. #{@prw[14]}"})%></div>
+				<div class="tmpbox nobottommargin"><%= image_tag("/images/tmpallstuff/#{@prw[15]}", {:title=>"Фото. #{@prw[15]}"})%></div>
+				<div class="lastinrowbox"><%= image_tag("/images/tmpallstuff/#{@prw[16]}", {:title=>"Фото. #{@prw[16]}"})%></div>
+			</div>
+			<div id="right-bottom-hidden">
+				<div class="tmpbox"><%= image_tag("/images/tmpallstuff/#{@prw[17]}", {:title=>"Фото. #{@prw[17]}"})%></div>
+				<div class="tmpbox"><%= image_tag("/images/tmpallstuff/#{@prw[18]}", {:title=>"Фото. #{@prw[18]}"})%></div>
+				<div class="tmpbox nobottommargin"><%= image_tag("/images/tmpallstuff/#{@prw[19]}", {:title=>"Фото. #{@prw[19]}"})%></div>
+			</div>
+		</div>
+
+		
+
+	</div>
+</div>
+<div id="footer">
+	<%= render "footer" %>
+</div>
+
+<div id="help_invisieble_box"></div>

@@ -24,19 +24,19 @@ p{text-align: justify; margin-bottom: 8px;}
 #leftmenu li a .current{}
 #leftcontact{line-height: 16px; color:#FCF9CE;}
 
-#contentcolumn{width: 660px; padding-top: 20px; background: #fff; overflow: hidden;}
+#contentcolumn{width: 940px; padding: 20px; background: #fff; overflow: hidden;}
 
 #wrapbox_top{float: left;}
 #right-top-hidden, #right-bottom-hidden{float: left; margin: 0 0 0 20px;									 display: none; }
 #contentbox{height:620px;}
-#contentbody{float: left; width:620px; height:620px; background: none; margin: 0 0 20px 20px;}
+#contentbody{float: left; width:620px; height:620px; background: none;}
 #contentbody-r{float: left; margin: 0 0 0 20px;}
 #contentbody-b{clear: both;}
 
 #wrapbox_bottom{float: left; width: 940px;}
 
 
-.tmpbox{width:298px; height:298px;border:1px solid #666766; float:left; margin:0 0 20px 20px;}
+.tmpbox{width:298px; height:298px;border:1px solid #666766;}
 .lastinrowbox{width:298px; height:298px;border:1px solid #666766; float: left; margin: 0;}
 
 #contentbody-r .tmpbox{margin: 0 0 20px 0;}

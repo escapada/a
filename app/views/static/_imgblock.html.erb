@@ -1,0 +1,44 @@
+<%loops = (@prw.length-8)/12%>
+<%loopsArr = Array.new()%>
+<%n = 0%>
+
+<%loops.times do |i|%>
+	<%if n != loops%>
+		<%12.times do |x|%>
+		<%str += '<div class="tmpbox"><img src="/images/tmpallstuff/#{@prw[(7+n*12)+x]}" alt="дизайн, печать, постпечатная обработка, шелкография, малотиражное производство рекламной продукции" title=" фото. " /></div>'%>
+	<%end%>
+	<%loopsArr << str%>
+	<%n += 1%>
+	<%end%>
+<%= loops.length%><br />
+<%= loopsArr.length%><br />
+<%= loopsArr.each do |s| %>
+<%=s%><br />
+<%end%>
+
+
+<% 8.times do |i| %>
+    <div class="tmpbox"><%= image_tag("/images/tmpallstuff/#{@prw[i]}", {:title=>"Фото. #{@prw[i]}", :alt=>"Шелкография, полноцветная печать, визитки, брошюры, пакеты, календари"})%></div>
+<%end %>
+
+<div id="hideblock"></div>
+<div id="hideblockbtn">
+	<div class="line"></div>
+	<div class="line_text"><span class="redtext">Больше фото</span></div>
+	<div class="line"></div>
+</div>
+
+<script type="text/javascript">
+var loops = <%= loops%>;
+var k=0;
+$("#hideblockbtn").click(showmore(loops, n));//end of hideblockbtn click
+
+function showmore (loops, k) {
+if (loops !== k) {
+	$("#hideblock").show(0);
+	<% 12.times do |k| %>
+	$('<div class="tmpbox"><%= image_tag("/images/tmpallstuff/#{@prw[k]}", {:title=>"Фото. #{@prw[k]}", :alt=>"дизайн, печать, постпечатная обработка, шелкография, малотиражное производство рекламной продукции"})%></div>').appendTo('#hideblock');
+<%end %>
+	};
+};
+</script>

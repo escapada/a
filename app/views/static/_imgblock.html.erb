@@ -20,21 +20,40 @@ end
 <%end %>
 
 <div id="hideblock"></div>
-<div id="hideblockbtn">
+<div id="hideblockbtn" onclick=showmore(<%=loops%>)>
 	<div class="line"></div>
 	<div class="line_text"><span class="redtext">Больше фото</span></div>
 	<div class="line"></div>
 </div>
 
-<script type="text/javascript">
-var loops = <%= loops%>;
-var k=0;
-$("#hideblockbtn").click(showmore(loops, k));//end of hideblockbtn click
+<%= javascript_tag do %>
+var loops = <%=loops%>;
+var loopsArr = new Array();
+<% loops.times do |i|%>
+	loopsArr[<%=i%>] = '<%= raw loopsArr[i]%>';
+<%end%>
 
-function showmore (loop, m) {
-if (loop !== m) {
-	$("#hideblock").show(0);
-	$('<%=loopsArr[m]%>').appendTo('#hideblock');
-	};
-};
-</script>
+function showmore(tmp){
+	switch (parseInt(tmp)) {
+	  case 1:
+	  	$(loopsArr[tmp-1]).appendTo('#hideblock');
+	    $("#hideblockbtn").attr("onclick", "hideall()");
+	    $("#hideblockbtn .redtext").text('Меньше фото');
+	    break
+	  default:
+	  	$('#hideblock').append(loopsArr[tmp-1]);
+	    //$(loopsArr[tmp]).appendTo('#hideblock');
+	    tmp-=1;
+	    $("#hideblockbtn").attr("onclick", "showmore("+tmp+")");
+	}
+}
+
+function hideall(){
+	$('#hideblock').text('');
+	$("#hideblockbtn").attr("onclick", "showmore("+loops+")");
+	$("#hideblockbtn .redtext").text('Больше фото');
+}
+
+//$("#hideblockbtn").click(showmore(loops));
+
+<% end %>

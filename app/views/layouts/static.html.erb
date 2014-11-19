@@ -11,9 +11,6 @@
   <% if @remotejs %>
   <%= javascript_include_tag "#{@remotejs}.js.erb" %>
   <% end %>
-  <% if @cards %>
-  <%= javascript_include_tag "cards.js.erb" %>
-  <% end %>
   <% if @home %>
   <%= stylesheet_link_tag 'home' %>
   <%= javascript_include_tag "functions.js" %>
@@ -26,14 +23,30 @@
   		resize_monitor();
   	});
   </script>
-  <%else if !@vizitki %>
+  <%else if !@contact && @static %>
     <script type="text/javascript">
 
+    function resize_static_monitor(){
+      var windowHSize = document.body.clientWidth;
+      var windowVSize = document.body.clientHeight;
+      //adaptive resizing for calc (vizitki...)
+      if (windowHSize > 1246){
+        $("#contentcolumn").css({"width": 980});
+        $("#footer").css({"width": $("#contentcolumn").outerWidth()});
+        $("#hideblockbtn .line").css({"width": 410});
+      }
+      else {
+        $("#contentcolumn").css({"width": 660});
+        $("#footer").css({"width": $("#contentcolumn").outerWidth()});
+        $("#hideblockbtn .line").css({"width": 250});
+      }
+    }
+
     $( document ).ready(function() {
-      $("#footer").css({"width": $("#contentcolumn").outerWidth()});
+      resize_static_monitor();
     });
     $( window ).resize(function() {
-      $("#footer").css({"width": $("#contentcolumn").outerWidth()});
+      resize_static_monitor();
     });
     </script>
   <% end %>

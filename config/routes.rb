@@ -15,12 +15,12 @@ A::Application.routes.draw do
   match '/vyrubka' => 'static#vyrubka', :as => :vyrubka
   match '/lak' => 'static#lak', :as => :lak
   match '/upprint' => 'static#upprint', :as => :upprint
+  match '/plasticfolders' => 'static#plasticfolders', :as => :plasticfolders
 
   #temp blank stuff
   match '/cards' => 'static#index', :as => :cards
   match '/folders' => 'static#index', :as => :folders
-  match '/plasticfolders' => 'static#index', :as => :plasticfolders
-  match '/stickers' => 'static#index', :as => :stickers
+  #match '/stickers' => 'static#index', :as => :stickers
   #end of temp blank stuff
 
   #resources :articles
@@ -86,6 +86,8 @@ A::Application.routes.draw do
   match 'index/vyrubka_calculate'
   match 'index/lak_calculate'
   match 'index/upprint_calculate'
+  match 'index/plasticfolders_calculate'
+  
 
   # See how all your routes lay out with "rake routes"
 

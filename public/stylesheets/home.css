@@ -18,9 +18,9 @@ body{ padding: 0px !important;}
 #fp_box_9{text-align: center; color: #FCF9CE;}
 
 #logo_fp{}
-.text_fp{}
+.text_fp{padding: 0 0 7px 7px;}
 
-#fp_nav{ margin-bottom: 15px;}
+#fp_nav{ margin-bottom: 15px; padding: 7px;}
 #nav_block_wrap{ margin:auto; width: 358px; text-align: left;}
 
 /*//////////////////*/

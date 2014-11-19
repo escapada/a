@@ -24,7 +24,8 @@ p{text-align: justify; margin-bottom: 8px;}
 #leftmenu li a .current{}
 #leftcontact{line-height: 16px; color:#FCF9CE;}
 
-#contentcolumn{width: 660px; padding-top: 20px; background: #fff; overflow: hidden;}
+#contentcolumn{width: 980px; padding-top: 20px; background: #fff; overflow: hidden;}
+/*#contentcolumn{width: 940px; padding: 20px; background: #fff; overflow: hidden;}*/
 
 #wrapbox_top{float: left;}
 #right-top-hidden, #right-bottom-hidden{float: left; margin: 0 0 0 20px;									 display: none; }
@@ -120,14 +121,11 @@ p{text-align: justify; margin-bottom: 8px;}
 #alert{display:none; border:solid red 1px; height: 26px; width:450px; float: left; text-align: center; color: red; line-height: 26px; margin-bottom: 10px;}
 
 /*///////////////////////////contact, about*/
-#cont_left{float: left; width:618px;}
+#cont_left{float: left; width:620px; margin-left: 20px;}
 #cont_left p{line-height:19px; margin-bottom:15px;}
 #cont_left a{color:#EF3C24;}
-#cont_right{float: right;}
-#cont_right .tmpbox{margin-bottom: 20px;}
-#cont_bottom{clear: both;}
-#cont_bottom .map{margin-bottom: 20px;}
-.nobottommargin{margin-bottom: 0 !important;}
+
+.map{margin: 0 0 20px 20px;}
 
 .last_p{margin-bottom:0px;}
 .red_marked{padding-left: 12px;}
@@ -153,7 +151,7 @@ p{text-align: justify; margin-bottom: 8px;}
 
 /*///////////////////////////footer*/
 #fp-footer{width: 100%;}
-#footer{margin:20px 0 20px 246px;}
+#footer{width: 980px; margin:20px 0 20px 246px;}
 #foo-info{ float: left; color: #FCF9CE;}
 #foo-js{float: left; color: #FCF9CE;}
 #foo-copyright{float: right; color: #FCF9CE;}

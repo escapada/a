@@ -505,7 +505,7 @@ class IndexController < ApplicationController
 		render :text => @tmp1
 	end
 
-	def vyrubka_calculate
+	def lak_calculate
 		formats = Format.find(params[:format])
 		lakConstants = Lakconstant.find(:first)
 		constants = Constant.find(:first)
@@ -558,6 +558,61 @@ class IndexController < ApplicationController
 	end
 
 	def upprint_calculate
+		formats = Format.find(params[:format])
+		upprintConstants = Upprintconstant.find(:first)
+		constants = Constant.find(:first)
+
+		dollar = constants.dollar
+		euro = constants.euro
+		percent = constants.percent
+
+		priladka = upprintConstants.priladka
+		upprint = upprintConstants.upprint
+		sKlishe = formats.sKlisheLetter
+		priceKlishe = formats.priceKlisheLetter
+
+		k = formats.kratnostLetter
+		
+		tirazh = params[:tirazh].to_i
+
+		klishe = sKlishe*priceKlishe
+		obrabotka = priladka + upprint*tirazh + klishe
+
+		if params[:paper]
+			paperInstance = Paper.find(params[:paper])
+			case paperInstance.currency
+			when 'd' then paperPrice = dollar*paperInstance.price/4
+			when 'e' then paperPrice = euro*paperInstance.price/4
+			when 'r' then paperPrice = paperInstance.price/4
+			end						
+		end
+
+		if params[:mypaper]
+			paperPrice = params[:mypaper].to_f/4
+		end
+
+		if params[:nopaper]
+			paperPrice = 0	
+		end
+
+		remainder = tirazh%k
+
+		if remainder>0
+			listCount = tirazh/k+1
+		else
+			listCount = tirazh/k
+		end 
+
+		bumaga = (paperPrice + paperPrice*percent/100)*listCount
+		
+		result = bumaga + obrabotka
+	
+		@tmp1 = "#{(result).round(2)} руб."#obrabotka#dopSum#bumaga#tirazh
+
+		render :text => @tmp1
+	end
+
+	def plasticfolders_calculate
 		formats = Format.find(params[:format])
 		upprintConstants = Upprintconstant.find(:first)
 		constants = Constant.find(:first)

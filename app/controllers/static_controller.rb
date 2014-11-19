@@ -16,6 +16,7 @@ class StaticController < ApplicationController
 		@prw.shuffle!
 	end
 	def about
+		@static=true
 		@title="О нас. АВС-Принт."
 		@meta="полиграфия, шелкография, печать на пакетах, печать визиток, брошюр, листовок, календарей, буклетов, рекламной продукции, тиснение, вырубка, УФ-лак, дизайн"
 
@@ -24,10 +25,13 @@ class StaticController < ApplicationController
 		@prw.shuffle!
 	end
 	def contact
+		@static=true
+		@contact=true
 		@title="Контакты. АВС-Принт. Санкт-Петербург, Химический пер. 1 (въезд с ул.Трефолева 1 литер П). тел. 7027840, 7027841"
 		@meta="полиграфия, шелкография, печать на пакетах, печать визиток, брошюр, листовок, календарей, буклетов, рекламной продукции, тиснение, вырубка, УФ-лак, дизайн"
 	end
 	def trebovaniya
+		@static=true
 		@title="Технические требования к макетам."
 		@meta="полиграфия, шелкография, требования к макетам, печать на пакетах, печать визиток, брошюр, листовок, календарей, буклетов, рекламной продукции"
 
@@ -153,5 +157,21 @@ class StaticController < ApplicationController
 		Dir.glob("public/images/tmpallstuff/*.jpg"){|x| @prw << File.basename(x)}
 		@prw.shuffle!
 	end
+
+	def plasticfolders
+		@title="Онлайн калькулятор. Верхняя печать / Леттерпресс. Online calculate."
+		@meta="Верхняя печать / Леттерпресс, малотиражное производство, печать, дизайн, постпечатная обработка"
+
+		@remotejs="plasticfolders"
+		#@paper = Paper.find(:all)
+		#@format = Format.where("letterpress = '1'")
+		#@format = Format.where("format = 'A4' OR format = 'A3' OR format = 'A2'")		##the same## @format = Format.find([4,5,6])
+		#@format = Format.all
+
+		@prw=Array.new()
+		Dir.glob("public/images/tmpallstuff/*.jpg"){|x| @prw << File.basename(x)}
+		@prw.shuffle!
+	end
+
 
 end

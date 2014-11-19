@@ -30,20 +30,19 @@ function resize_monitor() {
 
 	//adaptive resizing for calc (vizitki...)
 	if (windowHSize > 1546) {
-		$("#right-top-hidden").css({"display": "block"});
-		$("#right-bottom-hidden").css({"display": "block"});
-		$("#contentcolumn").css({"width": 1260});
+		$("#contentcolumn").css({"width": 1300});
 		$("#footer").css({"width": $("#contentcolumn").outerWidth()});
-		//$("#footer").css({"width": 1260});
 		$("#hideblockbtn .line").css({"width": 570});
 	}
-	else{
-		$("#right-top-hidden").css({"display": "none"});
-		$("#right-bottom-hidden").css({"display": "none"});
-		$("#contentcolumn").css({"width": 940});
+	else if (windowHSize > 1246){
+		$("#contentcolumn").css({"width": 980});
 		$("#footer").css({"width": $("#contentcolumn").outerWidth()});
-		//$("#footer").css({"width": 940});
 		$("#hideblockbtn .line").css({"width": 410});
+	}
+	else {
+		$("#contentcolumn").css({"width": 660});
+		$("#footer").css({"width": $("#contentcolumn").outerWidth()});
+		$("#hideblockbtn .line").css({"width": 250});
 	}
 	//logo+boxes scalling
 	wrapheight = $(".wrapper").height();

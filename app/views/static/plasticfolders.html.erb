@@ -7,21 +7,26 @@
 			<h1>Рассчет заказа онлайн</h1>
 			<h2>Папки-уголки (пластик)</h2>
 			<div id="vizitki_selectbox_line">
-				<div id="material" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /></div>
+				<div id="material-t" class="selectbox"><span class="noselect">Плотность</span><input name="material" type="hidden" value="" /></div>
 				<div id="material-options-wrap" class="options-list">
-					<ul id="material-options">
-							<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag("/images/selectarrow.png")%></span></li>
-						<% @noprinter.each do |paper| %>
-							<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
-						<% end %>
+					<ul id="material-t-options">
+						<li class="selectoption_material"><span>Папки заказчика</span><input class="" type="hidden" value="0"  /></li>
+						<li class="selectoption_material"><span>100 мкм</span><input class="" type="hidden" value="100"  /></li>
+						<li class="selectoption_material"><span>120 мкм</span><input class="" type="hidden" value="120"  /></li>
+						<li class="selectoption_material"><span>180 мкм</span><input class="" type="hidden" value="180"  /></li>
 					</ul>
 				</div>
-				<div id="format" class="selectbox"><span class="noselect">Формат</span><input name="format" type="hidden" value="false" /></div>
-				<ul id="format-options" class="options-list">
-					<li class="selectoption_format">A4<input type="hidden" value="A4" /></li>
-					<li class="selectoption_format">A3<input type="hidden" value="A3" /></li>
-					<li class="selectoption_format">A2<input type="hidden" value="A2" /></li>
+				<div id="format-t" class="selectbox"><span class="noselect">Цвет</span><input name="format" type="hidden" value="" /></div>
+				<ul id="format-t-options" class="options-list">
+					<li class="selectoption_format"><span>Прозрачные</span><input class="" type="hidden" value=""  /></li>
+					<li class="selectoption_format"><span>Жёлтые</span><input class="" type="hidden" value=""  /></li>
+					<li class="selectoption_format"><span>Красные</span><input class="" type="hidden" value=""  /></li>
+					<li class="selectoption_format"><span>Синие</span><input class="" type="hidden" value=""  /></li>
+					<li class="selectoption_format"><span>Зелёные</span><input class="" type="hidden" value=""  /></li>
 				</ul>
+				<div id="select-tirazh-wrap"><input id="select-tirazh-t" class="selectbox" type="text" value="Тираж"  /></div>
+			</div>
+			<div id="vizitki_radiolist" style="margin-top:40px;">
 				<div id="select-color" class="selectbox"><span class="noselect">Печать</span><input name="color" type="hidden" value="" /></div>
 				<div id="select-color-options-wrap" class="options-list">
 					<ul id="select-color-options">
@@ -48,9 +53,13 @@
 					</ul>
 
 				</div>
-				<div id="select-tirazh-wrap"><input id="select-tirazh" class="selectbox" type="text" value="Тираж"  /></div>
+
+				<span>Тиснение фольгой</span>
+				<div class="radiobtn"><input name="dp2" type="hidden" value="0" /></div>
+
 			</div>
-			<div class="separate_line"></div>
+
+			<div id="vizitki_dop_line_bottom"></div>
 
 			<div id="btns">
 				<input id="calculate" class="sendbtn" type="submit" value="Стоимость заказа" />
@@ -58,17 +67,30 @@
 				</div>
 				<%=link_to "<input class='sendbtn' type='submit' value='Оформить заказ' />".html_safe, contact_path %>
 			</div>
+			<div id="alert_wrap">
 				<div id="alert"></div>
-
-			<p style="clear:both; margin-top:420px;">
-				<span class="redtext p-header">Обратите внимание:</span>
+			</div>
+			<p style="clear:both; margin-top:165px;">
+				<span style="display:none;" class="redtext p-header">Обратите внимание:</span>
 			</p>
 			<p>
-				Если в списке материалов нет желаемого, Вы можете ввести цену листа картона выбрав пункт «Цена листа бумаги». Стоимость можно узнать на сайтах  наших поставщиков: Берег, Дубль В.
+				Стоимость тиснения в калькуляторе не включает в себя стоимость изготовления клише. Чтобы узнать цену клише впишите Ширину и Высоту оттиска в соответствующие ячейки и нажмите на кнопку цена клише:
+			</p>
+			<div id="klishe_line">
+				<div id="klishe1"><input id="width-klishe" class="selectbox" type="text" value="" placeholder="Ширина оттиска, см" /></div>
+				<div id="x"><%= image_tag("/images/x.png")%></div>
+				<div id="klishe2"><input id="height-klishe" class="selectbox" type="text" value="" placeholder="Высота оттиска, см" /></div>
+				<input id="klishebtn" class="sendbtn" type="submit" value="Цена клише" />
+				<div id="resklishe"></div>
+			</div>
+			<p style="clear:both;">
+				<span class="redtext p-header">Обратите внимание:</span><br />
+				Стоимость конгревного клише на 50% дороже от рассчётной. 
+				Если в заказе используются различные виды тиснения, на каждый вид рассчитывается отдельное клише.
 			</p>
 
-		</div>
-
+		</div><!--end of contentbody-->
+		
 		<%= render "imgblock" %>
 
 	</div>

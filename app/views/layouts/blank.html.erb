@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @title %></title>
+  <%= csrf_meta_tag %>
+  <meta name="keywords" content="<%= @meta %>" />
+
+  <%= favicon_link_tag 'favicon.ico' %>
+
+  <%= javascript_include_tag "blank" %>
+  <%= stylesheet_link_tag '_main' %>
+  
+</head>
+
+<body>
+
+<%= yield %>
+
+</body>
+</html>

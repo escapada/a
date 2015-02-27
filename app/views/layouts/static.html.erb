@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @title %></title>
+  <%= csrf_meta_tag %>
+  <meta name="keywords" content="<%= @meta %>" />
+
+  <%= favicon_link_tag 'favicon.ico' %>
+  
+  <% if @remotejs %>
+  <%= javascript_include_tag "#{@remotejs}" %>
+  <% end %>
+  <% if @home %>
+  <%= stylesheet_link_tag "_home" %>
+  <%= javascript_include_tag "home" %>
+  <script type="text/javascript">
+
+  	$( document ).ready(function() {
+  		resize_monitor();
+  	});
+  	$( window ).resize(function() {
+  		resize_monitor();
+  	});
+  </script>
+  <%else if !@contact && @static %>
+    <%= stylesheet_link_tag "_main" %>
+    <script type="text/javascript">
+
+    function resize_static_monitor(){
+      var windowHSize = document.body.clientWidth;
+      var windowVSize = document.body.clientHeight;
+      //adaptive resizing for calc (vizitki...)
+      if (windowHSize > 1246){
+        $("#contentcolumn").css({"width": 980});
+        $("#footer").css({"width": $("#contentcolumn").outerWidth()});
+        $("#hideblockbtn .line").css({"width": 410});
+      }
+      else {
+        $("#contentcolumn").css({"width": 660});
+        $("#footer").css({"width": $("#contentcolumn").outerWidth()});
+        $("#hideblockbtn .line").css({"width": 250});
+      }
+    }
+
+    $( document ).ready(function() {
+      resize_static_monitor();
+    });
+    $( window ).resize(function() {
+      resize_static_monitor();
+    });
+    </script>
+  <%else%>
+  <%= stylesheet_link_tag "_main"%>
+  <% end %>
+  <% end %>
+
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>

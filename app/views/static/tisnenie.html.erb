@@ -1,0 +1,81 @@
+<div id="leftcolumn">
+	<%= render "leftmenu" %>
+</div>
+<div id="content_wrap">
+	<div id="contentcolumn">
+		<div id="contentbody">
+			<h1>Рассчет заказа онлайн</h1>
+			<h2>Тиснение</h2>
+			<div id="vizitki_selectbox_line">
+				<div id="material-t" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /></div>
+				<div id="material-options-wrap" class="options-list">
+					<ul id="material-t-options">
+							<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag("selectarrow.png")%></span></li>
+							<li class="selectoption_material">Без бумаги<input class="" type="hidden" value="0"  /></li>
+						<% @paper.each do |paper| %>
+							<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
+						<% end %>
+					</ul>
+				</div>
+				<div id="format-t" class="selectbox"><span class="noselect">Формат</span><input name="format" type="hidden" value="" /></div>
+				<ul id="format-t-options" class="options-list">
+					<% @format.each do |format| %>
+							<li class="selectoption_format"><%= format.format %><input class="" type="hidden" value="<%= format.id %>"  /></li>
+					<% end %>
+				</ul>
+				<div id="select-tirazh-wrap"><input id="select-tirazh-t" class="selectbox" type="text" value="Тираж"  /></div>
+			</div>
+			<div id="vizitki_radiolist" style="margin-top:40px;">
+				<table id="radiotbl" width="624px">
+					<tr height="40px">
+						<td width="177px"><span>Тиснение блинтовое</span></td>
+						<td width="31px" align="right"><div class="radiobtn"><input name="dp1" type="hidden" value="0" /></div></td>
+						<td width="177px"><span>Тиснение фольгой</span></td>
+						<td width="31px" align="right"><div class="radiobtn"><input name="dp2" type="hidden" value="0" /></div></td>
+						<td width="177px"><span>Тиснение конгрев</span></td>
+						<td width="31px"><div class="radiobtn"><input name="dp3" type="hidden" value="0" /></div></td>
+					</tr>
+				</table>
+			</div>
+
+			<div id="vizitki_dop_line_bottom"></div>
+
+			<div id="btns">
+				<input id="calculate" class="sendbtn" type="submit" value="Стоимость заказа" />
+				<div id="result">
+				</div>
+				<%=link_to "<input class='sendbtn' type='submit' value='Оформить заказ' />".html_safe, contact_path %>
+			</div>
+			<div id="alert_wrap">
+				<div id="alert"></div>
+			</div>
+			<p style="clear:both; margin-top:165px;">
+				<span style="display:none;" class="redtext p-header">Обратите внимание:</span>
+			</p>
+			<p>
+				Стоимость тиснения в калькуляторе не включает в себя стоимость изготовления клише. Чтобы узнать цену клише впишите Ширину и Высоту оттиска в соответствующие ячейки и нажмите на кнопку цена клише:
+			</p>
+			<div id="klishe_line">
+				<div id="klishe1"><input id="width-klishe" class="selectbox" type="text" value="" placeholder="Ширина оттиска, см" /></div>
+				<div id="x"><%= image_tag("/images/x.png")%></div>
+				<div id="klishe2"><input id="height-klishe" class="selectbox" type="text" value="" placeholder="Высота оттиска, см" /></div>
+				<input id="klishebtn" class="sendbtn" type="submit" value="Цена клише" />
+				<div id="resklishe"></div>
+			</div>
+			<p style="clear:both;">
+				<span class="redtext p-header">Обратите внимание:</span><br />
+				Стоимость конгревного клише на 50% дороже от рассчётной. 
+				Если в заказе используются различные виды тиснения, на каждый вид рассчитывается отдельное клише.
+			</p>
+
+		</div><!--end of contentbody-->
+		
+		<%= render "imgblock" %>
+
+	</div>
+</div>
+<div id="footer">
+	<%= render "footer" %>
+</div>
+
+<div id="help_invisieble_box"></div>

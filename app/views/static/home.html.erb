@@ -1,0 +1,66 @@
+<div id="fp_wrap">
+<div class="line_margin"></div>
+	<div class="wrapper_margin"></div>
+	<div class="wrapper">
+	 <div id="fp_box_1" class="tmp_img"><table width="100%" height="100%" cellpadding="0" cellspacing="0"><tr><td valign="middle">
+	 	<div id="logo_fp">
+	 		<%=link_to "#{ image_tag("logo_fp.png", {:id=>"logo_img", :title=>"АВС-Принт. Дизайн. Полиграфия. Шелкография. Рекламное производство.", :alt=>"АВС-Принт. Эксклюзивная полиграфия в Санкт-Петербурге"}) }".html_safe, root_path %>
+	 		<div class="text_fp">
+	 			эксклюзивная полиграфия в Санкт-Петербурге
+	 		</div>
+	 	</div></td></tr></table>
+	 </div>
+	</div>
+	<div class="wrapper_margin"></div>
+	<div class="wrapper"><div id="fp_box_2" class="tmp_img" style="background:url(<%= asset_path "fp_random_prw/#{@prw[0]}"%>) no-repeat center; background-size:cover;"></div></div>
+	<div class="wrapper_margin"></div>
+	<div class="wrapper"><div id="fp_box_3" class="tmp_img" style="background:url(<%= asset_path "fp_random_prw/#{@prw[1]}"%>) no-repeat center; background-size:cover;"></div></div>
+	<div class="wrapper_margin"></div>
+
+<div class="line_margin"></div>
+	<div class="wrapper_margin"></div>
+	<div class="wrapper"><div id="fp_box_4" class="tmp_img" style="background:url(<%= asset_path "fp_random_prw/#{@prw[2]}"%>) no-repeat center; background-size:cover;"></div></div>
+	<div class="wrapper_margin"></div>
+
+	<div class="wrapper"><%=link_to "<div id='fp_box_5' class='tmp_img'><table width='100%' height='100%' cellpadding='0' cellspacing='0'><tr><td valign='middle'>#{ image_tag("fp_2_bg.png", {:id=>"fp_2_img", :title=>"Онлайн калькулятор. Расчёт заказа онлайн.", :alt=>"калькулятор, онлайн, расчёт online"}) }</td></tr></table></div>".html_safe, vizitki_path, {:class=>"link"} %>
+	</div>
+
+	<div class="wrapper_margin"></div>
+	<div class="wrapper"><div id="fp_box_6" class="tmp_img" style="background:url(<%= asset_path "fp_random_prw/#{@prw[3]}"%>) no-repeat center; background-size:cover;"></div></div>
+	<div class="wrapper_margin"></div>
+
+<div class="line_margin"></div>
+	<div class="wrapper_margin"></div>
+	<div class="wrapper"><div id="fp_box_7" class="tmp_img" style="background:url(<%= asset_path "fp_random_prw/#{@prw[4]}"%>) no-repeat center; background-size:cover;"></div></div>
+	<div class="wrapper_margin"></div>
+	<div class="wrapper"><div id="fp_box_8" class="tmp_img" style="background:url(<%= asset_path "fp_random_prw/#{@prw[5]}"%>) no-repeat center; background-size:cover;"></div></div>
+	<div class="wrapper_margin"></div>
+	<div class="wrapper">
+		<div id="fp_box_9" class="tmp_img"><table width="100%" height="100%" cellpadding="0" cellspacing="0"><tr><td valign="middle">
+			<div id="nav_block_wrap">
+				<nav id="fp_nav">
+					<ul>
+						<!--			<li><%= link_to "О нас", about_path, {:class=>"link"} %></li>
+						<li><%= link_to "Визитки", vizitki_path, {:class=>"link"} %></li>
+						<li><%= link_to "Контакты", contact_path, {:class=>"link"} %></li>
+						<li><%= link_to "Технические требования", trebovaniya_path, {:class=>"link"} %></li>			-->
+						<li><%= link_to "Шелкография", silk_path, {:class=>"link"} %></li>
+						<li><%= link_to "Высокая печать (Letterpress)", upprint_path, {:class=>"link"} %></li>
+						<li><%= link_to "Тиснение", tisnenie_path, {:class=>"link"} %></li>
+						<li><%= link_to "Вырубка", vyrubka_path, {:class=>"link"} %></li>
+						<li><%= link_to "УФ-Лакировка", lak_path, {:class=>"link"} %></li>
+						<li><%= link_to "Термоподъём", vizitki_path, {:class=>"link"} %></li>
+						<li><%= link_to "Цифровая печать", printer_path, {:class=>"link"} %></li>
+					</ul>
+				</nav>
+				<div class="text_fp">(812) 702 7840 / 702 7841 / 702 7802 / <%= mail_to "zakaz@abc-design.ru", "zakaz@abc-design.ru" %></div>
+			</div></td></tr></table>
+		</div>
+	</div>
+	<div class="wrapper_margin"></div>
+
+<div class="line_margin"></div>
+</div>
+<div id="fp-footer">
+	<%= render "footer" %>
+</div>

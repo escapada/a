@@ -10,7 +10,7 @@
 				<div id="material-p" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /></div>
 				<div id="material-options-wrap" class="options-list">
 					<ul id="material-p-options">
-							<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag("selectarrow.png")%></span></li>
+							<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag(asset_path "selectarrow.png")%></span></li>
 						<% @printer.each do |paper| %>
 							<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
 						<% end %>

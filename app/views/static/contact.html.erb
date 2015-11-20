@@ -12,9 +12,9 @@
 				<span class="redtext">Наши телефоны: (812) 702-7840, 702-7841, телефон/факс (812) 702-7802.</span><br />Адрес электронной почты: <%= mail_to "mail@abc-design.ru", "mail@abc-design.ru"%><br />ICQ: 434-766-847<br />Skype: ruslanpospelov
 			</p>
 		</div>
-		<div class="tmpbox"><%= image_tag("fabric.jpg", {:title=>"Здание завода Красный химик. Въезд с ул.Трефолева."})%></div>
-		<%= image_tag("map1.jpg", {:class=>"map", :title=>"Карта проезда.", :alt=>"адрес: СПб, ул.Трефолева 1 литер П, АВС-Принт."})%>
-		<%= image_tag("map2.jpg", {:class=>"map", :title=>"Карта проезда (увеличенная).", :alt=>"АВС-Принт контакты. Производство пакетов, цифровая и шелкотрафаретная печать."})%>
+		<div class="tmpbox"><%= image_tag(asset_path("fabric.jpg"), {:title=>"Здание завода Красный химик. Въезд с ул.Трефолева."})%></div>
+		<%= image_tag(asset_path("map1.jpg"), {:class=>"map", :title=>"Карта проезда.", :alt=>"адрес: СПб, ул.Трефолева 1 литер П, АВС-Принт."})%>
+		<%= image_tag(asset_path("map2.jpg"), {:class=>"map", :title=>"Карта проезда (увеличенная).", :alt=>"АВС-Принт контакты. Производство пакетов, цифровая и шелкотрафаретная печать."})%>
 	</div>
 </div>
 <div id="footer">

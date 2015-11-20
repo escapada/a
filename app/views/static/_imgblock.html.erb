@@ -8,7 +8,7 @@ loops.times do |i|
 	str = ''
 	if n != loops
 		12.times do |i|
-		str += %[<div class="tmpbox">#{image_tag("tmpallstuff/#{@prw[(7+n*12)+i]}", {:title=>"фото. #{@prw[(7+n*12)+i]}", :alt=>"дизайн, печать, постпечатная обработка, шелкография, малотиражное производство рекламной продукции"})}</div>]
+		str += %[<div class="tmpbox">#{image_tag(asset_path("tmpallstuff/#{@prw[(7+n*12)+i]}"), {:title=>"фото. #{@prw[(7+n*12)+i]}", :alt=>"дизайн, печать, постпечатная обработка, шелкография, малотиражное производство рекламной продукции"})}</div>]
 		end
 	loopsArr << str
 	n += 1
@@ -16,7 +16,7 @@ loops.times do |i|
 end
 %>
 <% 8.times do |i| %>
-    <div class="tmpbox"><%= image_tag("tmpallstuff/#{@prw[i]}", {:title=>"Фото. #{@prw[i]}", :alt=>"Шелкография, полноцветная печать, визитки, брошюры, пакеты, календари"})%></div>
+    <div class="tmpbox"><%= image_tag(asset_path("tmpallstuff/#{@prw[i]}"), {:title=>"Фото. #{@prw[i]}", :alt=>"Шелкография, полноцветная печать, визитки, брошюры, пакеты, календари"})%></div>
 <%end %>
 
 <div id="hideblock"></div>

@@ -10,7 +10,7 @@
 				<div id="material-t" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /></div>
 				<div id="material-options-wrap" class="options-list">
 					<ul id="material-t-options">
-							<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag("selectarrow.png")%></span></li>
+							<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag(asset_path "selectarrow.png")%></span></li>
 							<li class="selectoption_material">Без бумаги<input class="" type="hidden" value="0"  /></li>
 						<% @paper.each do |paper| %>
 							<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
@@ -57,7 +57,7 @@
 			</p>
 			<div id="klishe_line">
 				<div id="klishe1"><input id="width-klishe" class="selectbox" type="text" value="" placeholder="Ширина оттиска, см" /></div>
-				<div id="x"><%= image_tag("/images/x.png")%></div>
+				<div id="x"><%= image_tag(asset_path "x.png")%></div>
 				<div id="klishe2"><input id="height-klishe" class="selectbox" type="text" value="" placeholder="Высота оттиска, см" /></div>
 				<input id="klishebtn" class="sendbtn" type="submit" value="Цена клише" />
 				<div id="resklishe"></div>

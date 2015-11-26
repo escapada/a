@@ -16,7 +16,7 @@ A::Application.routes.draw do
   get '/vyrubka' => 'static#vyrubka', :as => :vyrubka
   get '/lak' => 'static#lak', :as => :lak
   get '/upprint' => 'static#upprint', :as => :upprint
-  get '/plasticfolders' => 'static#index', :as => :plasticfolders
+  get '/plasticfolders' => 'static#plasticfolders', :as => :plasticfolders
   
   #get '/plasticfolders' => 'static#plasticfolders', :as => :plasticfolders
 

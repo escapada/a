@@ -13,25 +13,15 @@
 					</div>
 					<div class="right_selectbox"></div>
 				</div>
-
-
-				
-
-				<div id="material" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /></div>
-				<div id="material-options-wrap" class="options-list">
-					<ul id="material-options">
-							<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag(asset_path "selectarrow.png")%></span></li>
-						<% @noprinter.each do |paper| %>
-							<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
-						<% end %>
-					</ul>
-				</div>
-				<div id="format" class="selectbox"><span class="noselect">Формат</span><input name="format" type="hidden" value="false" /></div>
+				<div id="format" class="selectbox"><span class="noselect">Цвет</span><input name="format" type="hidden" value="false" /></div>
 				<ul id="format-options" class="options-list">
-					<li class="selectoption_format">A4<input type="hidden" value="A4" /></li>
-					<li class="selectoption_format">A3<input type="hidden" value="A3" /></li>
-					<li class="selectoption_format">A2<input type="hidden" value="A2" /></li>
+					<li class="selectoption_format">Прозрачные<input type="hidden" value="none" /></li>
+					<li class="selectoption_format">Жёлтые<input type="hidden" value="yellow" /></li>
+					<li class="selectoption_format">Крсные<input type="hidden" value="red" /></li>
+					<li class="selectoption_format">Синие<input type="hidden" value="blue" /></li>
+					<li class="selectoption_format">Зелёные<input type="hidden" value="green" /></li>
 				</ul>
+				<div id="select-tirazh-wrap"><input id="select-tirazh" class="selectbox" type="text" value="Тираж"  /></div>
 				<div id="select-color" class="selectbox"><span class="noselect">Печать</span><input name="color" type="hidden" value="" /></div>
 				<div id="select-color-options-wrap" class="options-list">
 					<ul id="select-color-options">
@@ -58,7 +48,19 @@
 					</ul>
 
 				</div>
-				<div id="select-tirazh-wrap"><input id="select-tirazh" class="selectbox" type="text" value="Тираж"  /></div>
+
+
+				
+
+				<div id="plotnost-ugol" class="selectbox"><span class="noselect">Цвет</span><input name="plotnost-ugol" type="hidden" value="" /></div>
+				<div id="plotnost-ugol-options-wrap" class="options-list">
+					<ul id="plotnost-ugol-options">
+	
+						<%# @noprinter.each do |paper| %>
+							<li class="selectoption_material"><%#= paper.runame %><input class="" type="hidden" value="<%#= paper.id %>"  /></li>
+						<%# end %>
+					</ul>
+				</div>
 			</div>
 			<div class="separate_line"></div>
 

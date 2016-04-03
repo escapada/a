@@ -7,12 +7,13 @@
 			<h1>Рассчет заказа онлайн</h1>
 			<h2>Папки-уголки (пластик)</h2>
 			<div id="vizitki_selectbox_line">
-				<div id="plotnost-ugol" class="selectbox">
-					<div class="left_selectbox">
-						<span class="noselect">Плотность</span><input name="plotnost-ugol" type="hidden" value="" />
-					</div>
-					<div class="right_selectbox"></div>
-				</div>
+				<div id="plotnost-ugol" class="selectbox"><span class="noselect">Плотность</span><input name="plotnost-ugol" type="hidden" value="" /></div>
+				<ul id="plotnost-ugol-options" class="options-list">
+					<li class="selectoption_color-ugol">100 мкм<input type="hidden" value="100" /></li>
+					<li class="selectoption_color-ugol">120 мкм<input type="hidden" value="120" /></li>
+					<li class="selectoption_color-ugol">180 мкм<input type="hidden" value="180" /></li>
+					<li class="selectoption_color-ugol">папки заказчика<input type="hidden" value="none" /></li>
+				</ul>
 				<div id="color-ugol" class="selectbox"><span class="noselect">Цвет</span><input name="color-ugol" type="hidden" value="false" /></div>
 				<ul id="color-ugol-options" class="options-list">
 					<li class="selectoption_color-ugol">Прозрачные<input type="hidden" value="none" /></li>
@@ -21,7 +22,7 @@
 					<li class="selectoption_color-ugol">Синие<input type="hidden" value="blue" /></li>
 					<li class="selectoption_color-ugol">Зелёные<input type="hidden" value="green" /></li>
 				</ul>
-				<div id="select-tirazh-wrap"><input id="select-tirazh" class="selectbox" type="text" value="Тираж"  /></div>
+				<div id="select-tirazh-wrap"><input id="select-tirazh-ugol" class="selectbox" type="text" value="Тираж"  /></div>
 				<div id="select-color" class="selectbox"><span class="noselect">Печать</span><input name="color" type="hidden" value="" /></div>
 				<div id="select-color-options-wrap" class="options-list">
 					<ul id="select-color-options">

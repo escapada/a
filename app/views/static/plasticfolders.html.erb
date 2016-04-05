@@ -23,65 +23,46 @@
 					<li class="selectoption_color-ugol">Зелёные<input type="hidden" value="green" /></li>
 				</ul>
 				<div id="select-tirazh-wrap"><input id="select-tirazh-ugol" class="selectbox" type="text" value="Тираж"  /></div>
-
-				<div id="vizitki_radiolist" style="margin-top:40px;">
-					<table id="radiotbl" width="624px">
-						<tr height="40px">
-							<td width="177px"><span>Тиснение блинтовое</span></td>
-							<td width="31px" align="right"><div class="radiobtn"><input name="dp1" type="hidden" value="0" /></div></td>
-							<td width="177px"><span>Тиснение фольгой</span></td>
-							<td width="31px" align="right"><div class="radiobtn"><input name="dp2" type="hidden" value="0" /></div></td>
-							<td width="177px"><span>Тиснение конгрев</span></td>
-							<td width="31px"><div class="radiobtn"><input name="dp3" type="hidden" value="0" /></div></td>
-						</tr>
-					</table>
-				</div>
-
-				<div id="vizitki_dop_line_bottom"></div>
-
-
-				<div id="select-color-ugol" class="selectbox"><span class="noselect">Печать</span><input name="color" type="hidden" value="" /></div>
-				<div id="select-color-options-wrap" class="options-list">
-					<ul id="select-color-options">
-						<div id="color-op-1">
-							<li class="selectoption_color"><span>1+0</span><input class="" type="hidden" value="1+0"  /></li>
-							<li class="selectoption_color"><span>2+0</span><input class="" type="hidden" value="2+0"  /></li>
-							<li class="selectoption_color"><span>3+0</span><input class="" type="hidden" value="3+0"  /></li>
-							<li class="selectoption_color"><span>4+0</span><input class="" type="hidden" value="4+0"  /></li>
-						</div>
-						<div id="color-op-2">
-							<li class="selectoption_color"><span>1+1</span><input class="" type="hidden" value="1+1"  /></li>
-							<li class="selectoption_color"><span>2+2</span><input class="" type="hidden" value="2+2"  /></li>
-							<li class="selectoption_color"><span>3+3</span><input class="" type="hidden" value="3+3"  /></li>
-							<li class="selectoption_color"><span>4+4</span><input class="" type="hidden" value="4+4"  /></li>
-							<li class="selectoption_color"><span>4+2</span><input class="" type="hidden" value="4+2"  /></li>
-						</div>
-						<div id="color-op-3">
-							<li class="selectoption_color"><span>2+1</span><input class="" type="hidden" value="2+1"  /></li>
-							<li class="selectoption_color"><span>3+1</span><input class="" type="hidden" value="3+1"  /></li>
-							<li class="selectoption_color"><span>4+1</span><input class="" type="hidden" value="4+1"  /></li>
-							<li class="selectoption_color"><span>3+2</span><input class="" type="hidden" value="3+2"  /></li>
-							<li class="selectoption_color"><span>4+3</span><input class="" type="hidden" value="4+3"  /></li>
-						</div>
-					</ul>
-				</div>
-
-
-
-
-				
-
-				<div id="plotnost-ugol" class="selectbox"><span class="noselect">Цвет</span><input name="plotnost-ugol" type="hidden" value="" /></div>
-				<div id="plotnost-ugol-options-wrap" class="options-list">
-					<ul id="plotnost-ugol-options">
-	
-						<%# @noprinter.each do |paper| %>
-							<li class="selectoption_material"><%#= paper.runame %><input class="" type="hidden" value="<%#= paper.id %>"  /></li>
-						<%# end %>
-					</ul>
-				</div>
 			</div>
-			<div class="separate_line"></div>
+
+			<div id="vizitki_radiolist" style="margin-top:44px;">
+				<table width="624px" cellpadding="0" cellspacing="0" border="0" >
+					<tr height="40px">
+						<td width="200px">
+							<div id="select-color-ugol" class="selectbox"><span class="noselect">Печать</span><input name="color" type="hidden" value="" /></div>
+							<div id="select-color-options-wrap" class="options-list">
+								<ul id="select-color-options">
+									<div id="color-op-1">
+										<li class="selectoption_color"><span>1+0</span><input class="" type="hidden" value="1+0"  /></li>
+										<li class="selectoption_color"><span>2+0</span><input class="" type="hidden" value="2+0"  /></li>
+										<li class="selectoption_color"><span>3+0</span><input class="" type="hidden" value="3+0"  /></li>
+										<li class="selectoption_color"><span>4+0</span><input class="" type="hidden" value="4+0"  /></li>
+									</div>
+									<div id="color-op-2">
+										<li class="selectoption_color"><span>1+1</span><input class="" type="hidden" value="1+1"  /></li>
+										<li class="selectoption_color"><span>2+2</span><input class="" type="hidden" value="2+2"  /></li>
+										<li class="selectoption_color"><span>3+3</span><input class="" type="hidden" value="3+3"  /></li>
+										<li class="selectoption_color"><span>4+4</span><input class="" type="hidden" value="4+4"  /></li>
+										<li class="selectoption_color"><span>4+2</span><input class="" type="hidden" value="4+2"  /></li>
+									</div>
+									<div id="color-op-3">
+										<li class="selectoption_color"><span>2+1</span><input class="" type="hidden" value="2+1"  /></li>
+										<li class="selectoption_color"><span>3+1</span><input class="" type="hidden" value="3+1"  /></li>
+										<li class="selectoption_color"><span>4+1</span><input class="" type="hidden" value="4+1"  /></li>
+										<li class="selectoption_color"><span>3+2</span><input class="" type="hidden" value="3+2"  /></li>
+										<li class="selectoption_color"><span>4+3</span><input class="" type="hidden" value="4+3"  /></li>
+									</div>
+								</ul>
+							</div>
+						</td>
+						<td width="169px" style="color: #666766; text-align: right;"><span style="margin-right: 15px;">Тиснение фольгой</span></td>
+						<td width="31px" align="right"><div class="radiobtn"><input name="dp" type="hidden" value="0" /></div></td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+
+			<div id="vizitki_dop_line_bottom"></div>
 
 			<div id="btns">
 				<input id="calculate" class="sendbtn" type="submit" value="Стоимость заказа" />

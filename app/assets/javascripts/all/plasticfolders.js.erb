@@ -1,43 +1,37 @@
 var show_option_box = false;
-var mypaper = false;
-var nopaper = false;
 
 $( document ).ready(function() {
 resize_monitor();
 clear_cash();
 
-$("#material-t").click(function(){
+$("#plotnost-ugol").click(function(){
 	var xy = $(this).position();
-	$("#material-options-wrap").css({"left": xy.left, "top": xy.top+29});
-	$("#material-options-wrap").toggle();
+	$("#plotnost-ugol-options").css({"left": xy.left, "top": xy.top+29});
+	$("#plotnost-ugol-options").toggle();
 
-	/*////////////////material list scrolling*/
-	if ($("#material-options-wrap").children("ul").innerHeight()>350) {
-		$("#material-options-wrap").children("ul").css({"height": 350, "overflow": "scroll"});
-	}
-	/**/
-	
 	$("#help_invisieble_box").css({"display": "block"});
 });
 
-$("#format-t").click(function(){
+$("#color-ugol").click(function(){
 	var xy = $(this).position();
-	$("#format-t-options").css({"left": xy.left, "top": xy.top+29});
-	$("#format-t-options").toggle();
+	$("#color-ugol-options").css({"left": xy.left, "top": xy.top+29});
+	$("#color-ugol-options").toggle();
+
 	$("#help_invisieble_box").css({"display": "block"});
 });
 
-$("#select-color").click(function(){
+$("#select-color-ugol").click(function(){
 	var xy = $(this).position();
+	$("#select-color-options").css({"padding-left": "30px", "padding-right": "30px"});
 	$("#select-color-options-wrap").css({"left": xy.left, "top": xy.top+29});
 	$("#select-color-options-wrap").toggle();
 	$("#help_invisieble_box").css({"display": "block"});
 });
 
-$( "#select-tirazh-t" ).click(function() {
+$( "#select-tirazh-ugol" ).click(function() {
 	$( this ).val('');
 });
-$( "#select-tirazh-t" ).focusout(function() {
+$( "#select-tirazh-ugol" ).focusout(function() {
 	if($( this ).val().match(/\D/) || $( this ).val() == '' || $( this ).val()>5000){
 		$( this ).val('Тираж');
 	}
@@ -51,65 +45,55 @@ $( "#select-tirazh-t" ).focusout(function() {
 	}
 });
 
-$(".selectoption_format").click(function(){
+$(".selectoption_plotnost-ugol").click(function(){
 
-	var format = $('> input', this).val();
+	var plotnost = $('> input', this).val();
 	var text = $(this).text()
 
-	$("#format-t span").html(text);
-	$("#format-t").children("input").val(format);
+	if (plotnost == "none") {
+		$("#color-ugol").off();
+		$("#color-ugol span").css({"color": "#ccc"});
+		if ($("#color-ugol").children("input").val() == '') {$("#color-ugol").children("input").val("none");};
+	}
+	else {
+		if ($("#color-ugol").children("input").val() == 'none') {$("#color-ugol").children("input").val("");};
+		$("#color-ugol span").css({"color": "#666766"});
+		$("#color-ugol").on("click", function(event){
+			var xy = $(this).position();
+			$("#color-ugol-options").css({"left": xy.left, "top": xy.top+29});
+			$("#color-ugol-options").show(0);
+
+			$("#help_invisieble_box").css({"display": "block"});
+		});
+	};
+
+	$("#plotnost-ugol span").html(text);
+	$("#plotnost-ugol").children("input").val(plotnost);
 	
-	$("#format-t-options").toggle();
+	$("#plotnost-ugol-options").toggle();
 	
 	$("#help_invisieble_box").css({"display": "none"});
 });
 
+$(".selectoption_color-ugol").click(function(){
 
-$(".selectoption_material").click(function(){
-	var material = $('> input', this).val();
+	var colorUgol = $('> input', this).val();
 	var text = $(this).text()
 
-	mypaper = false;
-	nopaper = false;
+	$("#color-ugol span").html(text);
+	$("#color-ugol").children("input").val(colorUgol);
 	
-	if (material=='0') {nopaper=true;}
+	$("#color-ugol-options").toggle();
 	
-	$("#material-t span").html(text);
-	$("#material-t").children("input").val(material);
-	
-	$("#material-options-wrap").toggle();
 	$("#help_invisieble_box").css({"display": "none"});
-});
-
-$(".selectoption_material_input").click(function(){
-	$(this).val('');
-});
-
-$(".selectbtn").click(function() {
-	if($(this).prev().val().match(/[^0-9\\.]/) || $(this).prev().val() == ''){
-		alert("Неверно указана цена листа бумаги!");
-		$("#material-t span").html("Материал");
-		$("#material-t").children("input").val('');
-		mypaper = false;
-	}
-	else{
-		var text = $(this).prev().val();
-		$("#material-t span").html(text);
-		$("#material-t").children("input").val(text);
-
-		$("#material-options-wrap").toggle();
-		$("#help_invisieble_box").css({"display": "none"});
-		mypaper = true;
-		nopaper = false;
-	}
 });
 
 $(".selectoption_color").click(function(){
 	var color = $('> input', this).val();
 	var text = $(this).text()
 	
-	$("#select-color span").html(text);
-	$("#select-color").children("input").val(color);
+	$("#select-color-ugol span").html(text);
+	$("#select-color-ugol").children("input").val(color);
 	
 	$("#select-color-options-wrap").toggle();
 	$("#help_invisieble_box").css({"display": "none"});
@@ -119,7 +103,6 @@ $("#help_invisieble_box").click(function(){
 	$(this).css({"display": "none"});
 	$(".options-list").css({"display": "none"});
 });
-
 
 $(".radiobtn").click(function(){
 	if ($(this).hasClass('selected')) {
@@ -134,29 +117,26 @@ $(".radiobtn").click(function(){
 
 
 $("#calculate").click(function(){
-	var varpaper = "paper";
-	var notype = false;
-	if (mypaper) {varpaper = "mypaper";}
-	if (nopaper) {varpaper = "nopaper";}
-	//here will be validation and collecting all values
-	format = $("[name='format']").val();
-	paper = $("[name='material']").val();
-	tirazh = $("#select-tirazh-t").val();
+	plotnost = $("[name='plotnost']").val();
+	color_ugol = $("[name='color_ugol']").val();
+	color = $("[name='color']").val();
+	tirazh = $("#select-tirazh-ugol").val();
 
 	dp = $("[name='dp']").val();
 
-	if(paper == '' || format == '' || tirazh == '' || tirazh == 'Тираж'){
+	if(plotnost == '' || color_ugol == '' || color == '' || tirazh == '' || tirazh == 'Тираж'){
 		$("#alert").show(0);
 		$("#alert").text('Не хватает параметров!');
 	}
 	else{
+
 		$("#alert").hide(0);
 
 		$.ajax({
 			url: '/index/tisnenie_calculate',
 			type: 'POST',
 			beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-			data: varpaper+'='+paper+'&format='+format+'&tirazh='+tirazh+'&dp='+dp,
+			data: plotnost+'='+plotnost+'&color_ugol='+color_ugol+'&color='+color+'&tirazh='+tirazh+'&dp='+dp,
 			//dataType: "json",
 			success: function(tmp){
 				$('#result').text(tmp);
@@ -165,32 +145,8 @@ $("#calculate").click(function(){
 	}	
 }); //end of calculate click
 
-//begin of klishebtn click
-$("#klishebtn").click(function(){
-	//here will be validation and collecting all values
-	$("#resklishe").text('');
-	width = $("#width-klishe").val();
-	height = $("#height-klishe").val();
-	
-	if(width == '' || height == ''){
-		alert('Не хватает величины!');
-	}
-	else{
-		$.ajax({
-			url: '/index/klishe_calculate',
-			type: 'POST',
-			data: 'width'+'='+width+'&height='+height,
-			//dataType: "json",
-			success: function(tmp){
-				$('#resklishe').text(tmp);
-			}
-		});
-	}	
-});	//end of klishebtn click
 
 });//end of document ready function
-
-
 
 
 $( window ).resize(function() {
@@ -264,10 +220,15 @@ function resize_monitor() {
 
 }
 function clear_cash() {
-	$("[name='material']").val('');
-	$("#material-t-options").show(0);
+	$("[name='plotnost']").val('');
+	$("[name='color_ugol']").val('');
+	$("[name='color']").val('');
+
 	$("#select-color-options").show(0);
-	$(".selectoption_material_input").val('');
-	$("#select-tirazh-t").val('Тираж');
+
+	$("#select-tirazh-ugol").val('Тираж');
 	$("[name='dp']").val(0);
 }
+
+
+

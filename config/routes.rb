@@ -17,12 +17,12 @@ A::Application.routes.draw do
   get '/lak' => 'static#lak', :as => :lak
   get '/upprint' => 'static#upprint', :as => :upprint
   get '/plasticfolders' => 'static#plasticfolders', :as => :plasticfolders
+  get '/folders' => 'static#folders', :as => :folders
   
   #get '/plasticfolders' => 'static#plasticfolders', :as => :plasticfolders
 
   #temp blank stuff
   get '/cards' => 'static#index', :as => :cards
-  get '/folders' => 'static#index', :as => :folders
   #match '/stickers' => 'static#index', :as => :stickers
   #end of temp blank stuff
 

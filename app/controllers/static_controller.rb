@@ -65,6 +65,19 @@
 		Dir.glob("app/assets/images/tmpallstuff/*.jpg"){|x| @prw << File.basename(x)}
 		@prw.shuffle!
 	end
+	def folders
+		@title="Онлайн калькулятор. Шелкотрафаретная, цифровая, полноцветная печать на папках из бумаги/картона. Постобработка. Вырубка, тиснение, лакировка, ламинация. Online calculate."
+		@meta="папки из картона, бумаги, печать на папках, папки с логотипом"
+
+		@remotejs="folders"
+		@folders=true
+		@printer = Paper.printer
+		@noprinter = Paper.find(:all)
+
+		@prw=Array.new()
+		Dir.glob("app/assets/images/tmpallstuff/*.jpg"){|x| @prw << File.basename(x)}
+		@prw.shuffle!
+	end
 
 
 

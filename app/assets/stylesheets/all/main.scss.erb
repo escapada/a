@@ -58,9 +58,9 @@ p{text-align: justify; margin-bottom: 8px;}
 #material{float:left; margin: 0 10px 0 0; width: 222px;}
 #select-color{float:left; margin: 0 10px 0 0; width: 138px;}
 #select-tirazh{float:left; width: 90px; background: none; border: 1px solid #666766; color: #666766; text-align: center; font-size: 14px;}
-#material span, #material-t span, #material-p span, #printmethod span, #select-color span, #select-color-p span, #select-color-ugol span, #format span, #format-p span, #format-t span, #laminat span{font-size: 14px; padding-left: 5px; display: block; line-height: 26px;}
+#material span, #material-t span, #material-p span, #printmethod span, #select-color span, #select-color-p span, #select-color-ugol span, #format span, #format-p span, #format-t span, #laminat span{font-size: 14px; padding-left: 5px; display: block; line-height: 26px;/*float??*/ float: left;}
 #plotnost-ugol, #color-ugol{float:left; margin: 0 10px 0 0; width: 198px;}
-#plotnost-ugol span, #color-ugol span{font-size: 14px; padding-left: 5px; display: block; line-height: 26px;}
+#plotnost-ugol span, #color-ugol span{font-size: 14px; padding-left: 5px; display: block; line-height: 26px; /*float??*/float: left;}
 
 #klishe_line{line-height: 40px; padding: 10px 0 0 0;}
 #klishe1{}
@@ -117,6 +117,7 @@ p{text-align: justify; margin-bottom: 8px;}
 .selectoption_material{cursor: pointer;}
 .selectoption_material_input{cursor: pointer; color: #666766; font-size: 14px; min-width: 222px;}
 .selectbtn{text-align: center; cursor: pointer; padding: 0 5px; position: absolute; right: 0; margin-right: 9px;}
+.selectboxbtn{/*cursor: pointer;*/ width: 28px; height: 28px; float:right; /*margin-right: 9px;*/border-left: 1px solid #666766; background: url(<%= asset_path('down_arrow.png') %>) no-repeat; }
 .selectoption_printmethod, .selectoption_format, .selectoption_laminat, .selectoption_color-ugol, .selectoption_plotnost-ugol{cursor: pointer;}
 .sendbtn{cursor: pointer; width: 147px; height: 28px; font-size: 14px; background: url(<%= asset_path('graybtn.png') %>) repeat-x; border: 1px solid #666766; color: #666766; display: block;}
 

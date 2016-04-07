@@ -110,14 +110,16 @@ p{text-align: justify; margin-bottom: 8px;}
 #select-color-p-options2{display: none; color: #666766; width:165px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
 #material-options li, #material-options-printer li, #printmethod-options li, #format-options li, #format-p-options li, #material-p-options li, #material-t-options li, #format-t-options li, #laminat-options li, #select-color-options2 li, #select-color-p-options2 li span, #color-ugol-options li, #plotnost-ugol-options li{font-size: 14px; line-height: 28px; margin-left: 5px;}
 #select-color-options li, #select-color-options2 li, #select-color-p-options2 li {font-size: 14px; line-height: 28px;}
-.selectbox{height: 28px; background: none; border: 1px solid #666766; color: #666766; cursor: pointer; overflow:hidden; line-height:20px;
+.selectbox{height: 28px; background: none; border: 1px solid #666766; color: #666766; cursor: pointer; overflow:hidden; line-height:20px; position: relative;
 	.left_selectbox{float:left;}
 	.right_selectbox{ float:right; width: 26px; height: 26px;}
+	span{ position: absolute; left: 0; top: 0;}
 }
 .selectoption_material{cursor: pointer;}
-.selectoption_material_input{cursor: pointer; color: #666766; font-size: 14px; min-width: 222px;}
-.selectbtn{text-align: center; cursor: pointer; padding: 0 5px; position: absolute; right: 0; margin-right: 9px;}
-.selectboxbtn{/*cursor: pointer;*/ width: 28px; height: 28px; float:right; /*margin-right: 9px;*/border-left: 1px solid #666766; background: url(<%= asset_path('down_arrow.png') %>) no-repeat; }
+.selectoption_material_input{cursor: pointer; color: #666766; font-size: 14px; min-width: 130px;}
+.selectbtn{ width:27px; height: 26px; position: absolute; top: 0; left: 140px; cursor: pointer; display: inline; background: url(<%= asset_path('arrow.png') %>) no-repeat; border: 1px solid #666766; color: #666766; margin-top: 2px;}
+.selectboxbtn{ width: 28px; height: 28px; border-left: 1px solid #666766; background: url(<%= asset_path('down_arrow.png') %>) no-repeat; background-color: white; position: absolute; right: 0; z-index: 1;}
+
 .selectoption_printmethod, .selectoption_format, .selectoption_laminat, .selectoption_color-ugol, .selectoption_plotnost-ugol{cursor: pointer;}
 .sendbtn{cursor: pointer; width: 147px; height: 28px; font-size: 14px; background: url(<%= asset_path('graybtn.png') %>) repeat-x; border: 1px solid #666766; color: #666766; display: block;}
 
@@ -145,7 +147,7 @@ p{text-align: justify; margin-bottom: 8px;}
 
 #color-op{ width: 45px;}
 #select-color-p-options2 #color-op{ width: auto;}
-#color-op span{ cursor: pointer;}
+#color-op span{ cursor: pointer; font-size: 14px;}
 #color-op-1, #color-op-2, #color-op-3{ width: 45px; float: left; text-align: center;}
 #color-op-1 li span, #color-op-2 li span, #color-op-3 li span{ cursor: pointer;}
 /*//////////////////////////////////////noselect class*/	

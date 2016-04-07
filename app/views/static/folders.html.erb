@@ -12,16 +12,17 @@
 					<li class="selectoption_printmethod">Шелкография<input type="hidden" value="false" /></li>
 					<li class="selectoption_printmethod">Цифровая печать<input type="hidden" value="true" /></li>
 				</ul>
+				<br />
 				<div id="material" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /><div class="selectboxbtn"></div></div>
 				<div id="material-options-wrap" class="options-list">
 					<ul id="material-options">
-							<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag(asset_path "selectarrow.png")%></span></li>
+							<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><div class="selectbtn"></div></li>
 						<% @noprinter.each do |paper| %>
 							<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
 						<% end %>
 					</ul>
 					<ul id="material-options-printer">
-							<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag(asset_path "selectarrow.png")%></span></li>
+							<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><div class="selectbtn"></div></li>
 						<% @printer.each do |paper| %>
 							<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
 						<% end %>

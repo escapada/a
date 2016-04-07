@@ -7,17 +7,17 @@
 			<h1>Рассчет заказа онлайн</h1>
 			<h2>Вырубка</h2>
 			<div id="vizitki_selectbox_line">
-				<div id="material-t" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /></div>
+				<div id="material-t" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /><div class="selectboxbtn"></div></div>
 				<div id="material-options-wrap" class="options-list">
 					<ul id="material-t-options">
-							<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag(asset_path "selectarrow.png")%></span></li>
+							<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><div class="selectbtn"></div></li>
 							<li class="selectoption_material">Без бумаги<input class="" type="hidden" value="0"  /></li>
 						<% @paper.each do |paper| %>
 							<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
 						<% end %>
 					</ul>
 				</div>
-				<div id="format-t" class="selectbox"><span class="noselect">Формат</span><input name="format" type="hidden" value="" /></div>
+				<div id="format-t" class="selectbox"><span class="noselect">Формат</span><input name="format" type="hidden" value="" /><div class="selectboxbtn"></div></div>
 				<ul id="format-t-options" class="options-list">
 					<% @format.each do |format| %>
 							<li class="selectoption_format"><%= format.format %><input class="" type="hidden" value="<%= format.id %>"  /></li>

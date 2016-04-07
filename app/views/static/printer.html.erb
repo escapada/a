@@ -7,22 +7,22 @@
 			<h1>Рассчет заказа онлайн</h1>
 			<h2>Цифровая печать</h2>
 			<div id="vizitki_selectbox_line">
-				<div id="material-p" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /></div>
+				<div id="material-p" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /><div class="selectboxbtn"></div></div>
 				<div id="material-options-wrap" class="options-list">
 					<ul id="material-p-options">
-							<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><span class="selectbtn"><%= image_tag(asset_path "selectarrow.png")%></span></li>
+							<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><div class="selectbtn"></div></li>
 						<% @printer.each do |paper| %>
 							<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
 						<% end %>
 					</ul>
 				</div>
-				<div id="format-p" class="selectbox"><span class="noselect">Формат</span><input name="format" type="hidden" value="false" /></div>
+				<div id="format-p" class="selectbox"><span class="noselect">Формат</span><input name="format" type="hidden" value="false" /><div class="selectboxbtn"></div></div>
 				<ul id="format-p-options" class="options-list">
 					<% @format.each do |format| %>
 							<li class="selectoption_format"><%= format.format %><input class="" type="hidden" value="<%= format.id %>"  /></li>
 					<% end %>
 				</ul>
-				<div id="select-color-p" class="selectbox"><span class="noselect">Печать</span><input name="color" type="hidden" value="" /></div>
+				<div id="select-color-p" class="selectbox"><span class="noselect">Печать</span><input name="color" type="hidden" value="" /><div class="selectboxbtn"></div></div>
 				<div id="select-color-options-wrap" class="options-list">
 					<ul id="select-color-p-options2">
 						<div id="color-op">

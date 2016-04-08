@@ -46,6 +46,7 @@ p{text-align: justify; margin-bottom: 8px;}
 
 #vizitki_selectbox_line{margin-top: 7px;}
 #printmethod, #format, #laminat{float:left; margin: 0 10px 0 0; width: 132px;}
+#printmethod-alone{margin: 0 0 10px 0; width: 222px;}
 #format-p{float:left; margin: 0 10px 0 0; width: 163px;}
 #material-p{float:left; margin: 0 10px 0 0; width: 163px;}
 #select-color-p{float:left; margin: 0 10px 0 0; width: 165px;}
@@ -58,7 +59,7 @@ p{text-align: justify; margin-bottom: 8px;}
 #material{float:left; margin: 0 10px 0 0; width: 222px;}
 #select-color{float:left; margin: 0 10px 0 0; width: 138px;}
 #select-tirazh{float:left; width: 90px; background: none; border: 1px solid #666766; color: #666766; text-align: center; font-size: 14px;}
-#material span, #material-t span, #material-p span, #printmethod span, #select-color span, #select-color-p span, #select-color-ugol span, #format span, #format-p span, #format-t span, #laminat span{font-size: 14px; padding-left: 5px; display: block; line-height: 26px;/*float??*/ float: left;}
+#material span, #material-t span, #material-p span, #printmethod span, #printmethod-alone span, #select-color span, #select-color-p span, #select-color-ugol span, #format span, #format-p span, #format-t span, #laminat span{font-size: 14px; padding-left: 5px; display: block; line-height: 26px;/*float??*/ float: left;}
 #plotnost-ugol, #color-ugol{float:left; margin: 0 10px 0 0; width: 198px;}
 #plotnost-ugol span, #color-ugol span{font-size: 14px; padding-left: 5px; display: block; line-height: 26px; /*float??*/float: left;}
 
@@ -108,8 +109,8 @@ p{text-align: justify; margin-bottom: 8px;}
 #select-color-options{display: none; color: #666766; width:138px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
 #select-color-options2{display: none; color: #666766; width:138px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
 #select-color-p-options2{display: none; color: #666766; width:165px; position: absolute; z-index: 2; background: white; border: 1px solid #666766;}
-#material-options li, #material-options-printer li, #printmethod-options li, #format-options li, #format-p-options li, #material-p-options li, #material-t-options li, #format-t-options li, #laminat-options li, #select-color-options2 li, #select-color-p-options2 li span, #color-ugol-options li, #plotnost-ugol-options li{font-size: 14px; line-height: 28px; margin-left: 5px;}
-#select-color-options li, #select-color-options2 li, #select-color-p-options2 li {font-size: 14px; line-height: 28px;}
+#material-options li, #material-options-printer li, #printmethod-options li, #format-options li, #format-p-options li, #material-p-options li, #material-t-options li, #format-t-options li, #laminat-options li, #select-color-options2 li, #select-color-p-options2 li span, #color-ugol-options li, #plotnost-ugol-options li{font-size: 14px; margin:7px 0 7px 5px; /*margin-left: 5px;*/}
+#select-color-options li, #select-color-options2 li, #select-color-p-options2 li {font-size: 14px; margin:7px 0;}
 .selectbox{height: 28px; background: none; border: 1px solid #666766; color: #666766; cursor: pointer; overflow:hidden; line-height:20px; position: relative;
 	.left_selectbox{float:left;}
 	.right_selectbox{ float:right; width: 26px; height: 26px;}
@@ -117,13 +118,16 @@ p{text-align: justify; margin-bottom: 8px;}
 }
 .selectoption_material{cursor: pointer;}
 .selectoption_material_input{cursor: pointer; color: #666766; font-size: 14px; min-width: 130px;}
-.selectbtn{ width:27px; height: 26px; position: absolute; top: 0; left: 140px; cursor: pointer; display: inline; background: url(<%= asset_path('arrow.png') %>) no-repeat; border: 1px solid #666766; color: #666766; margin-top: 2px;}
 .selectboxbtn{ width: 28px; height: 28px; border-left: 1px solid #666766; background: url(<%= asset_path('down_arrow.png') %>) no-repeat; background-color: white; position: absolute; right: 0; z-index: 1;}
+.selectbtn{ width:27px; height: 26px; position: absolute; top: 0; left: 140px; cursor: pointer; display: inline; background: url(<%= asset_path('arrow.png') %>) no-repeat; border: 1px solid #666766; color: #666766; margin-top: 2px;}
+.selectbtn:hover{ outline: none; border-color:#EF3C24; box-shadow: 0 0 10px #EF3C24;}
 
 .selectoption_printmethod, .selectoption_format, .selectoption_laminat, .selectoption_color-ugol, .selectoption_plotnost-ugol{cursor: pointer;}
 .sendbtn{cursor: pointer; width: 147px; height: 28px; font-size: 14px; background: url(<%= asset_path('graybtn.png') %>) repeat-x; border: 1px solid #666766; color: #666766; display: block;}
+.sendbtn:hover {outline: none; border-color:#EF3C24; color:#EF3C24; box-shadow: 0 0 10px #EF3C24;}
 
-#result{width: 145px; height: 22px; font-size:16px; color:#EF3C24; text-align: center; margin: 10px 0; border: 1px solid #666766;}
+
+#result{width: 145px; height: 22px; line-height: 22px; font-size:16px; color:#EF3C24; text-align: center; margin: 10px 0; border: 1px solid #666766;}
 
 #notice1, #notice2, #notice3, #notice4{display:none; border:none; height: 26px; width:204px; float: left; color: #666766; line-height: 26px; margin-bottom:10px;}
 .notice_line{clear:left; line-height:45px;}

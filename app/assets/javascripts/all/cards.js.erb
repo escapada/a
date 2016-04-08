@@ -6,13 +6,6 @@ resize_monitor();
 clear_cash();
 /*alert($("#material-options").height()+' / '+$("#material-options").innerHeight()+' / ');*/
 
-$("#printmethod").click(function(){
-	var xy = $(this).position();
-	$("#printmethod-options").css({"left": xy.left, "top": xy.top+29});
-	$("#printmethod-options").toggle();
-	$("#help_invisieble_box").css({"display": "block"});
-});
-
 $("#material").click(function(){
 	var xy = $(this).position();
 	$("#material-options-wrap").css({"left": xy.left, "top": xy.top+29});
@@ -24,6 +17,13 @@ $("#material").click(function(){
 	}
 	/**/
 	
+	$("#help_invisieble_box").css({"display": "block"});
+});
+
+$("#format").click(function(){
+	var xy = $(this).position();
+	$("#format-options").css({"left": xy.left, "top": xy.top+29});
+	$("#format-options").toggle();
 	$("#help_invisieble_box").css({"display": "block"});
 });
 
@@ -52,42 +52,6 @@ $( "#select-tirazh" ).focusout(function() {
 	else if($( this ).val() == 0){
 		$( this ).val(100);
 	}
-});
-
-$(".selectoption_printmethod").click(function(){
-	$("[name='material']").val('');
-	$("[name='color']").val('');
-
-	var printmethod = $('> input', this).val();
-	var text = $(this).text()
-	
-	if (printmethod == "true") {
-		$("#material-options").hide(0);
-		$("#material-options-printer").show(0);
-		$("#select-color-options").hide(0);
-		$("#select-color-options2").show(0);
-	}
-	else{
-		$("#material-options-printer").hide(0);
-		$("#material-options").show(0);
-		$("#select-color-options2").hide(0);
-		$("#select-color-options").show(0);
-	}
-
-	$("#printmethod span").html(text);
-	$("#printmethod").children("input").val(printmethod);
-	
-	$("#printmethod-options").toggle();
-	
-	$("#material span").text("Материал");
-	$("[name='material']").val('');
-	$("#select-color span").text("Печать");
-	$("[name='color']").val('');
-	
-	$("#help_invisieble_box").css({"display": "none"});
-	//alert($(this).text());
-	//alert($("#material").children("input").value);
-
 });
 
 $(".selectoption_material").click(function(){
@@ -128,6 +92,19 @@ $(".selectbtn").click(function() {
 	}
 });
 
+$(".selectoption_format").click(function(){
+
+	var format = $('> input', this).val();
+	var text = $(this).text()
+
+	$("#format span").html(text);
+	$("#format").children("input").val(format);
+	
+	$("#format-options").toggle();
+	
+	$("#help_invisieble_box").css({"display": "none"});
+});
+
 $(".selectoption_color").click(function(){
 	var color = $('> input', this).val();
 	var text = $(this).text()
@@ -166,17 +143,15 @@ $("#calculate").click(function(){
 	var varpaper = "paper";
 	if (nopaper) {varpaper = "nopaper";}
 
-	printer = $("[name='printmethod']").val();
 	//here will be validation and collecting all values
 	paper = $("[name='material']").val();
+	format = $("[name='format']").val();
 	tirazh = $("#select-tirazh").val();
 	color = $("[name='color']").val();
 	klishe_blint = $("[name='klishe_blint']").val();
 	klishe_folga = $("[name='klishe_folga']").val();
 	klishe_kongrev = $("[name='klishe_kongrev']").val();
 	vyrubka = $("[name='vyrubka']").val();
-
-	
 
 
 	dp = new Array();
@@ -190,7 +165,7 @@ $("#calculate").click(function(){
 	dp[7] = $("[name='dp8']").val();
 	dp[8] = $("[name='dp9']").val();
 	
-	if(paper == '' || color == '' || tirazh == '' || tirazh == 'Тираж'){
+	if(paper == '' || format == '' || color == '' || tirazh == '' || tirazh == 'Тираж'){
 		$("#alert").show(0);
 		$("#alert").text('Не хватает параметров!');
 	}
@@ -201,7 +176,7 @@ $("#calculate").click(function(){
 			url: '/index/cards_calculate',
 			type: 'POST',
 			beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-			data: 'printer='+printer+'&'+varpaper+'='+paper+'&color='+encodeURIComponent(color)+'&tirazh='+tirazh+'&dp='+dp+'&klishe_blint='+klishe_blint+'&klishe_folga='+klishe_folga+'&klishe_kongrev='+klishe_kongrev+'&vyrubka='+vyrubka,
+			data: varpaper+'='+paper+'&format='+format+'&color='+encodeURIComponent(color)+'&tirazh='+tirazh+'&dp='+dp+'&klishe_blint='+klishe_blint+'&klishe_folga='+klishe_folga+'&klishe_kongrev='+klishe_kongrev+'&vyrubka='+vyrubka,
 			//dataType: "json",
 			success: function(tmp){
 				$('#result').text(tmp);
@@ -281,7 +256,73 @@ function resize_monitor() {
 }
 function clear_cash() {
 	$("[name='material']").val('');
-	$("#material-t-options").show(0);
+	$("#material-options").show(0);
+	$("#select-color-options").show(0);
 	$(".selectoption_material_input").val('');
-	$("#select-tirazh-t").val('Тираж');
+	$("[name='format']").val('');
+	$("[name='color']").val('');
+	$("#select-tirazh").val('Тираж');
+	$("[name='dp1']").val(0);
+	$("[name='dp2']").val(0);
+	$("[name='dp3']").val(0);
+	$("[name='dp4']").val(0);
+	$("[name='dp5']").val(0);
+	$("[name='dp6']").val(0);
+	$("[name='dp7']").val(0);
+	$("[name='dp8']").val(0);
+	$("[name='dp9']").val(0);
+	$("[name='klishe_blint']").val(0);
+	$("[name='klishe_folga']").val(0);
+	$("[name='klishe_kongrev']").val(0);
+	$("[name='vyrubka']").val(0);
+}
+function tisnenieOrVyrubkaChecked(dp, checked) {						//$(this).children("input").attr('name')
+	if (dp == 'dp1') {
+		if(checked){
+			$("#notice1").show(0);
+		}
+		else{
+			$("#notice1").hide(0);
+			if ($("input[name='klishe_blint']").parent().hasClass('selected')) {
+				$("input[name='klishe_blint']").parent().removeClass('selected');
+				$("input[name='klishe_blint']").val(0);
+			}
+		}
+	}
+		if (dp == 'dp2') {
+		if(checked){
+			$("#notice2").show(0);
+		}
+		else{
+			$("#notice2").hide(0);
+			if ($("input[name='klishe_folga']").parent().hasClass('selected')) {
+				$("input[name='klishe_folga']").parent().removeClass('selected');
+				$("input[name='klishe_folga']").val(0);
+			}
+		}
+	}
+	if (dp == 'dp3') {
+		if(checked){
+			$("#notice3").show(0);
+		}
+		else{
+			$("#notice3").hide(0);
+			if ($("input[name='klishe_kongrev']").parent().hasClass('selected')) {
+				$("input[name='klishe_kongrev']").parent().removeClass('selected');
+				$("input[name='klishe_kongrev']").val(0);
+			}
+		}
+	}
+	if (dp == 'dp9') {
+		if(checked){
+			$("#notice4").show(0);
+		}
+		else{
+			$("#notice4").hide(0);
+			if ($("input[name='vyrubka']").parent().hasClass('selected')) {
+				$("input[name='vyrubka']").parent().removeClass('selected');
+				$("input[name='vyrubka']").val(0);
+			}
+		}
+	}
 }

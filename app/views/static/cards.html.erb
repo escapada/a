@@ -5,29 +5,33 @@
 	<div id="contentcolumn">
 		<div id="contentbody">
 			<h1>Рассчет заказа онлайн</h1>
-			<h2>Визитные карточки</h2>
+			<h2>Открытки и Приглашения</h2>
 			<div id="vizitki_selectbox_line">
-				<div id="printmethod" class="selectbox"><span class="noselect">Шелкография</span><input name="printmethod" type="hidden" value="false" /></div>
-				<ul id="printmethod-options" class="options-list">
-					<li class="selectoption_printmethod">Шелкография<input type="hidden" value="false" /></li>
-					<li class="selectoption_printmethod">Цифровая печать<input type="hidden" value="true" /></li>
+				<div id="material" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /><div class="selectboxbtn"></div></div>
+				<div id="material-options-wrap" class="options-list">
+					<ul id="material-options">
+							<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><div class="selectbtn"></div></li>
+						<% @noprinter.each do |paper| %>
+							<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
+						<% end %>
+					</ul>
+					<ul id="material-options-printer">
+							<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><div class="selectbtn"></div></li>
+						<% @printer.each do |paper| %>
+							<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
+						<% end %>
+					</ul>
+				</div>
+				<div id="format" class="selectbox"><span class="noselect">Формат</span><input name="format" type="hidden" value="false" /><div class="selectboxbtn"></div></div>
+				<ul id="format-options" class="options-list">
+					<li class="selectoption_format">105х148мм<input type="hidden" value="1" /></li>
+					<li class="selectoption_format">98х210мм<input type="hidden" value="2" /></li>
+					<li class="selectoption_format">140х140мм<input type="hidden" value="3" /></li>
+					<li class="selectoption_format">200х210мм (100х210мм в сложенном виде)<input type="hidden" value="4" /></li>
+					<li class="selectoption_format">95х370мм (95х185мм в сложенном виде)<input type="hidden" value="5" /></li>
+					<li class="selectoption_format">140х280мм (140х140мм в сложенном виде)<input type="hidden" value="6" /></li>
 				</ul>
-				<div id="material" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /></div>
-					<div id="material-options-wrap" class="options-list">
-						<ul id="material-options">
-								<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><div class="selectbtn"></div></li>
-							<% @noprinter.each do |paper| %>
-								<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
-							<% end %>
-						</ul>
-						<ul id="material-options-printer">
-								<li class=""><input class="selectoption_material_input" type="text" placeholder="Цена листа бумаги" value=""  /><div class="selectbtn"></div></li>
-							<% @printer.each do |paper| %>
-								<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
-							<% end %>
-						</ul>
-					</div>
-				<div id="select-color" class="selectbox"><span class="noselect">Печать</span><input name="color" type="hidden" value="" /></div>
+				<div id="select-color" class="selectbox"><span class="noselect">Печать</span><input name="color" type="hidden" value="" /><div class="selectboxbtn"></div></div>
 				<div id="select-color-options-wrap" class="options-list">
 					<ul id="select-color-options">
 						<div id="color-op-1">
@@ -49,12 +53,6 @@
 							<li class="selectoption_color"><span>4+1</span><input class="" type="hidden" value="4+1"  /></li>
 							<li class="selectoption_color"><span>3+2</span><input class="" type="hidden" value="3+2"  /></li>
 							<li class="selectoption_color"><span>4+3</span><input class="" type="hidden" value="4+3"  /></li>
-						</div>
-					</ul>
-					<ul id="select-color-options2">
-						<div id="color-op">
-							<li class="selectoption_color"><span>Односторонние</span><input class="" type="hidden" value="1"  /></li>
-							<li class="selectoption_color"><span>Двусторонние</span><input class="" type="hidden" value="2"  /></li>
 						</div>
 					</ul>
 				</div>
@@ -86,7 +84,7 @@
 						<td width="30px"><div class="radiobtn"><input name="dp6" type="hidden" value="0" /></div></td>
 					</tr>
 					<tr height="40px">
-						<td width="176px"><span>Тонированный обрез</span></td>
+						<td width="176px"><span>Биговка</span></td>
 						<td width="30px"><div class="radiobtn"><input name="dp7" type="hidden" value="0" /></div></td>
 						<td width="176px"><span>Скругление углов</span></td>
 						<td width="30px"><div class="radiobtn"><input name="dp8" type="hidden" value="0" /></div></td>
@@ -126,7 +124,7 @@
 				<span class="redtext p-header">Обратите внимание:</span>
 			</p>
 			<p>
-				Если Вам нужны визитки с лакировкой, тиснением, термоподъемом и другими эффектами - выбирайте <span class="redtext">Дополнительную обработку.</span>
+				Если Вам нужны открытки с лакировкой, тиснением, термоподъемом и другими эффектами - выбирайте <span class="redtext">Дополнительную обработку.</span>
 			</p>
 			<p>
 				Если в списке материалов нет желаемого, Вы можете ввести цену листа картона выбрав пункт «Указать цену». Стоимость можно узнать на сайтах  наших поставщиков: Берег, Дубль В.
@@ -135,7 +133,7 @@
 				Термоподъем может быть только с одной стороны, но похожего эффекта можно добиться с двух сторон, используя объемный УФ-лак.
 			</p>
 			<p>
-				Блинтовое тиснение рекомендуем делать на толстом и мягком картоне или на «сэндвич»-визитках (склееных из нескольких слоев картона).
+				Блинтовое тиснение рекомендуем делать на толстом и мягком картоне или на «сэндвич»-открытках (склееных из нескольких слоев картона).
 			</p>
 		</div>
 

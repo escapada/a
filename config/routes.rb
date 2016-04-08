@@ -18,11 +18,11 @@ A::Application.routes.draw do
   get '/upprint' => 'static#upprint', :as => :upprint
   get '/plasticfolders' => 'static#plasticfolders', :as => :plasticfolders
   get '/folders' => 'static#folders', :as => :folders
+  get '/cards' => 'static#cards', :as => :cards
   
   #get '/plasticfolders' => 'static#plasticfolders', :as => :plasticfolders
 
   #temp blank stuff
-  get '/cards' => 'static#index', :as => :cards
   #match '/stickers' => 'static#index', :as => :stickers
   #end of temp blank stuff
 

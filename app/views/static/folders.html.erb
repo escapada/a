@@ -7,12 +7,11 @@
 			<h1>Рассчет заказа онлайн</h1>
 			<h2>Папки из картона</h2>
 			<div id="vizitki_selectbox_line">
-				<div id="printmethod" class="selectbox"><span class="noselect">Шелкография</span><input name="printmethod" type="hidden" value="false" /><div class="selectboxbtn"></div></div>
-				<ul id="printmethod-options" class="options-list">
+				<div id="printmethod-alone" class="selectbox"><span class="noselect">Шелкография</span><input name="printmethod" type="hidden" value="false" /><div class="selectboxbtn"></div></div>
+				<ul id="printmethod-options" class="options-list" style="width:222px!important;">
 					<li class="selectoption_printmethod">Шелкография<input type="hidden" value="false" /></li>
 					<li class="selectoption_printmethod">Цифровая печать<input type="hidden" value="true" /></li>
 				</ul>
-				<br />
 				<div id="material" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /><div class="selectboxbtn"></div></div>
 				<div id="material-options-wrap" class="options-list">
 					<ul id="material-options">
@@ -28,6 +27,11 @@
 						<% end %>
 					</ul>
 				</div>
+				<div id="format" class="selectbox"><span class="noselect">Модель папки</span><input name="format" type="hidden" value="false" /><div class="selectboxbtn"></div></div>
+				<ul id="format-options" class="options-list">
+					<li class="selectoption_format">Эконом<input type="hidden" value="eko" /></li>
+					<li class="selectoption_format">Стандарт<input type="hidden" value="standart" /></li>
+				</ul>
 				<div id="select-color" class="selectbox"><span class="noselect">Печать</span><input name="color" type="hidden" value="" /><div class="selectboxbtn"></div></div>
 				<div id="select-color-options-wrap" class="options-list">
 					<ul id="select-color-options">
@@ -52,11 +56,10 @@
 							<li class="selectoption_color"><span>4+3</span><input class="" type="hidden" value="4+3"  /></li>
 						</div>
 					</ul>
-	
 					<ul id="select-color-options2">
-						<div id="color-op">
-							<li class="selectoption_color"><span>Односторонние</span><input class="" type="hidden" value="1"  /></li>
-							<li class="selectoption_color"><span>Двусторонние</span><input class="" type="hidden" value="2"  /></li>
+						<div id="color-op" style="width:inherit!important;">
+							<li class="selectoption_color"><span style="display:block;">4+0</span><input class="" type="hidden" value="1"  /></li>
+							<li class="selectoption_color"><span style="display:block;">4+4</span><input class="" type="hidden" value="2"  /></li>
 						</div>
 					</ul>
 				</div>
@@ -71,7 +74,7 @@
 			<div id="vizitki_radiolist">
 				<table id="radiotbl" width="618px">
 					<tr height="40px">
-						<td width="176px"><span>Тиснение блинтовое</span></td>
+						<td width="176px"><span>Ламинация глянцевая</span></td>
 						<td width="30px"><div class="radiobtn"><input name="dp1" type="hidden" value="0" /></div></td>
 						<td width="176px"><span>Тиснение фольгой</span></td>
 						<td width="30px"><div class="radiobtn"><input name="dp2" type="hidden" value="0" /></div></td>
@@ -80,22 +83,13 @@
 					</tr>
 							
 					<tr height="40px">
+						<td width="176px"><span>Ламинация матовая</span></td>
+						<td width="30px"><div class="radiobtn"><input name="dp6" type="hidden" value="0" /></div></td>
 						<td width="176px"><span>УФ-лак</span></td>
 						<td width="30px"><div class="radiobtn"><input name="dp4" type="hidden" value="0" /></div></td>
 						<td width="176px"><span>Уф-лак объемный</span></td>
 						<td width="30px"><div class="radiobtn"><input name="dp5" type="hidden" value="0" /></div></td>
-						<td width="176px"><span>Термоподъем </span></td>
-						<td width="30px"><div class="radiobtn"><input name="dp6" type="hidden" value="0" /></div></td>
-					</tr>
-
-					<tr height="40px">
-						<td width="176px"><span>Тонированный обрез</span></td>
-						<td width="30px"><div class="radiobtn"><input name="dp7" type="hidden" value="0" /></div></td>
-						<td width="176px"><span>Скругление углов</span></td>
-						<td width="30px"><div class="radiobtn"><input name="dp8" type="hidden" value="0" /></div></td>
-						<td width="176px"><span>Вырубка</span></td>
-						<td width="30px"><div class="radiobtn"><input name="dp9" type="hidden" value="0" /></div></td>
-					</tr>					
+					</tr>		
 							
 				</table>
 			</div>
@@ -110,35 +104,15 @@
 			<div id="alert">
 			</div>
 			<div class="notice_line">
-				<div id="notice1">
-					<div class="notice_txt">Есть клише (блинт)</div><div class="notice_check"><div class="radiobtn"><input name="klishe_blint" type="hidden" value="0" /></div></div>
-				</div>
 				<div id="notice2">
 					<div class="notice_txt">Есть клише (фольга)</div><div class="notice_check"><div class="radiobtn"><input name="klishe_folga" type="hidden" value="0" /></div></div>
 				</div>
 				<div id="notice3">
 					<div class="notice_txt">Есть клише (конгрев)</div><div class="notice_check"><div class="radiobtn"><input name="klishe_kongrev" type="hidden" value="0" /></div></div>
 				</div>
-				<div id="notice4">
-					<div class="notice_txt">Есть штамп (вырубка)</div><div class="notice_check"><div class="radiobtn"><input name="vyrubka" type="hidden" value="0" /></div></div>
-				</div>
 			</div>
 			
-			<p style="clear:both;">
-				<span class="redtext p-header">Обратите внимание:</span>
-			</p>
-			<p>
-				Если Вам нужны визитки с лакировкой, тиснением, термоподъемом и другими эффектами - выбирайте <span class="redtext">Дополнительную обработку.</span>
-			</p>
-			<p>
-				Если в списке материалов нет желаемого, Вы можете ввести цену листа картона выбрав пункт «Цена листа бумаги». Стоимость можно узнать на сайтах  наших поставщиков: Берег, Дубль В.
-			</p>
-			<p>
-				Термоподъем может быть только с одной стороны, но похожего эффекта можно добиться с двух сторон, используя объемный УФ-лак.
-			</p>
-			<p>
-				Блинтовое тиснение рекомендуем делать на толстом и мягком картоне или на «сэндвич»-визитках (склееных из нескольких слоев картона).
-			</p>
+			<div style=" clear:both; width:100%; height:200px; background:#ccc;"></div>
 
 		</div>
 

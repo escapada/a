@@ -177,15 +177,40 @@ $(".radiobtn").click(function(){
 		$(this).addClass( "selected" );
 		$(this).children("input").val(1);
 		tisnenieChecked($(this).children("input").attr('name'), 1);
-		//alert($(this).children("input").attr('name')+' checked');
-		if ($(this).children("input").attr('name') == "dp1" && $("[name='dp6']").parent().hasClass('selected')) {
-			$("[name='dp6']").parent().removeClass('selected');
-			$("[name='dp6']").val(0);
+		////////////////////////block laminaciya checked
+		if ($(this).children("input").attr('name') == "dp1") {
+			$("[name='dp6'], [name='dp7'], [name='dp8']").each(function(){
+				if ($(this).parent().hasClass('selected')) {
+					$(this).parent().removeClass('selected');
+					$(this).val(0);
+				}
+			});
 		};
-		if ($(this).children("input").attr('name') == "dp6" && $("[name='dp1']").parent().hasClass('selected')) {
-			$("[name='dp1']").parent().removeClass('selected');
-			$("[name='dp1']").val(0);
+		if ($(this).children("input").attr('name') == "dp6") {
+			$("[name='dp1'], [name='dp7'], [name='dp8']").each(function(){
+				if ($(this).parent().hasClass('selected')) {
+					$(this).parent().removeClass('selected');
+					$(this).val(0);
+				}
+			});
 		};
+		if ($(this).children("input").attr('name') == "dp7") {
+			$("[name='dp1'], [name='dp6'], [name='dp8']").each(function(){
+				if ($(this).parent().hasClass('selected')) {
+					$(this).parent().removeClass('selected');
+					$(this).val(0);
+				}
+			});
+		};
+		if ($(this).children("input").attr('name') == "dp8") {
+			$("[name='dp1'], [name='dp6'], [name='dp7']").each(function(){
+				if ($(this).parent().hasClass('selected')) {
+					$(this).parent().removeClass('selected');
+					$(this).val(0);
+				}
+			});
+		};
+		////////////////////////end of laminaciya checked block
 	};
 });
 
@@ -211,6 +236,8 @@ $("#calculate").click(function(){
 	dp[3] = $("[name='dp4']").val();
 	dp[4] = $("[name='dp5']").val();
 	dp[5] = $("[name='dp6']").val();
+	dp[6] = $("[name='dp7']").val();
+	dp[7] = $("[name='dp8']").val();
 	
 	if(paper == '' || format == '' || color == '' || tirazh == '' || tirazh == 'Тираж'){
 		$("#alert").show(0);
@@ -323,6 +350,8 @@ function clear_cash() {
 	$("[name='dp4']").val(0);
 	$("[name='dp5']").val(0);
 	$("[name='dp6']").val(0);
+	$("[name='dp7']").val(0);
+	$("[name='dp8']").val(0);
 	$("[name='klishe_folga']").val(0);
 	$("[name='klishe_kongrev']").val(0);
 }

@@ -46,7 +46,7 @@
 		@remotejs="vizitki"
 		@vizitki=true
 		@printer = Paper.printer
-		@noprinter = Paper.find(:all)
+		@noprinter = Paper.all
 
 		@prw=Array.new()
 		Dir.glob("app/assets/images/tmpallstuff/*.jpg"){|x| @prw << File.basename(x)}
@@ -59,7 +59,7 @@
 		@remotejs="cards"
 		@cards=true
 		@printer = Paper.printer
-		@noprinter = Paper.find(:all)
+		@noprinter = Paper.all
 
 		@prw=Array.new()
 		Dir.glob("app/assets/images/tmpallstuff/*.jpg"){|x| @prw << File.basename(x)}
@@ -72,7 +72,7 @@
 		@remotejs="folders"
 		@folders=true
 		@printer = Paper.printer
-		@noprinter = Paper.find(:all)
+		@noprinter = Paper.all
 
 		@prw=Array.new()
 		Dir.glob("app/assets/images/tmpallstuff/*.jpg"){|x| @prw << File.basename(x)}
@@ -90,7 +90,7 @@
 
 		@remotejs="silk"
 		@silk=true
-		@noprinter = Paper.find(:all)
+		@noprinter = Paper.all
 
 		@prw=Array.new()
 		Dir.glob("app/assets/images/tmpallstuff/*.jpg"){|x| @prw << File.basename(x)}
@@ -116,7 +116,7 @@
 		@meta="тиснение, малотиражное производство, печать, дизайн"
 
 		@remotejs="tisnenie"
-		@paper = Paper.find(:all)
+		@paper = Paper.all
 		@format = Format.where("tisnenieVyrubkaLak = '1'")
 		#@format = Format.where("format = 'A4' OR format = 'A3' OR format = 'A2'")		##the same## @format = Format.find([4,5,6])
 		#@format = Format.all
@@ -131,7 +131,7 @@
 		@meta="вырубка, малотиражное производство, печать, дизайн, постпечатная обработка"
 
 		@remotejs="vyrubka"
-		@paper = Paper.find(:all)
+		@paper = Paper.all
 		@format = Format.where("tisnenieVyrubkaLak = '1'")
 		#@format = Format.where("format = 'A4' OR format = 'A3' OR format = 'A2'")		##the same## @format = Format.find([4,5,6])
 		#@format = Format.all
@@ -146,7 +146,7 @@
 		@meta="УФ-лак, малотиражное производство, печать, дизайн, постпечатная обработка"
 
 		@remotejs="lak"
-		@paper = Paper.find(:all)
+		@paper = Paper.all
 		@format = Format.where("tisnenieVyrubkaLak = '1'")
 		#@format = Format.where("format = 'A4' OR format = 'A3' OR format = 'A2'")		##the same## @format = Format.find([4,5,6])
 		#@format = Format.all
@@ -161,7 +161,7 @@
 		@meta="Верхняя печать / Леттерпресс, малотиражное производство, печать, дизайн, постпечатная обработка"
 
 		@remotejs="upprint"
-		@paper = Paper.find(:all)
+		@paper = Paper.all
 		@format = Format.where("letterpress = '1'")
 		#@format = Format.where("format = 'A4' OR format = 'A3' OR format = 'A2'")		##the same## @format = Format.find([4,5,6])
 		#@format = Format.all
@@ -176,7 +176,7 @@
 		@meta="Папки-уголки (пластик), шелкография на папке, пластиковые папки с печатью, с нанесением"
 
 		@remotejs="plasticfolders"
-		#@paper = Paper.find(:all)
+		#@paper = Paper.all
 		#@format = Format.where("letterpress = '1'")
 		#@format = Format.where("format = 'A4' OR format = 'A3' OR format = 'A2'")		##the same## @format = Format.find([4,5,6])
 		#@format = Format.all

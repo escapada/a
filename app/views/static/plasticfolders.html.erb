@@ -70,7 +70,21 @@
 				</div>
 				<%=link_to "<input class='sendbtn' type='submit' value='Оформить заказ' />".html_safe, contact_path %>
 			</div>
-				<div id="alert"></div>
+			<div id="alert"></div>
+
+			<p style="clear:both; margin-top:345px;">
+				<span class="redtext p-header">Обратите внимание:</span>
+			</p>
+			<p>
+				Стоимость тиснения в калькуляторе не включает в себя стоимость изготовления клише. Чтобы узнать цену клише впишите Ширину и Высоту оттиска в соответствующие ячейки и нажмите на кнопку цена клише:
+			</p>
+			<div id="klishe_line">
+				<div id="klishe1"><input id="width-klishe" class="selectbox" type="text" value="" placeholder="Ширина оттиска, см" /></div>
+				<div id="x"><%= image_tag(asset_path "x.png")%></div>
+				<div id="klishe2"><input id="height-klishe" class="selectbox" type="text" value="" placeholder="Высота оттиска, см" /></div>
+				<input id="klishebtn" class="sendbtn" type="submit" value="Цена клише" />
+				<div id="resklishe"></div>
+			</div>
 
 			<div style="clear:both;"></div>
 

@@ -220,7 +220,7 @@ $("#calculate").click(function(){
 		$("#alert").hide(0);
 
 		$.ajax({
-			url: '/index/vizitki_calculate',
+			url: '/index/folders_calculate',
 			type: 'POST',
 			beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
 			data: 'printer='+printer+'&'+varpaper+'='+paper+'&format='+format+'&color='+encodeURIComponent(color)+'&tirazh='+tirazh+'&dp='+dp+'&klishe_folga='+klishe_folga+'&klishe_kongrev='+klishe_kongrev,

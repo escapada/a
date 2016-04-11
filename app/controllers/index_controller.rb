@@ -1,11 +1,11 @@
 ﻿class IndexController < ApplicationController
 	def index
-		@papers = Paper.find(:all)
+		@papers = Paper.all
 	end
 
 	def vizitki_calculate
-		vizitkiConstants = Vizitkiconstant.find(:first)
-		constants = Constant.find(:first)
+		vizitkiConstants = Vizitkiconstant.first
+		constants = Constant.first
 
 		dollar = constants.dollar
 		euro = constants.euro
@@ -160,7 +160,7 @@
 
 	def silk_calculate
 		silkConstants = Silkconstant.where("format = '#{params[:format]}'").first
-		constants = Constant.find(:first)
+		constants = Constant.first
 
 		dollar = constants.dollar
 		euro = constants.euro
@@ -276,7 +276,7 @@
 
 	def printer_calculate
 		printerConstants = Printerconstant.find(params[:format])
-		constants = Constant.find(:first)
+		constants = Constant.first
 
 		dollar = constants.dollar
 		euro = constants.euro
@@ -387,8 +387,8 @@
 
 	def tisnenie_calculate
 		formats = Format.find(params[:format])
-		tisnenieConstants = Tisnenieconstant.find(:first)
-		constants = Constant.find(:first)
+		tisnenieConstants = Tisnenieconstant.first
+		constants = Constant.first
 
 		dollar = constants.dollar
 		euro = constants.euro
@@ -452,7 +452,7 @@
 	end
 
 	def klishe_calculate
-		tisnenieConstants = Tisnenieconstant.find(:first)
+		tisnenieConstants = Tisnenieconstant.first
 		klisheSm = tisnenieConstants.klisheSm
 		klisheMin = tisnenieConstants.klisheKongrevMin
 		
@@ -474,8 +474,8 @@
 
 	def vyrubka_calculate
 		formats = Format.find(params[:format])
-		vyrubkaConstants = Vyrubkaconstant.find(:first)
-		constants = Constant.find(:first)
+		vyrubkaConstants = Vyrubkaconstant.first
+		constants = Constant.first
 
 		dollar = constants.dollar
 		euro = constants.euro
@@ -526,8 +526,8 @@
 
 	def lak_calculate
 		formats = Format.find(params[:format])
-		lakConstants = Lakconstant.find(:first)
-		constants = Constant.find(:first)
+		lakConstants = Lakconstant.first
+		constants = Constant.first
 
 		dollar = constants.dollar
 		euro = constants.euro
@@ -578,8 +578,8 @@
 
 	def upprint_calculate
 		formats = Format.find(params[:format])
-		upprintConstants = Upprintconstant.find(:first)
-		constants = Constant.find(:first)
+		upprintConstants = Upprintconstant.first
+		constants = Constant.first
 
 		dollar = constants.dollar
 		euro = constants.euro
@@ -632,59 +632,248 @@
 	end
 
 	def plasticfolders_calculate
-		formats = Format.find(params[:format])
-		upprintConstants = Upprintconstant.find(:first)
-		constants = Constant.find(:first)
+		ugolConstants = Ugolconstant.first
+		constants = Constant.first
 
 		dollar = constants.dollar
 		euro = constants.euro
-		percent = constants.percent
+		percent = 10
 
-		priladka = upprintConstants.priladka
-		upprint = upprintConstants.upprint
-		sKlishe = formats.sKlisheLetter
-		priceKlishe = formats.priceKlisheLetter
+		setFirstColor = ugolConstants.setFirstColor
+		setNextColor = ugolConstants.setNextColor
+		setTisnenie = ugolConstants.setTisnenie
+		udarTisnenie = ugolConstants.udarTisnenie
 
-		k = formats.kratnostLetter
+		nextColorCount = 0
+		colorCount = 1
 		
 		tirazh = params[:tirazh].to_i
 
-		klishe = sKlishe*priceKlishe
-		obrabotka = priladka + upprint*tirazh + klishe
-
-		if params[:paper]
-			paperInstance = Paper.find(params[:paper])
-			case paperInstance.currency
-			when 'd' then paperPrice = dollar*paperInstance.price/4
-			when 'e' then paperPrice = euro*paperInstance.price/4
-			when 'r' then paperPrice = paperInstance.price/4
-			end						
-		end
-
-		if params[:mypaper]
-			paperPrice = params[:mypaper].to_f/4
-		end
-
-		if params[:nopaper]
-			paperPrice = 0	
-		end
-
-		remainder = tirazh%k
-
-		if remainder>0
-			listCount = tirazh/k+1
+		case params[:plotnost]
+		when '100'
+			ugolki = (ugolConstants._100 + ugolConstants._100*percent/100)*tirazh
+		when '120'
+			ugolki = (ugolConstants._120 + ugolConstants._120*percent/100)*tirazh
+		when '180'
+			ugolki = (ugolConstants._180 + ugolConstants._180*percent/100)*tirazh
 		else
-			listCount = tirazh/k
-		end 
+			ugolki = 0
+		end
 
-		bumaga = (paperPrice + paperPrice*percent/100)*listCount
-		
-		result = bumaga + obrabotka
+		case params[:dp]
+		when '1'
+			tisnenie = setTisnenie + udarTisnenie*tirazh
+		else
+			tisnenie = 0
+		end
+
+		case params[:color]
+		when '1+0' then nextColorCount = 0
+		when '2+0', '1+1' 
+		nextColorCount = 1
+		colorCount = 2
+		when '3+0', '2+1'
+		nextColorCount = 2
+		colorCount = 3
+		when '4+0', '2+2', '3+1'
+		nextColorCount = 3
+		colorCount = 4
+		when '3+2', '4+1'
+		nextColorCount = 4
+		colorCount = 5
+		when '3+3', '4+2'
+		nextColorCount = 5
+		colorCount = 6 
+		when '4+3'
+		nextColorCount = 6
+		colorCount = 7 
+		when '4+4'
+		nextColorCount = 7
+		colorCount = 8 
+		end
+
+		setAllColors = setFirstColor+setNextColor*nextColorCount		#первая выстановка цвета + все следующие
+		price_100 = 100*ugolConstants.prokat_100 										#стоимость прокатов без выстановки и перестановок цвета  (100, 200...)
+		price_200 = price_100+100*ugolConstants.prokat_200
+		price_300 = price_200+100*ugolConstants.prokat_300
+		price_500 = price_300+200*ugolConstants.prokat_500
+		price_2000 = price_500+1500*ugolConstants.prokat_2000
+
+		case tirazh
+		when 1..100
+			print = setAllColors+colorCount*tirazh*ugolConstants.prokat_100
+		when 101..200
+			print = setAllColors+colorCount*(price_100+(tirazh-100)*ugolConstants.prokat_200)
+		when 201..300
+			print = setAllColors+colorCount*(price_200+(tirazh-200)*ugolConstants.prokat_300)
+		when 301..500
+			print = setAllColors+colorCount*(price_300+(tirazh-300)*ugolConstants.prokat_500)
+		when 501..2000
+			print = setAllColors+colorCount*(price_500+(tirazh-500)*ugolConstants.prokat_2000)
+		when 2001..5000
+			print = setAllColors+colorCount*(price_2000+(tirazh-2000)*ugolConstants.prokat_5000)
+		end
+
+		result = ugolki + print + tisnenie
 	
 		@tmp1 = "#{(result).round(2)} руб."#obrabotka#dopSum#bumaga#tirazh
 
 		render :text => @tmp1
 	end
 
+	def folders_calculate
+		foldersConstants = Folderconstant.first
+		constants = Constant.first
 
-end
+		dollar = constants.dollar
+		euro = constants.euro
+		koeficient = constants.koeficient # множитель для цифровой печати на визитках
+		percent = constants.percent
+		
+		setFirstColor = vizitkiConstants.setFirstColor
+		setNextColor = vizitkiConstants.setNextColor
+		prokatPrint = vizitkiConstants.prokatPrint
+		setUF = vizitkiConstants.setUF
+		prokatUF = vizitkiConstants.prokatUF
+		setUFUp = vizitkiConstants.setUFUp
+		prokatUFUp = vizitkiConstants.prokatUFUp
+		setTisnenie = vizitkiConstants.setTisnenie
+		tisnenieBlint = vizitkiConstants.tisnenieBlint
+		tisnenieFolga = vizitkiConstants.tisnenieFolga
+		tisnenieKongrev = vizitkiConstants.tisnenieKongrev
+		klishe = vizitkiConstants.klishe
+		termopod = vizitkiConstants.termopod
+		obrez = vizitkiConstants.obrez
+		kruglenie = vizitkiConstants.kruglenie
+		setVyrubka = vizitkiConstants.setVyrubka
+		vyrubka = vizitkiConstants.vyrubka
+		shtamp = vizitkiConstants.shtamp
+		
+		#dollar = 38		euro = 50		koeficient = 1 	percent = 30		setFirstColor = 300		setNextColor = 150
+		#prokatPrint = 4		setUF = 1200		prokatUF = 5		setUFUp = 1700		prokatUFUp = 7		setTisnenie = 750
+		#tisnenieBlint = 3		tisnenieFolga = 5		tisnenieKongrev = 5		klishe = 500		termopod = 500
+		#obrez = 300		kruglenie = 1		setVyrubka = 750		vyrubka = 3		shtamp = 1500
+
+		dopSum = Array.new()
+		dp = params[:dp].split(/,/)
+
+		color = params[:color]
+		tirazh = params[:tirazh].to_i
+
+		nextColorCount = 0
+		prokatCount = tirazh/4
+		colorCount = 1
+		
+		if params[:paper]
+			paperInstance = Paper.find(params[:paper])
+			case paperInstance.currency
+			when 'd' then paperPrice = dollar*paperInstance.price
+			when 'e' then paperPrice = euro*paperInstance.price
+			when 'r' then paperPrice = paperInstance.price
+			end						
+		end
+
+		if params[:nopaper]
+			paperPrice = params[:nopaper].to_f
+			#percent = 0		
+		end
+
+		if params[:printer] == "true"
+			case color
+			when '1'
+				print = koeficient*Cyfravizitka.find(:first, :conditions => "tirazh = '#{tirazh}'").price
+			when '2'
+				print = koeficient*Cyfravizitka.find(:first, :conditions => "tirazh = '#{tirazh}'").price2
+			end
+		else
+			case color
+			when '1+0' then nextColorCount = 0
+			when '2+0' 
+			nextColorCount = 1
+			colorCount = 2
+			when '3+0'
+			nextColorCount = 2
+			colorCount = 3
+			when '4+0'
+			nextColorCount = 3
+			colorCount = 4
+			#####
+			when '1+1'
+			nextColorCount = 0
+			colorCount = 1
+			prokatCount *= 2
+			when '2+2', '2+1'
+			nextColorCount = 1
+			colorCount = 2
+			prokatCount *= 2
+			when '3+3', '3+2', '3+1'
+			nextColorCount = 2
+			colorCount = 3
+			prokatCount *= 2
+			when '4+4', '4+3', '4+2', '4+1'
+			nextColorCount = 3
+			colorCount = 4
+			prokatCount *= 2 
+			end
+
+			print = setFirstColor + setNextColor*nextColorCount + prokatCount*prokatPrint*colorCount
+		end
+
+
+		if(dp[0]=="1")
+			if(params[:klishe_blint]=="0")
+				dopSum << setTisnenie+klishe+tirazh*tisnenieBlint
+			else
+				dopSum << setTisnenie+tirazh*tisnenieBlint
+			end
+		end
+		if(dp[1]=="1")
+			if(params[:klishe_folga]=="0")
+				dopSum << setTisnenie+klishe+tirazh*tisnenieFolga
+			else
+				dopSum << setTisnenie+tirazh*tisnenieFolga
+			end
+		end
+		if(dp[2]=="1")
+			if(params[:klishe_kongrev]=="0")
+				dopSum << setTisnenie+klishe+tirazh*tisnenieKongrev
+			else
+				dopSum << setTisnenie+tirazh*tisnenieKongrev
+			end
+		end
+		if(dp[3]=="1")
+			dopSum << setUF+prokatCount*prokatUF
+		end
+		if(dp[4]=="1")
+			dopSum << setUFUp+prokatCount*prokatUFUp
+		end
+		if(dp[5]=="1")
+			dopSum << termopod*tirazh/100
+		end
+		if(dp[6]=="1")
+			dopSum << obrez*tirazh/100
+		end
+		if(dp[7]=="1")
+			dopSum << kruglenie*tirazh
+		end
+		if(dp[8]=="1")
+			if(params[:vyrubka]=="0")
+				dopSum << setVyrubka+shtamp+tirazh*vyrubka
+			else
+				dopSum << setVyrubka+tirazh*vyrubka
+			end
+		end
+
+		bumaga = (paperPrice + paperPrice*percent/100)*tirazh/100
+		obrabotka = dopSum.sum 
+		
+		result = bumaga + print + obrabotka
+		
+
+		@tmp1 = "#{(result).round(2)} руб."
+		
+		render :text => @tmp1
+	end
+
+
+end	#end of main class

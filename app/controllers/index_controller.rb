@@ -725,9 +725,11 @@
 		foldersConstants = Folderconstant.first
 		constants = Constant.first
 
+		touchCover = false
+
 		dollar = constants.dollar
 		euro = constants.euro
-		koeficient = constants.koeficient # множитель для цифровой печати на визитках
+		koeficient = constants.koeficient # множитель для цифровой печати не только на визитках
 		percent = constants.percent
 		
 		setFirstColor = vizitkiConstants.setFirstColor
@@ -770,15 +772,82 @@
 			when 'd' then paperPrice = dollar*paperInstance.price
 			when 'e' then paperPrice = euro*paperInstance.price
 			when 'r' then paperPrice = paperInstance.price
-			end						
+			end
+			[51,52,53,54,55].include?(paperInstance.id) ? touchCover = true : touchCover = false						
 		end
 
 		if params[:nopaper]
 			paperPrice = params[:nopaper].to_f
-			#percent = 0		
 		end
 
-		if params[:printer] == "true"
+		if params[:printer] == "cifra"
+			case color
+			when '1'	#односторонняя печать
+				vychet = 3.75 				
+				delta_1 = 0.75
+				delta_2 = 0.7
+				delta_3 = 0.18
+				delta_4 = 0.15
+				case listCount
+				when 1...75
+					print = delta_1*listCount+tech
+				when 75
+					print = (delta_1*listCount-vychet)+tech	#здесь вот тута и делается вычет, корректировка. дальше всё ровно как бэ
+				when 75+1..100
+					delta = delta_1*75-vychet
+					print = (delta+delta_2*(listCount-75))+tech
+				when 100+1..1000
+					delta = (delta_1*75-vychet)+(delta_2*25)	#до 75 одна дельта на 25 другая ну а после 100 третья, такая петрушка 
+					print = (delta+delta_3*(listCount-(75+25)))+tech
+				else	#если тираж (на A3-их) больше 1000
+					delta = (delta_1*75-vychet)+(delta_2*25)+(delta_3*900)
+					print = (delta+delta_4*(listCount-(75+25+900)))+tech
+				
+				end
+			when '2'	#двусторонняя печать
+				vychet2 = 3.8
+				delta_1 = 1.5
+				delta_2 = 1.4
+				delta_3 = 0.36
+				delta_4 = 0.3
+				case listCount
+				when 1...38 #без верхней границы
+					print = delta_1*listCount+tech
+				when 38
+					print = (delta_1*listCount-vychet2)+tech	#здесь вот тута и делается вычет, корректировка. дальше всё ровно как бэ
+				when 38+1..50
+					delta = delta_1*38-vychet2
+					print = (delta+delta_2*(listCount-38))+tech
+				when 50+1..500
+					delta = (delta_1*38-vychet2)+(delta_2*12)	#до 38 одна дельта на 12 другая ну а после 50 третья, такая петрушка 
+					print = (delta+delta_3*(listCount-(38+12)))+tech
+				else	#если тираж (на A3-их) больше 500
+					delta = (delta_1*38-vychet2)+(delta_2*12)+(delta_3*450)
+					print = (delta+delta_4*(listCount-(38+12+450)))+tech
+				
+				end
+			end #end of case color
+		else if params[:printer] == "offset"
+			###############
+		else if params[:printer] == "silk"
+			###############
+		end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		if params[:printer] == "cifra"
 			case color
 			when '1'
 				print = koeficient*Cyfravizitka.find(:first, :conditions => "tirazh = '#{tirazh}'").price

@@ -9,8 +9,9 @@
 			<div id="vizitki_selectbox_line">
 				<div id="printmethod-alone" class="selectbox"><span class="noselect">Шелкография</span><input name="printmethod" type="hidden" value="false" /><div class="selectboxbtn"></div></div>
 				<ul id="printmethod-options" class="options-list" style="width:222px!important;">
-					<li class="selectoption_printmethod">Шелкография<input type="hidden" value="false" /></li>
-					<li class="selectoption_printmethod">Цифровая печать<input type="hidden" value="true" /></li>
+					<li class="selectoption_printmethod">Шелкография<input type="hidden" value="silk" /></li>
+					<li class="selectoption_printmethod">Цифровая печать<input type="hidden" value="cifra" /></li>
+					<li class="selectoption_printmethod">Офсетная печать<input type="hidden" value="offset" /></li>
 				</ul>
 				<div id="material" class="selectbox"><span class="noselect">Материал</span><input name="material" type="hidden" value="" /><div class="selectboxbtn"></div></div>
 				<div id="material-options-wrap" class="options-list">
@@ -25,6 +26,9 @@
 						<% @printer.each do |paper| %>
 							<li class="selectoption_material"><%= paper.runame %><input class="" type="hidden" value="<%= paper.id %>"  /></li>
 						<% end %>
+					</ul>
+					<ul id="material-options-offset">
+						<li class="selectoption_material"><%= @printer.where(id: 1).first.runame %><input class="" type="hidden" value="1"  /></li>
 					</ul>
 				</div>
 				<div id="format" class="selectbox"><span class="noselect">Модель папки</span><input name="format" type="hidden" value="false" /><div class="selectboxbtn"></div></div>

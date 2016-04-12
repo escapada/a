@@ -68,33 +68,50 @@ $(".selectoption_printmethod").click(function(){
 	var printmethod = $('> input', this).val();
 	var text = $(this).text()
 	
-	if (printmethod == "true") {
+	if (printmethod == "cifra") {
 		$("#material-options").hide(0);
+		$("#material-options-offset").hide(0);
 		$("#material-options-printer").show(0);
 		$("#select-color-options").hide(0);
 		$("#select-color-options2").show(0);
+		
+		$("#material span").text("Материал");
+		$("[name='material']").val('');
+		$("#select-color span").text("Печать");
+		$("[name='color']").val('');
+	}
+	else if (printmethod == "offset") {
+		$("#material-options").hide(0);
+		$("#material-options-printer").hide(0);
+		// $("#material-options-offset").show(0);
+		$("#select-color-options").hide(0);
+		$("#select-color-options2").show(0);
+
+		nopaper = false;
+	
+		$("#material span").html('Мелованный картон (285г)');
+		$("#material").children("input").val("1");
+		$("#select-color span").text("Печать");
+		$("[name='color']").val('');
 	}
 	else{
 		$("#material-options-printer").hide(0);
+		$("#material-options-offset").hide(0);
 		$("#material-options").show(0);
 		$("#select-color-options2").hide(0);
 		$("#select-color-options").show(0);
+			
+		$("#material span").text("Материал");
+		$("[name='material']").val('');
+		$("#select-color span").text("Печать");
+		$("[name='color']").val('');
 	}
 
 	$("#printmethod-alone span").html(text);
 	$("#printmethod-alone").children("input").val(printmethod);
-	
+		
 	$("#printmethod-options").toggle();
-	
-	$("#material span").text("Материал");
-	$("[name='material']").val('');
-	$("#select-color span").text("Печать");
-	$("[name='color']").val('');
-	
 	$("#help_invisieble_box").css({"display": "none"});
-	//alert($(this).text());
-	//alert($("#material").children("input").value);
-
 });
 
 $(".selectoption_material").click(function(){

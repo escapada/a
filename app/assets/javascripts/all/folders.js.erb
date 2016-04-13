@@ -79,6 +79,10 @@ $(".selectoption_printmethod").click(function(){
 		$("[name='material']").val('');
 		$("#select-color span").text("Печать");
 		$("[name='color']").val('');
+
+		$("#format").hide(0);
+		$("#format-helper").show(0);
+		$("[name='format']").val('eko');
 	}
 	else if (printmethod == "offset") {
 		$("#material-options").hide(0);
@@ -93,6 +97,11 @@ $(".selectoption_printmethod").click(function(){
 		$("#material").children("input").val("1");
 		$("#select-color span").text("Печать");
 		$("[name='color']").val('');
+		
+		$("#format-helper").hide(0);
+		$("#format").show(0);
+		$("[name='format']").val('');
+		$("#format span").text("Модель папки");
 	}
 	else{
 		$("#material-options-printer").hide(0);
@@ -105,6 +114,11 @@ $(".selectoption_printmethod").click(function(){
 		$("[name='material']").val('');
 		$("#select-color span").text("Печать");
 		$("[name='color']").val('');
+
+		$("#format-helper").hide(0);
+		$("#format").show(0);
+		$("[name='format']").val('');
+		$("#format span").text("Модель папки");
 	}
 
 	$("#printmethod-alone span").html(text);

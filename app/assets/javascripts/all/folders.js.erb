@@ -40,30 +40,37 @@ $("#select-color").click(function(){
 	$("#select-color-options-wrap").toggle();
 	$("#help_invisieble_box").css({"display": "block"});
 });
-$( "#select-tirazh" ).click(function() {
+$( "#select-tirazh").click(function() {
 	$( this ).val('');
 });
-$( "#select-tirazh" ).focusout(function() {
+$( "#select-tirazh").focusout(function() {
 	if($( this ).val().match(/\D/) || $( this ).val() == '' || $( this ).val()>5000){
 		$( this ).val('Тираж');
 	}
-	else if($( this ).val()%100){
-		if ($( this ).val() < 100) {
-			$( this ).val(100);
+	if($( this ).val()%50){
+		if ($( this ).val() < 50) {
+			$( this ).val(50);
 		}
-		else{
-			tmpVal = Math.round($( this ).val()/100)*100;
-			$( this ).val(tmpVal);
-		}	
 	}
-	else if($( this ).val() == 0){
-		$( this ).val(100);
+	if ($("[name='printmethod']").val() == 'cifra') {
+		if ($( this ).val() > 200) {
+			$( this ).val(200);
+		}
+	}
+	if ($("[name='printmethod']").val() == 'offset') {
+		if ($( this ).val() < 200) {
+			$( this ).val(200);
+		}
+	}
+	if($( this ).val() == 0){
+		$( this ).val(50);
 	}
 });
 
 $(".selectoption_printmethod").click(function(){
 	$("[name='material']").val('');
 	$("[name='color']").val('');
+	$( "#select-tirazh").val('Тираж');
 
 	var printmethod = $('> input', this).val();
 	var text = $(this).text()
@@ -201,13 +208,13 @@ $(".radiobtn").click(function(){
 	if ($(this).hasClass('selected')) {
 		$(this).removeClass('selected');
 		$(this).children("input").val(0);
-		tisnenieChecked($(this).children("input").attr('name'), 0);
+		//tisnenieChecked($(this).children("input").attr('name'), 0);
 		//alert($(this).children("input").attr('name')+' unchecked');
 	}
 	else{
 		$(this).addClass( "selected" );
 		$(this).children("input").val(1);
-		tisnenieChecked($(this).children("input").attr('name'), 1);
+		//tisnenieChecked($(this).children("input").attr('name'), 1);
 		////////////////////////block laminaciya checked
 		if ($(this).children("input").attr('name') == "dp1") {
 			$("[name='dp6'], [name='dp7'], [name='dp8']").each(function(){

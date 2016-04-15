@@ -722,7 +722,7 @@
 	end
 
 	def folders_calculate
-		foldersConstants = Folderconstant.first
+		folderConstants = Folderconstant.first
 		constants = Constant.first
 
 		touchCover = false
@@ -732,30 +732,18 @@
 		koeficient = constants.koeficient # множитель для цифровой печати не только на визитках
 		percent = constants.percent
 		
-		setFirstColor = vizitkiConstants.setFirstColor
-		setNextColor = vizitkiConstants.setNextColor
-		prokatPrint = vizitkiConstants.prokatPrint
-		setUF = vizitkiConstants.setUF
-		prokatUF = vizitkiConstants.prokatUF
-		setUFUp = vizitkiConstants.setUFUp
-		prokatUFUp = vizitkiConstants.prokatUFUp
-		setTisnenie = vizitkiConstants.setTisnenie
-		tisnenieBlint = vizitkiConstants.tisnenieBlint
-		tisnenieFolga = vizitkiConstants.tisnenieFolga
-		tisnenieKongrev = vizitkiConstants.tisnenieKongrev
-		klishe = vizitkiConstants.klishe
-		termopod = vizitkiConstants.termopod
-		obrez = vizitkiConstants.obrez
-		kruglenie = vizitkiConstants.kruglenie
-		setVyrubka = vizitkiConstants.setVyrubka
-		vyrubka = vizitkiConstants.vyrubka
-		shtamp = vizitkiConstants.shtamp
+		setFirstColor = folderConstants.setFirstColor
+		setNextColor = folderConstants.setNextColor
+		setUF = folderConstants.setUF
+		prokatUF = folderConstants.prokatUF
+		setUFUp = folderConstants.setUFUp
+		prokatUFUp = folderConstants.prokatUFUp
+		setTisnenie = folderConstants.setTisnenie
+		tisnenie = folderConstants.udarTisnenie
 		
-		#dollar = 38		euro = 50		koeficient = 1 	percent = 30		setFirstColor = 300		setNextColor = 150
-		#prokatPrint = 4		setUF = 1200		prokatUF = 5		setUFUp = 1700		prokatUFUp = 7		setTisnenie = 750
-		#tisnenieBlint = 3		tisnenieFolga = 5		tisnenieKongrev = 5		klishe = 500		termopod = 500
-		#obrez = 300		kruglenie = 1		setVyrubka = 750		vyrubka = 3		shtamp = 1500
-
+		# klishe = folderConstants.klishe
+		# shtamp = folderConstants.shtamp
+		
 		dopSum = Array.new()
 		dp = params[:dp].split(/,/)
 
@@ -763,15 +751,14 @@
 		tirazh = params[:tirazh].to_i
 
 		nextColorCount = 0
-		prokatCount = tirazh/4
 		colorCount = 1
 		
 		if params[:paper]
 			paperInstance = Paper.find(params[:paper])
 			case paperInstance.currency
-			when 'd' then paperPrice = dollar*paperInstance.price
-			when 'e' then paperPrice = euro*paperInstance.price
-			when 'r' then paperPrice = paperInstance.price
+				when 'd' then paperPrice = dollar*paperInstance.price
+				when 'e' then paperPrice = euro*paperInstance.price
+				when 'r' then paperPrice = paperInstance.price
 			end
 			[51,52,53,54,55].include?(paperInstance.id) ? touchCover = true : touchCover = false						
 		end
@@ -781,168 +768,233 @@
 		end
 
 		if params[:printer] == "cifra"
+			tech = 3 	#баксы за работу/тех.обслуживание видимо. добавляется ко всему тиражу
+
+			touchCover ? folderCount = 2 : folderCount = 4 #определяем количество папок с листа
+
+			remainder = tirazh%folderCount
+
+			if remainder>0
+				listCount = tirazh/folderCount+1
+			else
+				listCount = tirazh/folderCount
+			end
+
+			bumaga = (paperPrice + paperPrice*percent/100)*listCount 	#+printerConstants.bigovka*priceBigovka*tirazh
+
 			case color
-			when '1'	#односторонняя печать
-				vychet = 3.75 				
-				delta_1 = 0.75
-				delta_2 = 0.7
-				delta_3 = 0.18
-				delta_4 = 0.15
-				case listCount
-				when 1...75
-					print = delta_1*listCount+tech
-				when 75
-					print = (delta_1*listCount-vychet)+tech	#здесь вот тута и делается вычет, корректировка. дальше всё ровно как бэ
-				when 75+1..100
-					delta = delta_1*75-vychet
-					print = (delta+delta_2*(listCount-75))+tech
-				when 100+1..1000
-					delta = (delta_1*75-vychet)+(delta_2*25)	#до 75 одна дельта на 25 другая ну а после 100 третья, такая петрушка 
-					print = (delta+delta_3*(listCount-(75+25)))+tech
-				else	#если тираж (на A3-их) больше 1000
-					delta = (delta_1*75-vychet)+(delta_2*25)+(delta_3*900)
-					print = (delta+delta_4*(listCount-(75+25+900)))+tech
-				
-				end
-			when '2'	#двусторонняя печать
-				vychet2 = 3.8
-				delta_1 = 1.5
-				delta_2 = 1.4
-				delta_3 = 0.36
-				delta_4 = 0.3
-				case listCount
-				when 1...38 #без верхней границы
-					print = delta_1*listCount+tech
-				when 38
-					print = (delta_1*listCount-vychet2)+tech	#здесь вот тута и делается вычет, корректировка. дальше всё ровно как бэ
-				when 38+1..50
-					delta = delta_1*38-vychet2
-					print = (delta+delta_2*(listCount-38))+tech
-				when 50+1..500
-					delta = (delta_1*38-vychet2)+(delta_2*12)	#до 38 одна дельта на 12 другая ну а после 50 третья, такая петрушка 
-					print = (delta+delta_3*(listCount-(38+12)))+tech
-				else	#если тираж (на A3-их) больше 500
-					delta = (delta_1*38-vychet2)+(delta_2*12)+(delta_3*450)
-					print = (delta+delta_4*(listCount-(38+12+450)))+tech
-				
-				end
+				when '1'	#односторонняя печать
+					vychet = 3.75 				
+					delta_1 = 0.75
+					delta_2 = 0.7
+					delta_3 = 0.18
+					delta_4 = 0.15
+					case listCount
+						when 1...75
+							print = delta_1*listCount+tech
+						when 75
+							print = (delta_1*listCount-vychet)+tech	#здесь вот тута и делается вычет, корректировка. дальше всё ровно как бэ
+						when 75+1..100
+							delta = delta_1*75-vychet
+							print = (delta+delta_2*(listCount-75))+tech
+						when 100+1..1000
+							delta = (delta_1*75-vychet)+(delta_2*25)	#до 75 одна дельта на 25 другая ну а после 100 третья, такая петрушка 
+							print = (delta+delta_3*(listCount-(75+25)))+tech
+						else	#если тираж (на A3-их) больше 1000
+							delta = (delta_1*75-vychet)+(delta_2*25)+(delta_3*900)
+							print = (delta+delta_4*(listCount-(75+25+900)))+tech
+					end
+				when '2'	#двусторонняя печать
+					vychet2 = 3.8
+					delta_1 = 1.5
+					delta_2 = 1.4
+					delta_3 = 0.36
+					delta_4 = 0.3
+					case listCount
+						when 1...38 #без верхней границы
+							print = delta_1*listCount+tech
+						when 38
+							print = (delta_1*listCount-vychet2)+tech	#здесь вот тута и делается вычет, корректировка. дальше всё ровно как бэ
+						when 38+1..50
+							delta = delta_1*38-vychet2
+							print = (delta+delta_2*(listCount-38))+tech
+						when 50+1..500
+							delta = (delta_1*38-vychet2)+(delta_2*12)	#до 38 одна дельта на 12 другая ну а после 50 третья, такая петрушка 
+							print = (delta+delta_3*(listCount-(38+12)))+tech
+						else	#если тираж (на A3-их) больше 500
+							delta = (delta_1*38-vychet2)+(delta_2*12)+(delta_3*450)
+							print = (delta+delta_4*(listCount-(38+12+450)))+tech
+					end
 			end #end of case color
-		else if params[:printer] == "offset"
-			###############
-		else if params[:printer] == "silk"
-			###############
+			print = print*dollar
 		end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		if params[:printer] == "cifra"
-			case color
-			when '1'
-				print = koeficient*Cyfravizitka.find(:first, :conditions => "tirazh = '#{tirazh}'").price
-			when '2'
-				print = koeficient*Cyfravizitka.find(:first, :conditions => "tirazh = '#{tirazh}'").price2
-			end
-		else
-			case color
-			when '1+0' then nextColorCount = 0
-			when '2+0' 
-			nextColorCount = 1
-			colorCount = 2
-			when '3+0'
-			nextColorCount = 2
-			colorCount = 3
-			when '4+0'
-			nextColorCount = 3
-			colorCount = 4
-			#####
-			when '1+1'
-			nextColorCount = 0
-			colorCount = 1
-			prokatCount *= 2
-			when '2+2', '2+1'
-			nextColorCount = 1
-			colorCount = 2
-			prokatCount *= 2
-			when '3+3', '3+2', '3+1'
-			nextColorCount = 2
-			colorCount = 3
-			prokatCount *= 2
-			when '4+4', '4+3', '4+2', '4+1'
-			nextColorCount = 3
-			colorCount = 4
-			prokatCount *= 2 
+		if params[:printer] == "offset"
+			#печать на офсете считается: 1.с ценой бумаги (bumaga = 0); 2.в долларах 
+			bumaga = 0
+			ourProcent = 1.2 #наша наценка на офсет +20%
+			case params[:format]	#определяем количество папок с листа
+				when 'eko' then folderCount = 4
+				when 'standart' then folderCount = 2
 			end
 
-			print = setFirstColor + setNextColor*nextColorCount + prokatCount*prokatPrint*colorCount
+			remainder = tirazh%folderCount
+
+			if remainder>0
+				listCount = tirazh/folderCount+1
+			else
+				listCount = tirazh/folderCount
+			end
+
+			case color
+				when '1'	#односторонняя печать
+					delta_100 = 1.6
+					delta_500 = 0.22
+					delta_1000 = 0.25
+					delta_5000 = 0.24
+					case listCount
+						when 1..100
+							print = delta_100*listCount*ourProcent
+						when 101..500
+							delta = delta_100*100
+							print = (delta+delta_500*(listCount-100))*ourProcent
+						when 501..1000
+							delta = delta_100*100+delta_500*400
+							print = (delta+delta_1000*(listCount-500))*ourProcent
+						when 1001..5000
+							delta = delta_100*100+delta_500*400+delta_1000*500
+							print = (delta+delta_5000*(listCount-1000))*ourProcent
+					end
+				when '2'	#двусторонняя печать
+					delta_100 = 1.6
+					delta_500 = 0.22
+					delta_1000 = 0.25
+					delta_5000 = 0.24
+					tirazh <= 1600 ? bothSideProcent = 1.8 : bothSideProcent = 1.5 # наценка за двустотроннюю печать +80% и +50%
+					case listCount
+						when 1..100
+							print = delta_100*listCount*ourProcent
+						when 101..500
+							delta = delta_100*100
+							print = (delta+delta_500*(listCount-100))*ourProcent*bothSideProcent
+						when 501..1000
+							delta = delta_100*100+delta_500*400
+							print = (delta+delta_1000*(listCount-500))*ourProcent*bothSideProcent
+						when 1001..5000
+							delta = delta_100*100+delta_500*400+delta_1000*500
+							print = (delta+delta_5000*(listCount-1000))*ourProcent*bothSideProcent
+					end
+			end #end of case color
+			print = print*dollar
+		end
+		if params[:printer] == "silk"
+			case params[:format]	#определяем количество папок с листа
+				when 'eko' then folderCount = 4
+				when 'standart' then folderCount = 2
+			end
+
+			remainder = tirazh%folderCount
+
+			if remainder>0
+				listCount = tirazh/folderCount+1
+			else
+				listCount = tirazh/folderCount
+			end
+	
+			bumaga = (paperPrice + paperPrice*percent/100)*listCount
+
+			case params[:color]
+				when '1+0' then nextColorCount = 0
+				when '2+0', '1+1' 
+				nextColorCount = 1
+				colorCount = 2
+				when '3+0', '2+1'
+				nextColorCount = 2
+				colorCount = 3
+				when '4+0', '2+2', '3+1'
+				nextColorCount = 3
+				colorCount = 4
+				when '3+2', '4+1'
+				nextColorCount = 4
+				colorCount = 5
+				when '3+3', '4+2'
+				nextColorCount = 5
+				colorCount = 6 
+				when '4+3'
+				nextColorCount = 6
+				colorCount = 7 
+				when '4+4'
+				nextColorCount = 7
+				colorCount = 8 
+			end
+
+			setAllColors = setFirstColor+setNextColor*nextColorCount		#первая выстановка цвета + все следующие
+			price_100 = 100*folderConstants.prokat_100 									#стоимость прокатов без выстановки и перестановок цвета  (100, 200...)
+			price_200 = price_100+100*folderConstants.prokat_200
+			price_300 = price_200+100*folderConstants.prokat_300
+			price_500 = price_300+200*folderConstants.prokat_500
+			price_2000 = price_500+1500*folderConstants.prokat_2000
+
+			case tirazh
+				when 1..100
+					print = setAllColors+colorCount*tirazh*folderConstants.prokat_100
+				when 101..200
+					print = setAllColors+colorCount*(price_100+(tirazh-100)*folderConstants.prokat_200)
+				when 201..300
+					print = setAllColors+colorCount*(price_200+(tirazh-200)*folderConstants.prokat_300)
+				when 301..500
+					print = setAllColors+colorCount*(price_300+(tirazh-300)*folderConstants.prokat_500)
+				when 501..2000
+					print = setAllColors+colorCount*(price_500+(tirazh-500)*folderConstants.prokat_2000)
+				when 2001..5000
+					print = setAllColors+colorCount*(price_2000+(tirazh-2000)*folderConstants.prokat_5000)
+			end
 		end
 
+# dop obrabotka next
 
 		if(dp[0]=="1")
-			if(params[:klishe_blint]=="0")
-				dopSum << setTisnenie+klishe+tirazh*tisnenieBlint
-			else
-				dopSum << setTisnenie+tirazh*tisnenieBlint
-			end
+				dopSum << folderConstants.glyanec_1_0*listCount
 		end
 		if(dp[1]=="1")
-			if(params[:klishe_folga]=="0")
-				dopSum << setTisnenie+klishe+tirazh*tisnenieFolga
-			else
-				dopSum << setTisnenie+tirazh*tisnenieFolga
-			end
+			dopSum << setTisnenie+tirazh*tisnenie
+			# if(params[:klishe_folga]=="0")
+			# 	dopSum << setTisnenie+klishe+tirazh*tisnenieFolga
+			# else
+			# 	dopSum << setTisnenie+tirazh*tisnenieFolga
+			# end
 		end
 		if(dp[2]=="1")
-			if(params[:klishe_kongrev]=="0")
-				dopSum << setTisnenie+klishe+tirazh*tisnenieKongrev
-			else
-				dopSum << setTisnenie+tirazh*tisnenieKongrev
-			end
+			dopSum << setTisnenie+tirazh*tisnenie
+			# if(params[:klishe_kongrev]=="0")
+			# 	dopSum << setTisnenie+klishe+tirazh*tisnenieKongrev
+			# else
+			# 	dopSum << setTisnenie+tirazh*tisnenieKongrev
+			# end
 		end
 		if(dp[3]=="1")
-			dopSum << setUF+prokatCount*prokatUF
+			dopSum << setUF+tirazh*prokatUF
 		end
 		if(dp[4]=="1")
-			dopSum << setUFUp+prokatCount*prokatUFUp
+			dopSum << setUFUp+tirazh*prokatUFUp
 		end
 		if(dp[5]=="1")
-			dopSum << termopod*tirazh/100
+				dopSum << folderConstants.mat_1_0*listCount
 		end
 		if(dp[6]=="1")
-			dopSum << obrez*tirazh/100
+				dopSum << folderConstants.mat_1_1*listCount
 		end
 		if(dp[7]=="1")
-			dopSum << kruglenie*tirazh
-		end
-		if(dp[8]=="1")
-			if(params[:vyrubka]=="0")
-				dopSum << setVyrubka+shtamp+tirazh*vyrubka
-			else
-				dopSum << setVyrubka+tirazh*vyrubka
-			end
+				dopSum << folderConstants.glyanec_1_1*listCount
 		end
 
-		bumaga = (paperPrice + paperPrice*percent/100)*tirazh/100
 		obrabotka = dopSum.sum 
 		
-		result = bumaga + print + obrabotka
+		result = bumaga + koeficient*print + obrabotka
 		
 
 		@tmp1 = "#{(result).round(2)} руб."
 		
 		render :text => @tmp1
 	end
-
 
 end	#end of main class

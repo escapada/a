@@ -93,6 +93,8 @@ A::Application.routes.draw do
   match 'index/lak_calculate', to: 'index#lak_calculate', via: [:get, :post]
   match 'index/upprint_calculate', to: 'index#upprint_calculate', via: [:get, :post]
   match 'index/plasticfolders_calculate', to: 'index#plasticfolders_calculate', via: [:get, :post]
+  match 'index/folders_calculate', to: 'index#folders_calculate', via: [:get, :post]
+  match 'index/cards_calculate', to: 'index#cards_calculate', via: [:get, :post]
 
   #get 'index/printer_calculate'
   #get 'index/tisnenie_calculate'

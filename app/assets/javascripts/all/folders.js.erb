@@ -91,7 +91,7 @@ $(".selectoption_printmethod").click(function(){
 		$("#format-helper").show(0);
 		$("[name='format']").val('eko');
 	}
-	else if (printmethod == "offset") {
+	if (printmethod == "offset") {
 		$("#material-options").hide(0);
 		$("#material-options-printer").hide(0);
 		// $("#material-options-offset").show(0);
@@ -110,7 +110,7 @@ $(".selectoption_printmethod").click(function(){
 		$("[name='format']").val('');
 		$("#format span").text("Модель папки");
 	}
-	else{
+	if (printmethod == "silk") {
 		$("#material-options-printer").hide(0);
 		$("#material-options-offset").hide(0);
 		$("#material-options").show(0);

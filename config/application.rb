@@ -11,6 +11,11 @@ end
 
 module A
   class Application < Rails::Application
+
+    # config.serve_static_assets = true
+    config.assets.digest = true
+    config.assets.precompile += ['main.css', 'home.css', 'blank.js', 'cards.js', 'home.js', 'lak.js', 'plasticfolders.js', 'printer.js', 'silk.js', 'tisnenie.js', 'upprint.js', 'vizitki.js', 'vyrubka.js', 'plasticfolders.js', 'folders.js']
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

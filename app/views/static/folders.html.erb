@@ -7,7 +7,7 @@
 			<h1>Рассчет заказа онлайн</h1>
 			<h2>Папки из картона</h2>
 			<div id="vizitki_selectbox_line">
-				<div id="printmethod-alone" class="selectbox"><span class="noselect">Шелкография</span><input name="printmethod" type="hidden" value="false" /><div class="selectboxbtn"></div></div>
+				<div id="printmethod-alone" class="selectbox"><span class="noselect">Шелкография</span><input name="printmethod" type="hidden" value="silk" /><div class="selectboxbtn"></div></div>
 				<ul id="printmethod-options" class="options-list" style="width:222px!important;">
 					<li class="selectoption_printmethod">Шелкография<input type="hidden" value="silk" /></li>
 					<li class="selectoption_printmethod">Цифровая печать<input type="hidden" value="cifra" /></li>
@@ -123,9 +123,16 @@
 			</div>
 			
 			<div id="downloadtmpl">
-				<div class="downloadtmpl">
-					<%=link_to "<input class='sendbtn' type='submit' value='Оформить заказ' />".html_safe, asset_path('about/442.jpg') %>
-				</div>
+				<table class="downloadtmpl" width="100%" cellspacing="0" cellpadding="0" border="0">
+					<tr class="downloadtoptd">
+						<td><div class="tdabsolute">"Эконом"</div><%= image_tag(asset_path("econom.png"), {:title=>"Папка Эконом."}) %></td>
+						<td><div class="tdabsolute">"Стандарт"</div><%= image_tag(asset_path("standart.png"), {:title=>"Папка Стандарт."}) %></td>
+					</tr>
+					<tr>
+						<td><%=link_to "<input class='sendbtn' type='submit' value='Скачать шаблон' />".html_safe, asset_path('downloads/spam.png') %></td>
+						<td><%=link_to "<input class='sendbtn' type='submit' value='Скачать шаблон' />".html_safe, asset_path('downloads/spam.png') %></td>
+					</tr>
+				</table>
 			</div>
 
 		</div>

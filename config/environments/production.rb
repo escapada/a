@@ -28,10 +28,11 @@ A::Application.configure do
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
-  config.assets.precompile += ['_main.css', '_home.css', 'blank.js', 'cards.js', 'home.js', 'lak.js', 'plasticfolders.js', 'printer.js', 'silk.js', 'tisnenie.js', 'upprint.js', 'vizitki.js', 'vyrubka.js']
+  # config.assets.precompile += ['main.css', 'home.css', 'blank.js', 'cards.js', 'home.js', 'lak.js', 'plasticfolders.js', 'printer.js', 'silk.js', 'tisnenie.js', 'upprint.js', 'vizitki.js', 'vyrubka.js', 'plasticfolders.js', 'folders.js']
+  # config.assets.precompile += '_main.css'
 
   # Generate digests for assets URLs.
-  config.assets.digest = true
+  # config.assets.digest = true
 
   # Version of your assets, change this if you want to expire all your assets.
   config.assets.version = '1.0'

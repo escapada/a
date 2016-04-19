@@ -18,7 +18,7 @@ A::Application.routes.draw do
   get '/upprint' => 'static#upprint', :as => :upprint
   get '/plasticfolders' => 'static#plasticfolders', :as => :plasticfolders
   get '/folders' => 'static#folders', :as => :folders
-  get '/cards' => 'static#cards', :as => :cards
+  get '/cards' => 'static#index', :as => :cards
   
   #get '/plasticfolders' => 'static#plasticfolders', :as => :plasticfolders
 

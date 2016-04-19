@@ -872,16 +872,16 @@
 					tirazh <= 1600 ? bothSideProcent = 1.8 : bothSideProcent = 1.5 # наценка за двустотроннюю печать +80% и +50%
 					case listCount
 						when 1..100
-							print = delta_100*listCount*ourProcent
+							print = delta_100*listCount*(1-ourProcent+bothSideProcent)
 						when 101..500
 							delta = delta_100*100
-							print = (delta+delta_500*(listCount-100))*ourProcent*bothSideProcent
+							print = (delta+delta_500*(listCount-100))*(1-ourProcent+bothSideProcent)
 						when 501..1000
 							delta = delta_100*100+delta_500*400
-							print = (delta+delta_1000*(listCount-500))*ourProcent*bothSideProcent
+							print = (delta+delta_1000*(listCount-500))*(1-ourProcent+bothSideProcent)
 						when 1001..5000
 							delta = delta_100*100+delta_500*400+delta_1000*500
-							print = (delta+delta_5000*(listCount-1000))*ourProcent*bothSideProcent
+							print = (delta+delta_5000*(listCount-1000))*(1-ourProcent+bothSideProcent)
 					end
 			end #end of case color
 			print = print*dollar

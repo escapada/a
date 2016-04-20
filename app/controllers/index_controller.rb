@@ -997,4 +997,156 @@
 		render :text => @tmp1
 	end
 
+	def cards_calculate
+		cardConstants = Folderconstant.first
+		constants = Constant.first
+
+		dollar = constants.dollar
+		euro = constants.euro
+		koeficient = constants.koeficient # множитель для цифровой печати не только на визитках
+		percent = constants.percent
+		
+		setFirstColor = cardConstants.setFirstColor
+		setNextColor = cardConstants.setNextColor
+		setUF = cardConstants.setUF
+		prokatUF = cardConstants.prokatUF
+		setUFUp = cardConstants.setUFUp
+		prokatUFUp = cardConstants.prokatUFUp
+		setTisnenie = cardConstants.setTisnenie
+		tisnenie = cardConstants.udarTisnenie
+		
+		# klishe = cardConstants.klishe
+		# shtamp = cardConstants.shtamp
+		
+		dopSum = Array.new()
+		dp = params[:dp].split(/,/)
+
+		color = params[:color]
+		tirazh = params[:tirazh].to_i
+
+		nextColorCount = 0
+		colorCount = 1
+		
+		if params[:paper]
+			paperInstance = Paper.find(params[:paper])
+			case paperInstance.currency
+				when 'd' then paperPrice = dollar*paperInstance.price
+				when 'e' then paperPrice = euro*paperInstance.price
+				when 'r' then paperPrice = paperInstance.price
+			end
+		end
+
+		if params[:nopaper]
+			paperPrice = params[:nopaper].to_f
+		end
+
+		case params[:format]	#определяем количество папок с листа
+			when 'eko' then folderCount = 4
+			when 'standart' then folderCount = 2
+		end
+
+		remainder = tirazh%folderCount
+
+		if remainder>0
+			listCount = tirazh/folderCount+1
+		else
+			listCount = tirazh/folderCount
+		end
+
+		bumaga = (paperPrice + paperPrice*percent/100)*listCount
+
+		case params[:color]
+			when '1+0' then nextColorCount = 0
+			when '2+0', '1+1' 
+			nextColorCount = 1
+			colorCount = 2
+			when '3+0', '2+1'
+			nextColorCount = 2
+			colorCount = 3
+			when '4+0', '2+2', '3+1'
+			nextColorCount = 3
+			colorCount = 4
+			when '3+2', '4+1'
+			nextColorCount = 4
+			colorCount = 5
+			when '3+3', '4+2'
+			nextColorCount = 5
+			colorCount = 6 
+			when '4+3'
+			nextColorCount = 6
+			colorCount = 7 
+			when '4+4'
+			nextColorCount = 7
+			colorCount = 8 
+		end
+
+		setAllColors = setFirstColor+setNextColor*nextColorCount		#первая выстановка цвета + все следующие
+		price_100 = 100*folderConstants.prokat_100 									#стоимость прокатов без выстановки и перестановок цвета  (100, 200...)
+		price_200 = price_100+100*folderConstants.prokat_200
+		price_300 = price_200+100*folderConstants.prokat_300
+		price_500 = price_300+200*folderConstants.prokat_500
+		price_2000 = price_500+1500*folderConstants.prokat_2000
+
+		case tirazh
+			when 1..100
+				print = setAllColors+colorCount*tirazh*folderConstants.prokat_100
+			when 101..200
+				print = setAllColors+colorCount*(price_100+(tirazh-100)*folderConstants.prokat_200)
+			when 201..300
+				print = setAllColors+colorCount*(price_200+(tirazh-200)*folderConstants.prokat_300)
+			when 301..500
+				print = setAllColors+colorCount*(price_300+(tirazh-300)*folderConstants.prokat_500)
+			when 501..2000
+				print = setAllColors+colorCount*(price_500+(tirazh-500)*folderConstants.prokat_2000)
+			when 2001..5000
+				print = setAllColors+colorCount*(price_2000+(tirazh-2000)*folderConstants.prokat_5000)
+		end
+
+# dop obrabotka next
+
+		if(dp[0]=="1")
+				dopSum << folderConstants.glyanec_1_0*listCount
+		end
+		if(dp[1]=="1")
+			dopSum << setTisnenie+tirazh*tisnenie
+			# if(params[:klishe_folga]=="0")
+			# 	dopSum << setTisnenie+klishe+tirazh*tisnenieFolga
+			# else
+			# 	dopSum << setTisnenie+tirazh*tisnenieFolga
+			# end
+		end
+		if(dp[2]=="1")
+			dopSum << setTisnenie+tirazh*tisnenie
+			# if(params[:klishe_kongrev]=="0")
+			# 	dopSum << setTisnenie+klishe+tirazh*tisnenieKongrev
+			# else
+			# 	dopSum << setTisnenie+tirazh*tisnenieKongrev
+			# end
+		end
+		if(dp[3]=="1")
+			dopSum << setUF+tirazh*prokatUF
+		end
+		if(dp[4]=="1")
+			dopSum << setUFUp+tirazh*prokatUFUp
+		end
+		if(dp[5]=="1")
+				dopSum << folderConstants.mat_1_0*listCount
+		end
+		if(dp[6]=="1")
+				dopSum << folderConstants.mat_1_1*listCount
+		end
+		if(dp[7]=="1")
+				dopSum << folderConstants.glyanec_1_1*listCount
+		end
+
+		obrabotka = dopSum.sum 
+		
+		result = bumaga + koeficient*print + obrabotka
+		
+
+		@tmp1 = "#{(result).round(2)} руб."
+		
+		render :text => @tmp1
+	end
+
 end	#end of main class

@@ -998,7 +998,7 @@
 	end
 
 	def cards_calculate
-		cardConstants = Folderconstant.first
+		cardConstants = Cardconstant.first
 		constants = Constant.first
 
 		dollar = constants.dollar
@@ -1049,7 +1049,6 @@
 		case format	#определяем количество листов бумаги. расчёт ведётся исходя из количеста листов бумаги на каждые 100 открыток...
 			when 1 
 				k = 4 	#нужно листов на 100 открыток этого формата
-				end
 			when 2 
 				k = 5
 			when 3 
@@ -1065,14 +1064,10 @@
 		remainder = tirazh%100
 
 		if remainder>0
-			listCount = tirazh/k+1
+			listCount = (tirazh/100)*k+proc{remainder<=50 ? (k.to_f/2).ceil : k}.call
 		else
-			listCount = tirazh/k
+			listCount = (tirazh/100)*k
 		end
-
-
-
-
 
 		bumaga = (paperPrice + paperPrice*percent/100)*listCount
 
@@ -1102,47 +1097,49 @@
 		end
 
 		setAllColors = setFirstColor+setNextColor*nextColorCount		#первая выстановка цвета + все следующие
-		price_100 = 100*folderConstants.prokat_100 									#стоимость прокатов без выстановки и перестановок цвета  (100, 200...)
-		price_200 = price_100+100*folderConstants.prokat_200
-		price_300 = price_200+100*folderConstants.prokat_300
-		price_500 = price_300+200*folderConstants.prokat_500
-		price_2000 = price_500+1500*folderConstants.prokat_2000
+		price_100 = 100*cardConstants.prokat_100 									#стоимость прокатов без выстановки и перестановок цвета  (100, 200...)
+		price_200 = price_100+100*cardConstants.prokat_200
+		price_300 = price_200+100*cardConstants.prokat_300
+		price_500 = price_300+200*cardConstants.prokat_500
+		price_2000 = price_500+1500*cardConstants.prokat_2000
 
 		case tirazh
 			when 1..100
-				print = setAllColors+colorCount*tirazh*folderConstants.prokat_100
+				print = setAllColors+colorCount*tirazh*cardConstants.prokat_100
 			when 101..200
-				print = setAllColors+colorCount*(price_100+(tirazh-100)*folderConstants.prokat_200)
+				print = setAllColors+colorCount*(price_100+(tirazh-100)*cardConstants.prokat_200)
 			when 201..300
-				print = setAllColors+colorCount*(price_200+(tirazh-200)*folderConstants.prokat_300)
+				print = setAllColors+colorCount*(price_200+(tirazh-200)*cardConstants.prokat_300)
 			when 301..500
-				print = setAllColors+colorCount*(price_300+(tirazh-300)*folderConstants.prokat_500)
+				print = setAllColors+colorCount*(price_300+(tirazh-300)*cardConstants.prokat_500)
 			when 501..2000
-				print = setAllColors+colorCount*(price_500+(tirazh-500)*folderConstants.prokat_2000)
+				print = setAllColors+colorCount*(price_500+(tirazh-500)*cardConstants.prokat_2000)
 			when 2001..5000
-				print = setAllColors+colorCount*(price_2000+(tirazh-2000)*folderConstants.prokat_5000)
+				print = setAllColors+colorCount*(price_2000+(tirazh-2000)*cardConstants.prokat_5000)
 		end
 
 # dop obrabotka next
 
 		if(dp[0]=="1")
-				dopSum << folderConstants.glyanec_1_0*listCount
+			if(params[:klishe_blint]=="0")
+				dopSum << setTisnenie+klishe+tirazh*tisnenieBlint
+			else
+				dopSum << setTisnenie+tirazh*tisnenieBlint
+			end
 		end
 		if(dp[1]=="1")
-			dopSum << setTisnenie+tirazh*tisnenie
-			# if(params[:klishe_folga]=="0")
-			# 	dopSum << setTisnenie+klishe+tirazh*tisnenieFolga
-			# else
-			# 	dopSum << setTisnenie+tirazh*tisnenieFolga
-			# end
+			if(params[:klishe_folga]=="0")
+				dopSum << setTisnenie+klishe+tirazh*tisnenieFolga
+			else
+				dopSum << setTisnenie+tirazh*tisnenieFolga
+			end
 		end
 		if(dp[2]=="1")
-			dopSum << setTisnenie+tirazh*tisnenie
-			# if(params[:klishe_kongrev]=="0")
-			# 	dopSum << setTisnenie+klishe+tirazh*tisnenieKongrev
-			# else
-			# 	dopSum << setTisnenie+tirazh*tisnenieKongrev
-			# end
+			if(params[:klishe_kongrev]=="0")
+				dopSum << setTisnenie+klishe+tirazh*tisnenieKongrev
+			else
+				dopSum << setTisnenie+tirazh*tisnenieKongrev
+			end
 		end
 		if(dp[3]=="1")
 			dopSum << setUF+tirazh*prokatUF
@@ -1151,13 +1148,20 @@
 			dopSum << setUFUp+tirazh*prokatUFUp
 		end
 		if(dp[5]=="1")
-				dopSum << folderConstants.mat_1_0*listCount
+			dopSum << termopod*tirazh/50
 		end
-		if(dp[6]=="1")
-				dopSum << folderConstants.mat_1_1*listCount
+		if(dp[6]=="1") #bigovka
+			dopSum << kruglenie_bigovka*tirazh
 		end
-		if(dp[7]=="1")
-				dopSum << folderConstants.glyanec_1_1*listCount
+		if(dp[7]=="1") #kruglenie
+			dopSum << kruglenie_bigovka*tirazh
+		end
+		if(dp[8]=="1")
+			if(params[:vyrubka]=="0")
+				dopSum << setVyrubka+shtamp+tirazh*vyrubka
+			else
+				dopSum << setVyrubka+tirazh*vyrubka
+			end
 		end
 
 		obrabotka = dopSum.sum 

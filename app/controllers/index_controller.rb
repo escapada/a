@@ -1013,15 +1013,21 @@
 		setUFUp = cardConstants.setUFUp
 		prokatUFUp = cardConstants.prokatUFUp
 		setTisnenie = cardConstants.setTisnenie
-		tisnenie = cardConstants.udarTisnenie
-		
-		# klishe = cardConstants.klishe
-		# shtamp = cardConstants.shtamp
+		tisnenieBlint = cardConstants.tisnenieBlint
+		tisnenieFolga = cardConstants.tisnenieFolga
+		tisnenieKongrev = cardConstants.tisnenieKongrev
+		klishe = cardConstants.klishe
+		termopod = cardConstants.termopod							#за 50 открыток
+		kruglenie_bigovka = cardConstants.kruglenie
+		setVyrubka = cardConstants.setVyrubka
+		vyrubka = cardConstants.vyrubka
+		shtamp = cardConstants.shtamp
 		
 		dopSum = Array.new()
 		dp = params[:dp].split(/,/)
 
 		color = params[:color]
+		format = params[:format].to_i
 		tirazh = params[:tirazh].to_i
 
 		nextColorCount = 0
@@ -1040,18 +1046,33 @@
 			paperPrice = params[:nopaper].to_f
 		end
 
-		case params[:format]	#определяем количество папок с листа
-			when 'eko' then folderCount = 4
-			when 'standart' then folderCount = 2
+		case format	#определяем количество листов бумаги. расчёт ведётся исходя из количеста листов бумаги на каждые 100 открыток...
+			when 1 
+				k = 4 	#нужно листов на 100 открыток этого формата
+				end
+			when 2 
+				k = 5
+			when 3 
+				k = 6
+			when 4 
+				k = 14
+			when 5 
+				k = 10
+			when 6 
+				k = 10
 		end
 
-		remainder = tirazh%folderCount
+		remainder = tirazh%100
 
 		if remainder>0
-			listCount = tirazh/folderCount+1
+			listCount = tirazh/k+1
 		else
-			listCount = tirazh/folderCount
+			listCount = tirazh/k
 		end
+
+
+
+
 
 		bumaga = (paperPrice + paperPrice*percent/100)*listCount
 

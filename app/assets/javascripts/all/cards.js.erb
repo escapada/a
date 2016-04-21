@@ -40,19 +40,11 @@ $( "#select-tirazh" ).focusout(function() {
 	if($( this ).val().match(/\D/) || $( this ).val() == '' || $( this ).val()>5000){
 		$( this ).val('Тираж');
 	}
-	else if($( this ).val()%100){
-		if ($( this ).val() < 100) {
-			$( this ).val(100);
-		}
-		else{
-			tmpVal = Math.round($( this ).val()/100)*100;
-			$( this ).val(tmpVal);
-		}	
-	}
-	else if($( this ).val() == 0){
-		$( this ).val(100);
+	if ($( this ).val() < 50 || $( this ).val() == 0) {
+			$( this ).val(50);
 	}
 });
+			// tmpVal = Math.round($( this ).val()/100)*100;
 
 $(".selectoption_material").click(function(){
 	var material = $('> input', this).val();

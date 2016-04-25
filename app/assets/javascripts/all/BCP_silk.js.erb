@@ -1,5 +1,4 @@
 var show_option_box = false;
-var mypaper = false;
 var nopaper = false;
 
 $( document ).ready(function() {
@@ -67,10 +66,7 @@ $(".selectoption_material").click(function(){
 	var material = $('> input', this).val();
 	var text = $(this).text()
 
-	mypaper = false;
 	nopaper = false;
-
-	if (material=='0') {nopaper=true;}
 	
 	$("#material span").html(text);
 	$("#material").children("input").val(material);
@@ -88,8 +84,7 @@ $(".selectbtn").click(function() {
 		alert("Неверно указана цена листа бумаги!");
 		$("#material span").html("Материал");
 		$("#material").children("input").val('');
-		//nopaper = false;
-		mypaper = false;
+		nopaper = false;
 	}
 	else{
 		var text = $(this).prev().val();
@@ -98,8 +93,7 @@ $(".selectbtn").click(function() {
 
 		$("#material-options-wrap").toggle();
 		$("#help_invisieble_box").css({"display": "none"});
-		nopaper = false;
-		mypaper = true;
+		nopaper = true;
 	}
 });
 
@@ -121,7 +115,6 @@ $("#help_invisieble_box").click(function(){
 
 $("#calculate").click(function(){
 	var varpaper = "paper";
-	if (mypaper) {varpaper = "mypaper";}
 	if (nopaper) {varpaper = "nopaper";}
 
 	format = $("[name='format']").val();

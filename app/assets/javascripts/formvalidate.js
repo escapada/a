@@ -1,0 +1,1 @@
+//= require './all/jquery.form-validator.min'

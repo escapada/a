@@ -6,7 +6,10 @@
   <meta name="keywords" content="<%= @meta %>" />
 
   <%= favicon_link_tag 'favicon.ico' %>
-  
+
+  <%= javascript_include_tag "jquery" %>
+  <%= javascript_include_tag "formvalidate" %>
+
   <% if @remotejs %>
   <%= javascript_include_tag "#{@remotejs}" %>
   <% end %>
